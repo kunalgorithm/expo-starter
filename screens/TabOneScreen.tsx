@@ -13,30 +13,35 @@ export default function TabOneScreen() {
   useInterval(() => {
     if (timerOn && seconds > 0) setSeconds(seconds - 1);
   }, 1000);
+
+  const DropDown = () => (
+    <DropDownPicker
+      items={[
+        { label: "15 min", value: 15 * 60 },
+        { label: "30 min", value: 30 * 60 },
+        { label: "60 min", value: 60 * 60 },
+      ]}
+      defaultValue={15 * 60}
+      containerStyle={{ height: 40, width: 130 }}
+      style={{
+        backgroundColor: "#fff",
+        borderRadius: 10,
+
+        // boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.05)"
+      }}
+      itemStyle={{
+        justifyContent: "flex-start",
+      }}
+      dropDownStyle={{ backgroundColor: "#fafafa" }}
+      onChangeItem={(item: { value: number }) => setSeconds(item.value)}
+    />
+  );
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Day 1</Text>
+      <DropDown />
       <View style={styles.circle}>
-        <Text style={styles.title}>Day 1</Text>
-        <DropDownPicker
-          items={[
-            { label: "15 min", value: 15 * 60 },
-            { label: "30 min", value: 30 * 60 },
-            { label: "60 min", value: 60 * 60 },
-          ]}
-          defaultValue={15 * 60}
-          containerStyle={{ height: 40, width: 130 }}
-          style={{
-            backgroundColor: "#fff",
-            borderRadius: 10,
-          }}
-          itemStyle={{
-            justifyContent: "flex-start",
-          }}
-          dropDownStyle={{ backgroundColor: "#fafafa" }}
-          onChangeItem={(item: { value: number }) => setSeconds(item.value)}
-        />
-
-        <Image source={logo} />
+        {/* <Image source={logo} /> */}
         <Text style={styles.timer} onPress={(e) => setTimerOn(!timerOn)}>
           {Math.floor(seconds / 60)}:
           {seconds % 60 < 10 ? "0" + (seconds % 60) : seconds % 60}
@@ -60,29 +65,35 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#fff",
   },
+  title: {
+    fontSize: 40,
+    margin: 20,
+    fontWeight: "bold",
+    color: "#4A4A4A",
+    opacity: 0.8,
+    letterSpacing: 7,
+  },
   circle: {
+    marginTop: 10,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 5,
-    borderColor: "gray",
+    borderColor: "#C4C4C4",
     borderRadius: 400,
-    padding: 60,
-    width: "110%",
+
+    width: 330,
+    height: 330,
   },
   timer: {
     // fontFamily: "Calibre",
     fontSize: 56,
     lineHeight: 67,
-    color: "gray",
+    color: "#B6999B",
 
     letterSpacing: 15,
   },
   picker: { height: 50, width: 150 },
-  title: {
-    fontSize: 40,
-    fontWeight: "bold",
-  },
   subtitle: {
     fontSize: 20,
     fontWeight: "bold",

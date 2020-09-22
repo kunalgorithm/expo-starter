@@ -16,7 +16,7 @@ export default function TabThreeScreen() {
       {Array(9)
         .fill(0)
         .map((row, i) => (
-          <View style={styles.row}>
+          <View style={styles.row} key={i}>
             <Row>Here's a row</Row>
           </View>
         ))}

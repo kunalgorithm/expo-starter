@@ -16,7 +16,7 @@ export default function TabTwoScreen() {
       {Array(9)
         .fill(0)
         .map((row, i) => (
-          <View style={styles.row}>
+          <View style={styles.row} key={i}>
             <Box>{i * 7}</Box>
             <Box>{i * 7 + 1}</Box>
             <Box>{i * 7 + 2}</Box>

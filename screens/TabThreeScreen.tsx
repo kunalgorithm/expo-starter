@@ -12,12 +12,12 @@ export default function TabThreeScreen() {
   );
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>You're on a 5 day streak 💪</Text>
-      {Array(9)
+      <Text style={styles.title}>My 60 day meditation journal 🗒</Text>
+      {Array(4)
         .fill(0)
         .map((row, i) => (
           <View style={styles.row} key={i}>
-            <Row>Here's a row</Row>
+            <Row>Day 1</Row>
           </View>
         ))}
     </View>
@@ -39,32 +39,32 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    color: "#C4C4C4",
+    color: "#4A4A4A",
     fontWeight: "bold",
     margin: 25,
   },
   text: {
     fontSize: 20,
-    color: "#C4C4C4",
-    fontWeight: "bold",
+    color: "#B6999B",
+    // fontWeight: "",
   },
   box: {
-    height: 35,
-    width: 100,
-    shadowColor: "#000",
+    height: 72,
+    width: 320,
+    shadowColor: "#BBB9B9",
     shadowOffset: {
       width: 0,
       height: 4,
     },
     shadowOpacity: 0.32,
     shadowRadius: 5.46,
-    borderRadius: 5.46,
+    borderRadius: 100/2,
 
     elevation: 9,
     backgroundColor: "#fff",
     color: "#B6999B",
     alignItems: "center",
     justifyContent: "center",
-    margin: 5,
+    margin: 10,
   },
 });

@@ -22,17 +22,30 @@ export default function TabOneScreen() {
         { label: "60 min", value: 60 * 60 },
       ]}
       defaultValue={15 * 60}
-      containerStyle={{ height: 40, width: 130 }}
+      containerStyle={{ 
+        height: 40, 
+        width: 146,
+        borderRadius: 200,
+        marginVertical: 15,
+      
+      }}
       style={{
-        backgroundColor: "#fff",
-        borderRadius: 10,
+        backgroundColor: "#FBFBFC",
+        shadowColor: "#8D8A8A",
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.20,
+        shadowRadius: 1.41,
+       
 
         // boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.05)"
       }}
       itemStyle={{
         justifyContent: "flex-start",
       }}
-      dropDownStyle={{ backgroundColor: "#fafafa" }}
+      dropDownStyle={{ backgroundColor: "#FBFBFC" }}
       onChangeItem={(item: { value: number }) => setSeconds(item.value)}
     />
   );
@@ -63,7 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "#FBFBFC",
   },
   title: {
     fontSize: 40,
@@ -75,11 +88,11 @@ const styles = StyleSheet.create({
   },
   circle: {
     marginTop: 10,
-    backgroundColor: "#fff",
+    backgroundColor: "#FBFBFC",
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 5,
-    borderColor: "#C4C4C4",
+    borderWidth: 12,
+    borderColor: "#EBECEF",
     borderRadius: 400,
 
     width: 330,
@@ -93,9 +106,13 @@ const styles = StyleSheet.create({
 
     letterSpacing: 15,
   },
-  picker: { height: 50, width: 150 },
+  picker: { 
+
+    height: 0, 
+    width: 0 },
   subtitle: {
     fontSize: 20,
+
     fontWeight: "bold",
   },
   separator: {
@@ -105,12 +122,15 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#B6999B",
-    padding: 20,
+    padding: 15,
+    width: 146,
     borderRadius: 100,
     marginVertical: 50,
+    alignItems: "center",
   },
   buttonText: {
     fontSize: 20,
     color: "#fff",
+    letterSpacing: 4,
   },
 });

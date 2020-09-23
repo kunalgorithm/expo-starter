@@ -1,19 +1,9 @@
 import * as React from "react";
-import { AsyncStorage, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
-function useMeditations() {
-  const [meditations, setMeditations] = React.useState<
-    { date: string; duration: number }[]
-  >([]);
-  React.useEffect(() => {
-    AsyncStorage.getItem("meditations").then(
-      (data) => data && setMeditations(JSON.parse(data))
-    );
-  }, []);
-  return meditations;
-}
+import { useMeditations } from "../hooks/useMeditations";
 export default function TabThreeScreen() {
   const meditations = useMeditations();
 

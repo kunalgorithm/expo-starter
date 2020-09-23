@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     color: "#4A4A4A",
     fontWeight: "bold",
     margin: 25,
+    fontFamily: "Calibre-Medium",
   },
   text: {
     fontSize: 20,

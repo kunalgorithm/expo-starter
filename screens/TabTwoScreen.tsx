@@ -16,7 +16,7 @@ export default function TabTwoScreen() {
       {Array(9)
         .fill(0)
         .map((row, i) => (
-          <View style={styles.row}>
+          <View style={styles.row} key={i}>
             <Box>{i * 7}</Box>
             <Box>{i * 7 + 1}</Box>
             <Box>{i * 7 + 2}</Box>
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     color: "#4A4A4A",
     fontWeight: "bold",
     margin: 25,
+    fontFamily: "Calibre-Medium",
   },
   text: {
     fontSize: 20,

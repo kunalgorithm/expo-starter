@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     color: "#4A4A4A",
     opacity: 0.8,
     letterSpacing: 7,
+    fontFamily: "Calibre-Medium",
   },
   circle: {
     marginTop: 10,
@@ -103,6 +104,7 @@ const styles = StyleSheet.create({
     fontSize: 56,
     lineHeight: 67,
     color: "#B6999B",
+    fontFamily: "Calibre-Medium",
 
     letterSpacing: 15,
   },
@@ -132,5 +134,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#fff",
     letterSpacing: 4,
+    fontFamily: "Calibre-Medium",
   },
 });

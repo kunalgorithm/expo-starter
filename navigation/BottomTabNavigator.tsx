@@ -8,14 +8,9 @@ import useColorScheme from "../hooks/useColorScheme";
 import TabOneScreen from "../screens/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import TabThreeScreen from "../screens/TabThreeScreen";
-import {
-  BottomTabParamList,
-  TabOneParamList,
-  TabTwoParamList,
-  TabThreeParamList,
-} from "../types";
+import { TabOneParamList, TabTwoParamList, TabThreeParamList } from "../types";
 
-const BottomTab = createBottomTabNavigator<BottomTabParamList>();
+const BottomTab = createBottomTabNavigator<any>();
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();

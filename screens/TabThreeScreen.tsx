@@ -1,10 +1,22 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { AsyncStorage, StyleSheet } from "react-native";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
-
+function useMeditations() {
+  const [meditations, setMeditations] = React.useState<
+    { date: string; duration: number }[]
+  >([]);
+  React.useEffect(() => {
+    AsyncStorage.getItem("meditations").then(
+      (data) => data && setMeditations(JSON.parse(data))
+    );
+  }, []);
+  return meditations;
+}
 export default function TabThreeScreen() {
+  const meditations = useMeditations();
+
   const Row = ({ children }: { children: any }) => (
     <View style={styles.box}>
       <Text style={styles.text}>{children}</Text>
@@ -13,13 +25,14 @@ export default function TabThreeScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>My 60 day meditation journal 🗒</Text>
-      {Array(4)
-        .fill(0)
-        .map((row, i) => (
-          <View style={styles.row} key={i}>
-            <Row>Day 1</Row>
-          </View>
-        ))}
+      {meditations.map((meditation, i) => (
+        <View style={styles.row} key={i}>
+          <Row>
+            {new Date(meditation.date).toDateString()} -{" "}
+            {Math.floor(meditation.duration / 60)} min
+          </Row>
+        </View>
+      ))}
     </View>
   );
 }
@@ -59,7 +72,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.32,
     shadowRadius: 5.46,
-    borderRadius: 100/2,
+    borderRadius: 100 / 2,
 
     elevation: 9,
     backgroundColor: "#fff",

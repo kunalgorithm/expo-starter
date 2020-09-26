@@ -6,7 +6,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "build-server": "cd server && yarn build",
+    "start-server": "cd server && yarn start"
   },
   "jest": {
     "preset": "jest-expo"

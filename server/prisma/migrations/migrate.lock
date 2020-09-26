@@ -1,0 +1,4 @@
+# Prisma Migrate lockfile v1
+
+20200926220818-init-sqlite
+20200926231534-init-postgres

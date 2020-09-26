@@ -4,10 +4,10 @@ const prisma = new PrismaClient();
 export default async (req, res) => {
   const { id } = req.body;
 
-  const tweet = await prisma.tweet.delete({
+  const data = await prisma.meditation.delete({
     where: { id },
   });
 
-  res.json(tweet);
+  res.json(data);
   return;
 };

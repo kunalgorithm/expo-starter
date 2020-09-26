@@ -7,13 +7,14 @@ export default async (req, res) => {
 
   if (token) {
     // Get authenticated user
-    const { _id, username } = jwt.verify(token, process.env.JWT_SECRET);
-    const { text } = req.body;
+    //@ts-ignore
+    const { _id, username } = jwt.verify(token, process.env.JWT_SECRET!);
+    const { duration, notes } = req.body;
 
-    const tweet = await prisma.tweet.create({
-      data: { text, author: { connect: { username } } },
+    const data = await prisma.meditation.create({
+      data: { duration, notes, user: { connect: { username } } },
     });
-    res.json(tweet);
+    res.json(data);
   } else {
     res.json({ error: "You must be logged in to tweet." });
   }

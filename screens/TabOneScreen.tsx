@@ -82,14 +82,14 @@ const styles = StyleSheet.create({
     color: "#4A4A4A",
     opacity: 0.8,
     letterSpacing: 7,
-    fontFamily: "Calibre-Medium",
+    fontFamily: "Calibre-Regular",
   },
   circle: {
     marginTop: 10,
     backgroundColor: "#FBFBFC",
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 12,
+    borderWidth: 15,
     borderColor: "#EBECEF",
     borderRadius: 400,
 
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     fontSize: 56,
     lineHeight: 67,
     color: "#B6999B",
-    fontFamily: "Calibre-Medium",
+    fontFamily: "Calibre-Regular",
 
     letterSpacing: 15,
   },
@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#fff",
     letterSpacing: 4,
+    marginTop: 7,
     fontFamily: "Calibre-Medium",
   },
 });

@@ -29,6 +29,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#fff",
     letterSpacing: 4,
+    textTransform: 'uppercase',
     fontFamily: "Calibre-Medium",
+    marginTop: 10,
+    marginLeft: 5,
+    alignItems: "center",
   },
 });

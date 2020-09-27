@@ -54,7 +54,7 @@ export default function TabOneScreen() {
         onPress={() => setTimerOn(!timerOn)}
         style={styles.button}
       >
-        <Text style={styles.buttonText}>{timerOn ? "Pause" : "Start"}</Text>
+        <Text style={styles.buttonText}>{timerOn ? "PAUSE" : "START"}</Text>
       </TouchableOpacity>
       {timerOn && (
         <TouchableOpacity
@@ -99,10 +99,12 @@ const styles = StyleSheet.create({
   timer: {
     // fontFamily: "Calibre",
     fontSize: 56,
-    lineHeight: 67,
+    lineHeight: 90,
+    marginTop: 30,
+    marginLeft: 20,
     color: "#B6999B",
+    alignItems: "center",
     fontFamily: "Calibre-Regular",
-
     letterSpacing: 15,
   },
   picker: {
@@ -131,7 +133,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#fff",
     letterSpacing: 4,
-    marginTop: 7,
+    textTransform: 'uppercase',
+    marginTop: 10,
+    marginLeft: 5,
+    alignItems: "center",
     fontFamily: "Calibre-Medium",
   },
 });

@@ -6,15 +6,15 @@ import cookie from "cookie";
 
 export default async (req: any, res: any) => {
   // @ts-ignore
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   const user = await prisma.user.findOne({
-    where: { username },
+    where: { email },
   });
 
   if (user && bcrypt.compareSync(password, user.password)) {
     const token = jwt.sign(
-      { username: user.username, id: user.id, time: new Date() },
+      { email: user.email, id: user.id, time: new Date() },
       process.env.JWT_SECRET!,
       {
         expiresIn: "6h",
@@ -34,7 +34,7 @@ export default async (req: any, res: any) => {
 
     res.json(user);
   } else {
-    res.json({ error: "Incorrect username or password 🙁" });
+    res.json({ error: "Incorrect email or password 🙁" });
     return;
   }
 };

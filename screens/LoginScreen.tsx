@@ -4,12 +4,14 @@ import { Text, View } from "../components/Themed";
 import Button from "../components/Button";
 import { Image, TextInput, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { fetcher } from "../hooks/fetcher";
 
 export default function TabOneScreen() {
   const [login, setLogin] = React.useState(false);
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{login ? "Login" : "Sign Up"}</Text>
@@ -51,7 +53,18 @@ export default function TabOneScreen() {
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
-        <Button onPress={() => {}}>{login ? "Log in" : "Signup"}</Button>
+        <Button
+          onPress={async () => {
+            // console.log("logging in");
+            // const res = await fetcher(`/api/${login ? "login" : "signup"}`, {
+            //   email,
+            //   password,
+            // });
+            // console.log(res);
+          }}
+        >
+          {login ? "Log in" : "Signup"}
+        </Button>
 
         <View style={styles.footerView}>
           {login ? (
@@ -69,6 +82,7 @@ export default function TabOneScreen() {
               </Text>
             </Text>
           )}
+          {loading && <Text>loading...</Text>}
         </View>
       </KeyboardAwareScrollView>
     </View>

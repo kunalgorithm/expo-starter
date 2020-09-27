@@ -12,15 +12,16 @@ export default function TabOneScreen() {
   const [password, setPassword] = React.useState("");
   return (
     <View style={styles.container}>
+         <Image
+          style={styles.logo}
+          source={require("../assets/images/bestlogo.png")}
+        />
       <Text style={styles.title}>{login ? "Log in" : "Sign up"}</Text>
       <KeyboardAwareScrollView
         style={{ flex: 1, width: "100%" }}
         keyboardShouldPersistTaps="always"
       >
-        <Image
-          style={styles.logo}
-          source={require("../assets/images/Logo_name.png")}
-        />
+    
         {!login && (
           <TextInput
             style={styles.input}
@@ -87,11 +88,13 @@ const styles = StyleSheet.create({
   },
   logo: {
     flex: 1,
+    resizeMode: 'contain',
+    justifyContent: "center",
+    alignItems: "center",
     height: 120,
     width: 200,
-    alignSelf: "center",
-    resizeMode: 'contain',
-    margin: 30,
+    marginTop: -100,
+    margin: 0,
   },
   input: {
     height: 48,
@@ -110,8 +113,8 @@ const styles = StyleSheet.create({
 
   },
   title: {
-    fontSize: 40,
-    marginTop: 100,
+    fontSize: 30,
+    marginTop: -150,
     fontWeight: "bold",
     color: "#4A4A4A",
     opacity: 0.8,

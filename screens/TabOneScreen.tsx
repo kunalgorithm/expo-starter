@@ -1,58 +1,47 @@
 import * as React from "react";
-import { StyleSheet, Image, TouchableOpacity } from "react-native";
-import DropDownPicker from "react-native-dropdown-picker";
+import {
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  AsyncStorage,
+} from "react-native";
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { useInterval } from "../hooks/useInterval";
 // @ts-ignore
 import logo from "../assets/images/logo.jpeg";
+import CongratsScreen from "./CongratsScreen";
+import { DropDown } from "./DropDown";
 
 export default function TabOneScreen() {
   const [seconds, setSeconds] = React.useState(900);
+  const [secondsMeditated, setSecondsMeditated] = React.useState(900);
   const [timerOn, setTimerOn] = React.useState(false);
-  useInterval(() => {
+  const [congratsScreen, setCongratsScreen] = React.useState(false);
+  useInterval(async () => {
     if (timerOn && seconds > 0) setSeconds(seconds - 1);
+    if (seconds === 0) {
+      if (!(await AsyncStorage.getItem("day1")))
+        await AsyncStorage.setItem("day1", new Date().toString());
+      const meditationsRaw = await AsyncStorage.getItem("meditations");
+      const meditations = meditationsRaw ? JSON.parse(meditationsRaw) : [];
+      await AsyncStorage.setItem(
+        "meditations",
+        JSON.stringify([
+          ...meditations,
+          { date: new Date().toString(), duration: secondsMeditated },
+        ])
+      );
+    }
   }, 1000);
 
-  const DropDown = () => (
-    <DropDownPicker
-      items={[
-        { label: "15 min", value: 15 * 60 },
-        { label: "30 min", value: 30 * 60 },
-        { label: "60 min", value: 60 * 60 },
-      ]}
-      defaultValue={15 * 60}
-      containerStyle={{ 
-        height: 40, 
-        width: 146,
-        marginVertical: 15,
-      
-      }}
-      style={{
-        backgroundColor: "#FBFBFC",
-        borderRadius: 14,
-        shadowColor: "#8D8A8A",
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.20,
-        shadowRadius: 1.41,
-       
+  if (congratsScreen)
+    return <CongratsScreen setCongratsScreen={setCongratsScreen} />;
 
-        // boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.05)"
-      }}
-      itemStyle={{
-        justifyContent: "flex-start",
-      }}
-      dropDownStyle={{ backgroundColor: "#FBFBFC" }}
-      onChangeItem={(item: { value: number }) => setSeconds(item.value)}
-    />
-  );
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Day 1</Text>
-      <DropDown />
+      <DropDown setSeconds={setSeconds} />
       <View style={styles.circle}>
         {/* <Image source={logo} /> */}
         <Text style={styles.timer} onPress={(e) => setTimerOn(!timerOn)}>
@@ -67,6 +56,14 @@ export default function TabOneScreen() {
       >
         <Text style={styles.buttonText}>{timerOn ? "Pause" : "Start"}</Text>
       </TouchableOpacity>
+      {timerOn && (
+        <TouchableOpacity
+          onPress={() => setCongratsScreen(true)}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>{"End"}</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
@@ -108,10 +105,10 @@ const styles = StyleSheet.create({
 
     letterSpacing: 15,
   },
-  picker: { 
-
-    height: 0, 
-    width: 0 },
+  picker: {
+    height: 0,
+    width: 0,
+  },
   subtitle: {
     fontSize: 20,
 

@@ -3,27 +3,62 @@ import { StyleSheet } from "react-native";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
+import { useMeditations } from "../hooks/useMeditations";
+import dayjs from "dayjs";
 
 export default function TabTwoScreen() {
-  const Box = ({ children }: { children: any }) => (
-    <View style={styles.box}>
-      <Text style={styles.text}>{children}</Text>
-    </View>
+  const meditations = useMeditations();
+
+  const sorted = meditations.sort((a, b) =>
+    new Date(a.date) < new Date(b.date) ? 1 : -1
   );
+  const day1 =
+    sorted.length > 0 ? sorted[0] : { date: new Date(), duration: 0 };
+
+  const Box = ({ index }: { index: number }) => {
+    const sessions = sorted.filter(
+      (item) =>
+        dayjs(day1.date).add(index, "day").format("ddd, MMM D, YYYY") ===
+        dayjs(item.date).format("ddd, MMM D, YYYY")
+    );
+    return (
+      <View
+        style={{
+          ...styles.box,
+          backgroundColor: sessions.length > 0 ? "#ccc" : "#fff",
+        }}
+      >
+        <Text
+          style={{
+            ...styles.text,
+            color: sessions.length > 0 ? "#fff" : "#B6999B",
+          }}
+        >
+          {index}
+        </Text>
+      </View>
+    );
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>You're on a 5 day streak 💪</Text>
+      {sorted.length > 0 && (
+        <Text style={styles.title}>
+          You're first meditation was on{" "}
+          {dayjs(day1.date).format("ddd, MMM D, YYYY")} - {day1.date}
+        </Text>
+      )}
       {Array(9)
         .fill(0)
         .map((row, i) => (
           <View style={styles.row} key={i}>
-            <Box>{i * 7}</Box>
-            <Box>{i * 7 + 1}</Box>
-            <Box>{i * 7 + 2}</Box>
-            <Box>{i * 7 + 3}</Box>
-            <Box>{i * 7 + 4}</Box>
-            <Box>{i * 7 + 5}</Box>
-            <Box>{i * 7 + 6}</Box>
+            <Box index={i * 7} />
+            <Box index={i * 7 + 1} />
+            <Box index={i * 7 + 2} />
+            <Box index={i * 7 + 3} />
+            <Box index={i * 7 + 4} />
+            <Box index={i * 7 + 5} />
+            <Box index={i * 7 + 6} />
           </View>
         ))}
     </View>
@@ -35,17 +70,17 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#FBFBFC",
-    color: "#FBFBFC",
+    backgroundColor: "#fff",
+    color: "#C4C4C4",
   },
   row: {
     display: "flex",
     flexDirection: "row",
-    backgroundColor: "#FBFBFC",
+    backgroundColor: "#fff",
   },
   title: {
     fontSize: 20,
-    color: "#4A4A4A",
+    color: "#C4C4C4",
     fontWeight: "bold",
     margin: 25,
     fontFamily: "Calibre-Medium",
@@ -60,22 +95,21 @@ const styles = StyleSheet.create({
   box: {
     height: 35,
     width: 35,
-    shadowColor: "#8D8A8A",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 4,
     },
-    shadowOpacity: 0.20,
-    shadowRadius: 1.41,
-    borderRadius: 35/5,
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+    borderRadius: 5.46,
 
-    elevation: 2,
-    backgroundColor: "#FFF",
-    color: "#FFF",
+    elevation: 9,
+    backgroundColor: "#fff",
+    color: "#B6999B",
     alignItems: "center",
     justifyContent: "center",
     margin: 5,
-
   },
   separator: {
     marginVertical: 30,

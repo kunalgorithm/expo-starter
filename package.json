@@ -6,7 +6,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "build-server": "cd server && yarn && yarn build",
+    "start-server": "cd server && yarn start"
   },
   "jest": {
     "preset": "jest-expo"
@@ -17,6 +19,7 @@
     "@react-navigation/bottom-tabs": "^5.6.1",
     "@react-navigation/native": "^5.6.1",
     "@react-navigation/stack": "^5.6.2",
+    "dayjs": "^1.8.36",
     "expo": "~38.0.8",
     "expo-asset": "~8.1.7",
     "expo-constants": "~9.1.1",

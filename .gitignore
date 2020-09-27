@@ -8,6 +8,14 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+.env
+server/node_modules
+
 
 # macOS
 .DS_Store
+node_modules
+server/.next
+*/**/.env
+.env
+server/.vercel

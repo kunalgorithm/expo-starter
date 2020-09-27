@@ -1,0 +1,26 @@
+
+datasource sqlite {
+  provider = ["sqlite", "postgresql"]
+  url = "***"
+}
+
+generator client {
+  provider      = "prisma-client-js"
+}
+
+model User {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  username    String @unique
+  password    String
+  meditation      Meditation[]
+}
+
+model Meditation {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  notes       String?
+  duration  Int
+  userId   Int
+  user     User @relation(fields: [userId], references:[id])
+}

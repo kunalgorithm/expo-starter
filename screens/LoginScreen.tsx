@@ -12,6 +12,8 @@ export default function TabOneScreen() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(false);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{login ? "Login" : "Sign Up"}</Text>
@@ -55,12 +57,20 @@ export default function TabOneScreen() {
         />
         <Button
           onPress={async () => {
-            // console.log("logging in");
-            // const res = await fetcher(`/api/${login ? "login" : "signup"}`, {
-            //   email,
-            //   password,
-            // });
-            // console.log(res);
+            setLoading(true);
+            setError(false);
+            console.log("logging in");
+            const { data, error } = await fetcher(
+              `/api/${login ? "login" : "signup"}`,
+              {
+                email,
+                name,
+                password,
+              }
+            );
+            console.log({ data, error });
+            setLoading(false);
+            if (error) setError(error);
           }}
         >
           {login ? "Log in" : "Signup"}
@@ -83,6 +93,7 @@ export default function TabOneScreen() {
             </Text>
           )}
           {loading && <Text>loading...</Text>}
+          {error && <Text>Error: {error}</Text>}
         </View>
       </KeyboardAwareScrollView>
     </View>

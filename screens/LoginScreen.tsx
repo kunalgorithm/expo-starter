@@ -6,11 +6,13 @@ import { Image, TextInput, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function TabOneScreen() {
+  const [login, setLogin] = React.useState(false);
+  const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>{login ? "Login" : "Sign Up"}</Text>
       <KeyboardAwareScrollView
         style={{ flex: 1, width: "100%" }}
         keyboardShouldPersistTaps="always"
@@ -19,10 +21,21 @@ export default function TabOneScreen() {
           style={styles.logo}
           source={require("../assets/images/logo.png")}
         />
+        {!login && (
+          <TextInput
+            style={styles.input}
+            placeholder="Name"
+            placeholderTextColor="#ccc"
+            onChangeText={(text) => setName(text)}
+            value={name}
+            underlineColorAndroid="transparent"
+            autoCapitalize="none"
+          />
+        )}
         <TextInput
           style={styles.input}
           placeholder="E-mail"
-          placeholderTextColor="#aaaaaa"
+          placeholderTextColor="#ccc"
           onChangeText={(text) => setEmail(text)}
           value={email}
           underlineColorAndroid="transparent"
@@ -30,7 +43,7 @@ export default function TabOneScreen() {
         />
         <TextInput
           style={styles.input}
-          placeholderTextColor="#aaaaaa"
+          placeholderTextColor="#ccc"
           secureTextEntry
           placeholder="Password"
           onChangeText={(text) => setPassword(text)}
@@ -38,15 +51,24 @@ export default function TabOneScreen() {
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
-        <Button onPress={() => {}}>Log in</Button>
+        <Button onPress={() => {}}>{login ? "Log in" : "Signup"}</Button>
 
         <View style={styles.footerView}>
-          <Text style={styles.footerText}>
-            Don't have an account?{" "}
-            <Text onPress={() => {}} style={styles.footerLink}>
-              Sign up
+          {login ? (
+            <Text style={styles.footerText}>
+              Don't have an account?{" "}
+              <Text onPress={() => setLogin(false)} style={styles.footerLink}>
+                Sign up
+              </Text>
             </Text>
-          </Text>
+          ) : (
+            <Text style={styles.footerText}>
+              Have an account?{" "}
+              <Text onPress={() => setLogin(true)} style={styles.footerLink}>
+                Login
+              </Text>
+            </Text>
+          )}
         </View>
       </KeyboardAwareScrollView>
     </View>

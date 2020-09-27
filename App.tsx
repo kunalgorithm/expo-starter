@@ -7,10 +7,12 @@ import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
 import { useFonts } from "expo-font";
 import LoginScreen from "./screens/LoginScreen";
+import { useMe } from "./hooks/fetcher";
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
-  const [user, setUser] = useState(null);
+  const { me } = useMe();
+  console.log("me --> ", me);
 
   let [fontsLoaded] = useFonts({
     "Calibre-Medium": require("./assets/fonts/Calibre-Medium.otf"),
@@ -23,7 +25,11 @@ export default function App() {
   } else {
     return (
       <SafeAreaProvider>
-        {user!! ? <Navigation colorScheme={colorScheme} /> : <LoginScreen />}
+        {me!! && me?.email!! ? (
+          <Navigation colorScheme={colorScheme} />
+        ) : (
+          <LoginScreen />
+        )}
         <StatusBar />
       </SafeAreaProvider>
     );

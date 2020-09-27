@@ -12,14 +12,14 @@ export default function TabOneScreen() {
   const [password, setPassword] = React.useState("");
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{login ? "Login" : "Sign Up"}</Text>
+      <Text style={styles.title}>{login ? "Log in" : "Sign up"}</Text>
       <KeyboardAwareScrollView
         style={{ flex: 1, width: "100%" }}
         keyboardShouldPersistTaps="always"
       >
         <Image
           style={styles.logo}
-          source={require("../assets/images/logo.png")}
+          source={require("../assets/images/Logo_name.png")}
         />
         {!login && (
           <TextInput
@@ -51,7 +51,9 @@ export default function TabOneScreen() {
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
-        <Button onPress={() => {}}>{login ? "Log in" : "Signup"}</Button>
+        <View style={styles.container}>
+          <Button onPress={() => {}}>{login ? "Log in" : "Sign up"}</Button>
+        </View>
 
         <View style={styles.footerView}>
           {login ? (
@@ -81,46 +83,55 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#FBFBFC",
+    
   },
   logo: {
     flex: 1,
     height: 120,
-    width: 90,
+    width: 200,
     alignSelf: "center",
+    resizeMode: 'contain',
     margin: 30,
   },
   input: {
     height: 48,
     borderRadius: 5,
     overflow: "hidden",
-    backgroundColor: "white",
+    backgroundColor: "#fff",
     marginTop: 10,
     marginBottom: 10,
+    fontSize: 25,
+    paddingTop: 10,
+    fontFamily: "Calibre-Medium",
+    color: "#4A4A4A",
     marginLeft: 30,
     marginRight: 30,
-    paddingLeft: 16,
+    paddingLeft: 16,  
+
   },
   title: {
     fontSize: 40,
-    margin: 20,
+    marginTop: 100,
     fontWeight: "bold",
     color: "#4A4A4A",
     opacity: 0.8,
-    letterSpacing: 7,
     fontFamily: "Calibre-Medium",
   },
   footerView: {
     flex: 1,
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 1,
+    backgroundColor: "#FBFBFC",
   },
   footerText: {
-    fontSize: 16,
+    fontSize: 22,
+    fontFamily: "Calibre-Medium",
     color: "#2e2e2d",
   },
   footerLink: {
-    color: "#788eec",
+    color: "#B6999B",
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: 22,
+    marginBottom: 50,
   },
 });

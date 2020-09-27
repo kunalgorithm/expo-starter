@@ -53,6 +53,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     color: "#E7DDDE",
+    marginTop: 10,
+    fontFamily: "Calibre-Regular",
     // fontWeight: "bold",
   },
   box: {

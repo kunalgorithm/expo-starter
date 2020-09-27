@@ -29,13 +29,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "#FBFBFC",
     color: "#C4C4C4",
   },
   row: {
     display: "flex",
     flexDirection: "row",
-    backgroundColor: "#fff",
+    backgroundColor: "#FBFBFC",
   },
   title: {
     fontSize: 20,
@@ -47,6 +47,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     color: "#B6999B",
+    fontFamily: "Calibre-Regular",
+    marginTop: 6,
     // fontWeight: "",
   },
   box: {

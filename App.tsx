@@ -12,6 +12,8 @@ export default function App() {
 
   let [fontsLoaded] = useFonts({
     "Calibre-Medium": require("./assets/fonts/Calibre-Medium.otf"),
+    "Calibre-Regular": require("./assets/fonts/Calibre-Regular.otf"),
+    "Calibre-Light": require("./assets/fonts/Calibre-Light.otf"),
   });
 
   if (!isLoadingComplete || !fontsLoaded) {

@@ -12,9 +12,10 @@ import { TabOneParamList, TabTwoParamList, TabThreeParamList } from "../types";
 
 const BottomTab = createBottomTabNavigator<any>();
 
-export default function BottomTabNavigator() {
+export default function BottomTabNavigator(user: any) {
   const colorScheme = useColorScheme();
 
+  if (!user) return null;
   return (
     <BottomTab.Navigator
       initialRouteName="Home"

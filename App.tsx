@@ -1,14 +1,16 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
 import { useFonts } from "expo-font";
+import LoginScreen from "./screens/LoginScreen";
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
+  const [user, setUser] = useState(null);
 
   let [fontsLoaded] = useFonts({
     "Calibre-Medium": require("./assets/fonts/Calibre-Medium.otf"),
@@ -19,7 +21,7 @@ export default function App() {
   } else {
     return (
       <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
+        {user!! ? <Navigation colorScheme={colorScheme} /> : <LoginScreen />}
         <StatusBar />
       </SafeAreaProvider>
     );

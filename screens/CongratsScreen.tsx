@@ -1,5 +1,6 @@
 import * as React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import Button from "../components/Button";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
@@ -10,6 +11,7 @@ export default function CongratsScreen({
   setCongratsScreen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [screen, setScreen] = React.useState(0);
+  const [notes, setNotes] = React.useState("");
   if (screen === 0)
     return (
       <View style={styles.container}>
@@ -29,19 +31,24 @@ export default function CongratsScreen({
   return (
     <View style={styles.container}>
       <Text style={styles.title}>How did you feel? </Text>
-      <View>
-        <Text>:( :)</Text>
+      <View style={styles.row}>
+        <Button onPress={() => {}}>:(</Button>
+        <Button onPress={() => {}}>:|</Button>
+        <Button onPress={() => {}}>:)</Button>
       </View>
       <View>
-        <Text>How did it go?</Text>
+        <TextInput
+          style={styles.input}
+          placeholderTextColor="#ccc"
+          secureTextEntry
+          placeholder="How did it go?"
+          onChangeText={(text) => setNotes(text)}
+          value={notes}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
       </View>
-
-      <TouchableOpacity
-        onPress={() => setCongratsScreen(false)}
-        style={styles.button}
-      >
-        <Text style={styles.buttonText}>Submit</Text>
-      </TouchableOpacity>
+      <Button onPress={() => setCongratsScreen(false)}>Submit</Button>
     </View>
   );
 }
@@ -58,6 +65,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     backgroundColor: "#fff",
+    justifyContent: "space-around",
   },
   title: {
     fontSize: 20,
@@ -96,5 +104,20 @@ const styles = StyleSheet.create({
     color: "#fff",
     letterSpacing: 4,
     fontFamily: "Calibre-Medium",
+  },
+  input: {
+    height: 48,
+    borderRadius: 5,
+    overflow: "hidden",
+    backgroundColor: "#fff",
+    marginTop: 10,
+    marginBottom: 10,
+    fontSize: 25,
+    paddingTop: 10,
+    fontFamily: "Calibre-Medium",
+    color: "#4A4A4A",
+    marginLeft: 30,
+    marginRight: 30,
+    paddingLeft: 16,
   },
 });

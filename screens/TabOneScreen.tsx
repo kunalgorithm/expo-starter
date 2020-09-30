@@ -59,9 +59,9 @@ export default function TabOneScreen() {
       {timerOn && (
         <TouchableOpacity
           onPress={() => setCongratsScreen(true)}
-          style={styles.button}
+          style={{ marginVertical: 0 }}
         >
-          <Text style={styles.buttonText}>{"End"}</Text>
+          <Text style={{ ...styles.buttonText, color: "#ccc" }}>{"End"}</Text>
         </TouchableOpacity>
       )}
     </View>
@@ -126,14 +126,14 @@ const styles = StyleSheet.create({
     padding: 15,
     width: 146,
     borderRadius: 100,
-    marginVertical: 50,
+    marginVertical: 30,
     alignItems: "center",
   },
   buttonText: {
     fontSize: 20,
     color: "#fff",
     letterSpacing: 4,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
     marginTop: 10,
     marginLeft: 5,
     alignItems: "center",

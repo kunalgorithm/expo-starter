@@ -18,7 +18,7 @@ export default function TabThreeScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{me?.email} 60 day meditation journal 🗒</Text>
-      {me?.meditation.map((meditation, i) => (
+      {me?.meditation?.map((meditation, i) => (
         <View style={styles.row} key={i}>
           <Row>
             {new Date(meditation.createdAt).toDateString()} -{" "}

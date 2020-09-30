@@ -12,7 +12,7 @@ export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
   const { me } = useMe();
-  console.log("me --> ", me);
+  // console.log("me --> ", me);
 
   let [fontsLoaded] = useFonts({
     "Calibre-Medium": require("./assets/fonts/Calibre-Medium.otf"),

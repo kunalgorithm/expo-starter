@@ -60,7 +60,7 @@ export default function TabOneScreen() {
             onPress={async () => {
               setLoading(true);
               setError(false);
-              console.log("logging in");
+              // console.log("logging in");
               const { data, error } = await fetcher(
                 `/api/${login ? "login" : "signup"}`,
                 {
@@ -69,7 +69,7 @@ export default function TabOneScreen() {
                   password,
                 }
               );
-              console.log({ data, error });
+              // console.log({ data, error });
               setLoading(false);
               if (error) setError(error);
             }}

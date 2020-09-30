@@ -20,6 +20,9 @@ export function useFeed() {
   return { feed };
 }
 export function useMe() {
-  const { data: me }: { data?: User } = useSWR("/api/me", fetcher);
+  const { data: me }: { data?: User & { meditation: Meditation[] } } = useSWR(
+    "/api/me",
+    fetcher
+  );
   return { me };
 }

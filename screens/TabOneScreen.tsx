@@ -25,6 +25,7 @@ export default function TabOneScreen() {
   const endMeditation = () => {
     setCongratsScreen(true);
     setTimerOn(false);
+    setSecondsMeditated(0);
     setSeconds(DEFAULT_TIMER);
   };
   useInterval(async () => {
@@ -60,7 +61,7 @@ export default function TabOneScreen() {
           </TouchableOpacity>
         )}
         <Text style={styles.title}>Day 1</Text>
-        <DropDown setSeconds={setSeconds} />
+        <DropDown setSeconds={setSeconds} secondsMeditated={secondsMeditated} />
         <View style={styles.circle}>
           {/* <Image source={logo} /> */}
           <Text style={styles.timer} onPress={(e) => setTimerOn(!timerOn)}>

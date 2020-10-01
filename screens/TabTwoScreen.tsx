@@ -14,7 +14,7 @@ export default function TabTwoScreen() {
 
   const sorted = meditations
     ? meditations.sort((a, b) =>
-        new Date(a.createdAt) < new Date(b.createdAt) ? 1 : -1
+        new Date(a.createdAt) < new Date(b.createdAt) ? -1 : 1
       )
     : [];
   const day1 =

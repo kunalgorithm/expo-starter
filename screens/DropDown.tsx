@@ -3,8 +3,10 @@ import DropDownPicker from "react-native-dropdown-picker";
 
 export function DropDown({
   setSeconds,
+  secondsMeditated,
 }: {
   setSeconds: React.Dispatch<React.SetStateAction<number>>;
+  secondsMeditated: number;
 }) {
   return (
     <DropDownPicker
@@ -34,7 +36,9 @@ export function DropDown({
         justifyContent: "flex-start",
       }}
       dropDownStyle={{ backgroundColor: "#FBFBFC" }}
-      onChangeItem={(item: { value: number }) => setSeconds(item.value)}
+      onChangeItem={(item: { value: number }) =>
+        setSeconds(item.value - secondsMeditated)
+      }
     />
   );
 }

@@ -27,23 +27,24 @@ export default function TabOneScreen() {
       name,
       password,
     });
-    res.data && res.data.user && mutate("/api/me", res.data.user);
+    res.data &&
+      res.data.user &&
+      mutate("/api/me", { ...res.data.user, meditation: [] });
     // console.log("login response --> ", res);
     setLoading(false);
     if (res.error) setError(res.error);
   };
   return (
     <View style={styles.container}>
-         <Image
-          style={styles.logo}
-          source={require("../assets/images/bestlogo.png")}
-        />
+      <Image
+        style={styles.logo}
+        source={require("../assets/images/bestlogo.png")}
+      />
       <Text style={styles.title}>{login ? "Log in" : "Sign up"}</Text>
       <KeyboardAwareScrollView
         style={{ flex: 1, width: "100%" }}
         keyboardShouldPersistTaps="always"
       >
-    
         {!login && (
           <TextInput
             style={styles.input}

@@ -12,31 +12,35 @@ export default function TabTwoScreen() {
 
   const meditations = me ? me?.meditation : [];
 
-  const sorted = meditations
-    ? meditations.sort((a, b) =>
-        new Date(a.createdAt) < new Date(b.createdAt) ? -1 : 1
-      )
-    : [];
   const day1 =
-    sorted.length > 0 ? sorted[0] : { createdAt: new Date(), duration: 0 };
+    meditations.length > 0
+      ? meditations[0]
+      : { createdAt: new Date(), duration: 0 };
 
   const Box = ({ index }: { index: number }) => {
-    const sessions = sorted.filter(
+    const boxDate = dayjs(day1.createdAt).add(index, "day");
+    const meditationsThisDay = meditations.filter(
       (item) =>
-        dayjs(day1.createdAt).add(index, "day").format("ddd, MMM D, YYYY") ===
+        boxDate.format("ddd, MMM D, YYYY") ===
         dayjs(item.createdAt).format("ddd, MMM D, YYYY")
     );
+    const isToday: boolean =
+      boxDate.format("ddd, MMM D, YYYY") === dayjs().format("ddd, MMM D, YYYY");
     return (
       <View
         style={{
           ...styles.box,
-          backgroundColor: sessions.length > 0 ? "#ccc" : "#fff",
+          backgroundColor: isToday
+            ? "#84B9C8"
+            : meditationsThisDay.length > 0
+            ? "#ccc"
+            : "#fff",
         }}
       >
         <Text
           style={{
             ...styles.text,
-            color: sessions.length > 0 ? "#fff" : "#B6999B",
+            color: meditationsThisDay.length > 0 ? "#fff" : "#B6999B",
           }}
         >
           {index}
@@ -47,7 +51,7 @@ export default function TabTwoScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>You're on a 5 day streak 💪</Text>
-      {sorted.length > 0 && (
+      {meditations.length > 0 && (
         <Text style={styles.title}>
           Your first meditation was on{" "}
           {dayjs(day1.createdAt).format("ddd, MMM D, YYYY")}
@@ -95,7 +99,6 @@ const styles = StyleSheet.create({
     color: "#E7DDDE",
     marginTop: 10,
     fontFamily: "Calibre-Regular",
-    // fontWeight: "bold",
   },
   box: {
     height: 35,

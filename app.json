@@ -5,11 +5,11 @@
     "version": "1.0.1",
     "sdkVersion": "39.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/mindstreaks_splash.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/mindstreaks_splash.jpeg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

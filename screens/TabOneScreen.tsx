@@ -13,30 +13,36 @@ import logo from "../assets/images/logo.jpeg";
 import CongratsScreen from "./CongratsScreen";
 import { DropDown } from "./DropDown";
 
+const DEFAULT_TIMER = 15 * 60; // 15 minutes
+
 export default function TabOneScreen() {
-  const [seconds, setSeconds] = React.useState(900);
-  const [secondsMeditated, setSecondsMeditated] = React.useState(900);
+  const [seconds, setSeconds] = React.useState(DEFAULT_TIMER);
+  const [secondsMeditated, setSecondsMeditated] = React.useState(0);
   const [timerOn, setTimerOn] = React.useState(false);
   const [congratsScreen, setCongratsScreen] = React.useState(false);
+
+  const endMeditation = () => {
+    setCongratsScreen(true);
+    setTimerOn(false);
+    setSeconds(DEFAULT_TIMER);
+  };
   useInterval(async () => {
-    if (timerOn && seconds > 0) setSeconds(seconds - 1);
+    if (timerOn && seconds > 0) {
+      setSeconds(seconds - 1);
+      setSecondsMeditated(secondsMeditated + 1);
+    }
     if (seconds === 0) {
-      if (!(await AsyncStorage.getItem("day1")))
-        await AsyncStorage.setItem("day1", new Date().toString());
-      const meditationsRaw = await AsyncStorage.getItem("meditations");
-      const meditations = meditationsRaw ? JSON.parse(meditationsRaw) : [];
-      await AsyncStorage.setItem(
-        "meditations",
-        JSON.stringify([
-          ...meditations,
-          { date: new Date().toString(), duration: secondsMeditated },
-        ])
-      );
+      endMeditation();
     }
   }, 1000);
 
   if (congratsScreen)
-    return <CongratsScreen setCongratsScreen={setCongratsScreen} />;
+    return (
+      <CongratsScreen
+        setCongratsScreen={setCongratsScreen}
+        duration={secondsMeditated}
+      />
+    );
 
   return (
     <View style={styles.container}>
@@ -57,10 +63,7 @@ export default function TabOneScreen() {
         <Text style={styles.buttonText}>{timerOn ? "PAUSE" : "START"}</Text>
       </TouchableOpacity>
       {timerOn && (
-        <TouchableOpacity
-          onPress={() => setCongratsScreen(true)}
-          style={{ marginVertical: 0 }}
-        >
+        <TouchableOpacity onPress={endMeditation} style={{ marginVertical: 0 }}>
           <Text style={{ ...styles.buttonText, color: "#ccc" }}>{"End"}</Text>
         </TouchableOpacity>
       )}

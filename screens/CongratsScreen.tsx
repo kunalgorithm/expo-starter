@@ -4,14 +4,19 @@ import Button from "../components/Button";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
+import { fetcher, useMe } from "../hooks/fetcher";
+import { mutate } from "swr";
 
 export default function CongratsScreen({
   setCongratsScreen,
+  duration,
 }: {
   setCongratsScreen: React.Dispatch<React.SetStateAction<boolean>>;
+  duration: number;
 }) {
   const [screen, setScreen] = React.useState(0);
   const [notes, setNotes] = React.useState("");
+  const { me } = useMe();
   if (screen === 0)
     return (
       <View style={styles.container}>
@@ -40,7 +45,6 @@ export default function CongratsScreen({
         <TextInput
           style={styles.input}
           placeholderTextColor="#ccc"
-          secureTextEntry
           placeholder="How did it go?"
           onChangeText={(text) => setNotes(text)}
           value={notes}
@@ -48,7 +52,25 @@ export default function CongratsScreen({
           autoCapitalize="none"
         />
       </View>
-      <Button onPress={() => setCongratsScreen(false)}>Submit</Button>
+      <Button
+        onPress={async () => {
+          const res = await fetcher(`/api/meditation/create`, {
+            duration,
+            notes,
+          });
+          mutate("/api/me", {
+            ...me,
+            meditation: [
+              ...me?.meditation!,
+              { duration, notes, createdAt: new Date() },
+            ],
+          });
+          console.log(res);
+          setCongratsScreen(false);
+        }}
+      >
+        Submit
+      </Button>
     </View>
   );
 }

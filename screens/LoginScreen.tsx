@@ -5,6 +5,7 @@ import Button from "../components/Button";
 import { Image, TextInput, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { fetcher, useMe } from "../hooks/fetcher";
+import { mutate } from "swr";
 
 export default function TabOneScreen() {
   const [login, setLogin] = React.useState(false);
@@ -26,14 +27,10 @@ export default function TabOneScreen() {
       name,
       password,
     });
-    console.log("login response --> ", res);
+    res.data && res.data.user && mutate("/api/me", res.data.user);
+    // console.log("login response --> ", res);
     setLoading(false);
     if (res.error) setError(res.error);
-    if (res.data.user && res.data.token) {
-      console.log("SETTING TOKEN");
-      await AsyncStorage.setItem("token", res.data.token);
-      await AsyncStorage.setItem("user_email", res.data.user.email);
-    }
   };
   return (
     <View style={styles.container}>

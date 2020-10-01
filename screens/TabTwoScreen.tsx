@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Image } from "react-native";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
@@ -50,7 +50,37 @@ export default function TabTwoScreen() {
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>You're on a 5 day streak 💪</Text>
+      <Text style={styles.title}>{me?.email}, you're on a 4 day streak</Text>
+      <View style={styles.row}>
+        <View style={styles.col}>
+          <Image
+            style={styles.icon}
+            source={require("../assets/images/total_sessions.jpg")}
+          />
+          <Text style={styles.subtitle}>MINDFUL TIME</Text>
+          <Text style={styles.number}>
+            {Math.ceil(
+              meditations.map((a) => a.duration).reduce((a, b) => a + b) / 60
+            )}
+          </Text>
+        </View>
+        <View style={styles.col}>
+          <Image
+            style={styles.icon}
+            source={require("../assets/images/clock_icon.jpg")}
+          />
+          <Text style={styles.subtitle}>TOTAL SESSIONS</Text>
+          <Text style={styles.number}>{meditations.length}</Text>
+        </View>
+        <View style={styles.col}>
+          <Image
+            style={styles.icon}
+            source={require("../assets/images/longest_streak.jpg")}
+          />
+          <Text style={styles.subtitle}>LONGEST STREAK</Text>
+          <Text style={styles.number}>10</Text>
+        </View>
+      </View>
       {meditations.length > 0 && (
         <Text style={styles.title}>
           Your first meditation was on{" "}
@@ -100,6 +130,27 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontFamily: "Calibre-Regular",
   },
+  subtitle: {
+    fontSize: 14,
+    color: "gray",
+    fontFamily: "Calibre-Regular",
+    marginBottom: 4,
+
+    textAlign: "center",
+  },
+  number: {
+    fontSize: 25,
+    color: "gray",
+    fontFamily: "Calibre-Regular",
+
+    textAlign: "center",
+  },
+  col: {
+    width: "30%",
+    textAlign: "center",
+    alignItems: "center",
+    backgroundColor: "transparent",
+  },
   box: {
     height: 35,
     width: 35,
@@ -123,5 +174,11 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: "80%",
+  },
+  icon: {
+    // width: 30,
+    margin: 10,
+    height: 50,
+    width: 50,
   },
 });

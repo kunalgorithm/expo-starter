@@ -2,6 +2,7 @@ import * as React from "react";
 import {
   StyleSheet,
   Image,
+  ImageBackground,
   TouchableOpacity,
   AsyncStorage,
 } from "react-native";
@@ -40,44 +41,57 @@ export default function TabOneScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Day 1</Text>
-      <DropDown setSeconds={setSeconds} />
-      <View style={styles.circle}>
-        {/* <Image source={logo} /> */}
-        <Text style={styles.timer} onPress={(e) => setTimerOn(!timerOn)}>
-          {Math.floor(seconds / 60)}:
-          {seconds % 60 < 10 ? "0" + (seconds % 60) : seconds % 60}
-        </Text>
-      </View>
-
-      <TouchableOpacity
-        onPress={() => setTimerOn(!timerOn)}
-        style={styles.button}
+      <ImageBackground
+        style={styles.backgroundImage}
+        source={require("../assets/images/ocean_bg.jpg")}
       >
-        <Text style={styles.buttonText}>{timerOn ? "PAUSE" : "START"}</Text>
-      </TouchableOpacity>
-      {timerOn && (
+        <Text style={styles.title}>Day 1</Text>
+        <DropDown setSeconds={setSeconds} />
+        <View style={styles.circle}>
+          {/* <Image source={logo} /> */}
+          <Text style={styles.timer} onPress={(e) => setTimerOn(!timerOn)}>
+            {Math.floor(seconds / 60)}:
+            {seconds % 60 < 10 ? "0" + (seconds % 60) : seconds % 60}
+          </Text>
+        </View>
+
         <TouchableOpacity
-          onPress={() => setCongratsScreen(true)}
+          onPress={() => setTimerOn(!timerOn)}
           style={styles.button}
         >
-          <Text style={styles.buttonText}>{"End"}</Text>
+          <Text style={styles.buttonText}>{timerOn ? "PAUSE" : "START"}</Text>
         </TouchableOpacity>
-      )}
+        {timerOn && (
+          <TouchableOpacity
+            onPress={() => setCongratsScreen(true)}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>{"End"}</Text>
+          </TouchableOpacity>
+        )}
+      </ImageBackground>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#FBFBFC",
   },
+
+  backgroundImage: {
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    opacity: 0.7,
+  },
+
   title: {
-    fontSize: 40,
-    margin: 20,
+    fontSize: 50,
+    margin: 1,
     fontWeight: "bold",
     color: "#4A4A4A",
     opacity: 0.8,
@@ -86,7 +100,7 @@ const styles = StyleSheet.create({
   },
   circle: {
     marginTop: 10,
-    backgroundColor: "#FBFBFC",
+    backgroundColor: "#FBFBFC00",
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 15,
@@ -102,7 +116,7 @@ const styles = StyleSheet.create({
     lineHeight: 90,
     marginTop: 30,
     marginLeft: 20,
-    color: "#B6999B",
+    color: "#ffffff",
     alignItems: "center",
     fontFamily: "Calibre-Regular",
     letterSpacing: 15,
@@ -117,7 +131,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   separator: {
-    marginVertical: 30,
+    marginVertical: 0,
     height: 1,
     width: "80%",
   },
@@ -126,14 +140,14 @@ const styles = StyleSheet.create({
     padding: 15,
     width: 146,
     borderRadius: 100,
-    marginVertical: 50,
+    marginVertical: 20,
     alignItems: "center",
   },
   buttonText: {
     fontSize: 20,
     color: "#fff",
     letterSpacing: 4,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
     marginTop: 10,
     marginLeft: 5,
     alignItems: "center",

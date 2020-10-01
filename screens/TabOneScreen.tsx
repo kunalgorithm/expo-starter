@@ -12,10 +12,11 @@ import { useInterval } from "../hooks/useInterval";
 // @ts-ignore
 import logo from "../assets/images/logo.jpeg";
 import CongratsScreen from "./CongratsScreen";
-import { DropDown } from "./DropDown";
+import { DropDown } from "../components/DropDown";
 import { useMe } from "../hooks/fetcher";
 import dayjs from "dayjs";
 
+import { activateKeepAwake, deactivateKeepAwake } from "expo-keep-awake";
 const DEFAULT_TIMER = 15 * 60; // 15 minutes
 
 export default function TabOneScreen() {
@@ -45,6 +46,12 @@ export default function TabOneScreen() {
       endMeditation();
     }
   }, 1000);
+
+  React.useEffect(() => {
+    if (timerOn) activateKeepAwake();
+    if (!timerOn) deactivateKeepAwake();
+    return deactivateKeepAwake();
+  }, [timerOn]);
 
   if (congratsScreen)
     return (

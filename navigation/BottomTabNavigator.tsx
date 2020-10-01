@@ -9,6 +9,7 @@ import TabOneScreen from "../screens/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import TabThreeScreen from "../screens/TabThreeScreen";
 import { TabOneParamList, TabTwoParamList, TabThreeParamList } from "../types";
+import { Image, StyleSheet } from "react-native";
 
 const BottomTab = createBottomTabNavigator<any>();
 
@@ -26,7 +27,10 @@ export default function BottomTabNavigator(user: any) {
         component={TabOneNavigator}
         options={{
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-code" color={color} />
+            <Image
+              source={require("../assets/images/pray_icon.png")}
+              style={styles.icon}
+            />
           ),
         }}
       />
@@ -35,7 +39,10 @@ export default function BottomTabNavigator(user: any) {
         component={TabTwoNavigator}
         options={{
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-code" color={color} />
+            <Image
+              source={require("../assets/images/cal_icon.png")}
+              style={styles.icon}
+            />
           ),
         }}
       />
@@ -44,7 +51,10 @@ export default function BottomTabNavigator(user: any) {
         component={TabThreeNavigator}
         options={{
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-code" color={color} />
+            <Image
+              source={require("../assets/images/history_icon.png")}
+              style={styles.icon}
+            />
           ),
         }}
       />
@@ -101,3 +111,9 @@ function TabThreeNavigator() {
     </TabThreeStack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  icon: {
+    // height: 40,
+  },
+});

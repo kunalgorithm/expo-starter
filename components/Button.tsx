@@ -9,7 +9,7 @@ const Button = ({
   onPress: (e: any) => any;
 }) => {
   return (
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
       <Text style={styles.buttonText}>{children}</Text>
     </TouchableOpacity>
   );

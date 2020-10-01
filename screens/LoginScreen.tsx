@@ -4,12 +4,16 @@ import { Text, View } from "../components/Themed";
 import Button from "../components/Button";
 import { Image, TextInput, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { fetcher } from "../hooks/fetcher";
 
 export default function TabOneScreen() {
   const [login, setLogin] = React.useState(false);
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(false);
+
   return (
     <View style={styles.container}>
          <Image
@@ -53,7 +57,26 @@ export default function TabOneScreen() {
           autoCapitalize="none"
         />
         <View style={styles.container}>
-          <Button onPress={() => {}}>{login ? "Log in" : "Sign up"}</Button>
+          <Button
+            onPress={async () => {
+              setLoading(true);
+              setError(false);
+              // console.log("logging in");
+              const { data, error } = await fetcher(
+                `/api/${login ? "login" : "signup"}`,
+                {
+                  email,
+                  name,
+                  password,
+                }
+              );
+              // console.log({ data, error });
+              setLoading(false);
+              if (error) setError(error);
+            }}
+          >
+            {login ? "Log in" : "Signup"}
+          </Button>
         </View>
 
         <View style={styles.footerView}>
@@ -72,6 +95,8 @@ export default function TabOneScreen() {
               </Text>
             </Text>
           )}
+          {loading && <Text>loading...</Text>}
+          {error && <Text>Error: {error}</Text>}
         </View>
       </KeyboardAwareScrollView>
     </View>
@@ -84,17 +109,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#FBFBFC",
-    
   },
   logo: {
     flex: 1,
-    resizeMode: 'contain',
     justifyContent: "center",
     alignItems: "center",
     height: 120,
     width: 200,
-    marginTop: -100,
-    margin: 0,
+    alignSelf: "center",
+    resizeMode: "contain",
+    margin: 30,
   },
   input: {
     height: 48,
@@ -109,8 +133,7 @@ const styles = StyleSheet.create({
     color: "#4A4A4A",
     marginLeft: 30,
     marginRight: 30,
-    paddingLeft: 16,  
-
+    paddingLeft: 16,
   },
   title: {
     fontSize: 30,

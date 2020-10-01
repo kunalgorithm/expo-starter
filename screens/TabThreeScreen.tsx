@@ -1,9 +1,11 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
+import { mutate } from "swr";
+import Button from "../components/Button";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
-import { useMe } from "../hooks/fetcher";
+import { fetcher, useMe } from "../hooks/fetcher";
 import { useMeditations } from "../hooks/useMeditations";
 import { Meditation, User } from "../server/node_modules/@prisma/client";
 export default function TabThreeScreen() {
@@ -17,12 +19,22 @@ export default function TabThreeScreen() {
   );
   return (
     <View style={styles.container}>
+      <Text
+        onPress={async () => {
+          const res = await fetcher(`/api/logout`);
+          mutate("/api/me", {});
+        }}
+      >
+        Log out{" "}
+      </Text>
       <Text style={styles.title}>{me?.email} 60 day meditation journal 🗒</Text>
-      {me?.meditation.map((meditation, i) => (
+
+      {me?.meditation?.map((meditation, i) => (
         <View style={styles.row} key={i}>
           <Row>
             {new Date(meditation.createdAt).toDateString()} -{" "}
-            {Math.floor(meditation.duration / 60)} min
+            {Math.floor(meditation.duration / 60)} min {`\n`}
+            {meditation.notes}
           </Row>
         </View>
       ))}

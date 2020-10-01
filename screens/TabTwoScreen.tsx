@@ -5,21 +5,26 @@ import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { useMeditations } from "../hooks/useMeditations";
 import dayjs from "dayjs";
+import { useMe } from "../hooks/fetcher";
 
 export default function TabTwoScreen() {
-  const meditations = useMeditations();
+  const { me } = useMe();
 
-  const sorted = meditations.sort((a, b) =>
-    new Date(a.date) < new Date(b.date) ? 1 : -1
-  );
+  const meditations = me ? me?.meditation : [];
+
+  const sorted = meditations
+    ? meditations.sort((a, b) =>
+        new Date(a.createdAt) < new Date(b.createdAt) ? -1 : 1
+      )
+    : [];
   const day1 =
-    sorted.length > 0 ? sorted[0] : { date: new Date(), duration: 0 };
+    sorted.length > 0 ? sorted[0] : { createdAt: new Date(), duration: 0 };
 
   const Box = ({ index }: { index: number }) => {
     const sessions = sorted.filter(
       (item) =>
-        dayjs(day1.date).add(index, "day").format("ddd, MMM D, YYYY") ===
-        dayjs(item.date).format("ddd, MMM D, YYYY")
+        dayjs(day1.createdAt).add(index, "day").format("ddd, MMM D, YYYY") ===
+        dayjs(item.createdAt).format("ddd, MMM D, YYYY")
     );
     return (
       <View
@@ -44,8 +49,8 @@ export default function TabTwoScreen() {
       <Text style={styles.title}>You're on a 5 day streak 💪</Text>
       {sorted.length > 0 && (
         <Text style={styles.title}>
-          You're first meditation was on{" "}
-          {dayjs(day1.date).format("ddd, MMM D, YYYY")} - {day1.date}
+          Your first meditation was on{" "}
+          {dayjs(day1.createdAt).format("ddd, MMM D, YYYY")}
         </Text>
       )}
       {Array(9)
@@ -100,9 +105,9 @@ const styles = StyleSheet.create({
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.20,
+    shadowOpacity: 0.2,
     shadowRadius: 1.41,
-    borderRadius: 35/5,
+    borderRadius: 35 / 5,
 
     elevation: 9,
     backgroundColor: "#fff",

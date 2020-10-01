@@ -2,14 +2,14 @@ import { Meditation, User } from "../server/node_modules/@prisma/client";
 import useSWR from "swr";
 
 const API_URL = "https://mindstreaks-api.onrender.com";
-export const fetcher = (url: string, data: any): any =>
+export const fetcher = (url: string, data?: any): any =>
   fetch(API_URL + url, {
     method: data ? "POST" : "GET",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: data ? JSON.stringify(data) : "",
   }).then((r) => r.json());
 
 export function useFeed() {

@@ -1,15 +1,22 @@
 import * as React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import Button from "../components/Button";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
+import { fetcher, useMe } from "../hooks/fetcher";
+import { mutate } from "swr";
 
 export default function CongratsScreen({
   setCongratsScreen,
+  duration,
 }: {
   setCongratsScreen: React.Dispatch<React.SetStateAction<boolean>>;
+  duration: number;
 }) {
   const [screen, setScreen] = React.useState(0);
+  const [notes, setNotes] = React.useState("");
+  const { me } = useMe();
   if (screen === 0)
     return (
       <View style={styles.container}>
@@ -33,19 +40,41 @@ export default function CongratsScreen({
   return (
     <View style={styles.container}>
       <Text style={styles.title}>How did you feel? </Text>
-      <View>
-        <Text>:( :)</Text>
+      <View style={styles.row}>
+        <Button onPress={() => {}}>:(</Button>
+        <Button onPress={() => {}}>:|</Button>
+        <Button onPress={() => {}}>:)</Button>
       </View>
       <View>
-        <Text>How did it go?</Text>
+        <TextInput
+          style={styles.input}
+          placeholderTextColor="#ccc"
+          placeholder="How did it go?"
+          onChangeText={(text) => setNotes(text)}
+          value={notes}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
       </View>
-
-      <TouchableOpacity
-        onPress={() => setCongratsScreen(false)}
-        style={styles.button}
+      <Button
+        onPress={async () => {
+          const res = await fetcher(`/api/meditation/create`, {
+            duration,
+            notes,
+          });
+          mutate("/api/me", {
+            ...me,
+            meditation: [
+              ...me?.meditation!,
+              { duration, notes, createdAt: new Date() },
+            ],
+          });
+          console.log(res);
+          setCongratsScreen(false);
+        }}
       >
-        <Text style={styles.buttonText}>Submit</Text>
-      </TouchableOpacity>
+        Submit
+      </Button>
     </View>
   );
 }
@@ -62,6 +91,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     backgroundColor: "#fff",
+    justifyContent: "space-around",
   },
   title: {
     fontSize: 30,
@@ -135,5 +165,20 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     alignItems: "center",
     fontFamily: "Calibre-Medium",
+  },
+  input: {
+    height: 48,
+    borderRadius: 5,
+    overflow: "hidden",
+    backgroundColor: "#fff",
+    marginTop: 10,
+    marginBottom: 10,
+    fontSize: 25,
+    paddingTop: 10,
+    fontFamily: "Calibre-Medium",
+    color: "#4A4A4A",
+    marginLeft: 30,
+    marginRight: 30,
+    paddingLeft: 16,
   },
 });

@@ -1,10 +1,11 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { AsyncStorage, StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
 import Button from "../components/Button";
 import { Image, TextInput, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { fetcher } from "../hooks/fetcher";
+import { fetcher, useMe } from "../hooks/fetcher";
+import { mutate } from "swr";
 
 export default function TabOneScreen() {
   const [login, setLogin] = React.useState(false);
@@ -14,6 +15,23 @@ export default function TabOneScreen() {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
 
+  // const { me } = useMe();
+  // console.log(me);
+
+  const onSubmit = async () => {
+    setLoading(true);
+    setError(false);
+    console.log("logging in");
+    const res = await fetcher(`/api/${login ? "login" : "signup"}`, {
+      email,
+      name,
+      password,
+    });
+    res.data && res.data.user && mutate("/api/me", res.data.user);
+    // console.log("login response --> ", res);
+    setLoading(false);
+    if (res.error) setError(res.error);
+  };
   return (
     <View style={styles.container}>
          <Image
@@ -57,25 +75,9 @@ export default function TabOneScreen() {
           autoCapitalize="none"
         />
         <View style={styles.container}>
-          <Button
-            onPress={async () => {
-              setLoading(true);
-              setError(false);
-              // console.log("logging in");
-              const { data, error } = await fetcher(
-                `/api/${login ? "login" : "signup"}`,
-                {
-                  email,
-                  name,
-                  password,
-                }
-              );
-              // console.log({ data, error });
-              setLoading(false);
-              if (error) setError(error);
-            }}
-          >
-            {login ? "Log in" : "Signup"}
+          {error && <Text>Error: {error}</Text>}
+          <Button onPress={onSubmit}>
+            {login ? (loading ? "..." : "Login") : loading ? "..." : "Sign Up"}
           </Button>
         </View>
 
@@ -91,12 +93,10 @@ export default function TabOneScreen() {
             <Text style={styles.footerText}>
               Have an account?{" "}
               <Text onPress={() => setLogin(true)} style={styles.footerLink}>
-                Login
+                Log in
               </Text>
             </Text>
           )}
-          {loading && <Text>loading...</Text>}
-          {error && <Text>Error: {error}</Text>}
         </View>
       </KeyboardAwareScrollView>
     </View>

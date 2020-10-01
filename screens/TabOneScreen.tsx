@@ -49,8 +49,8 @@ export default function TabOneScreen() {
 
   React.useEffect(() => {
     if (timerOn) activateKeepAwake();
-    if (!timerOn) deactivateKeepAwake();
-    return deactivateKeepAwake();
+    // if (!timerOn) deactivateKeepAwake();
+    // return deactivateKeepAwake();
   }, [timerOn]);
 
   if (congratsScreen)

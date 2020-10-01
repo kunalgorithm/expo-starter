@@ -27,6 +27,7 @@ export default function TabTwoScreen() {
           {dayjs(day1.createdAt).format("ddd, MMM D, YYYY")}
         </Text>
       )}
+
       {Array(9)
         .fill(0)
         .map((row, i) => (
@@ -52,6 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FBFBFC",
     color: "#fbfbfc",
   },
+
   row: {
     display: "flex",
     flexDirection: "row",

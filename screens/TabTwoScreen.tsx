@@ -21,11 +21,12 @@ export default function TabTwoScreen() {
     sorted.length > 0 ? sorted[0] : { createdAt: new Date(), duration: 0 };
 
   const Box = ({ index }: { index: number }) => {
-    const sessions = sorted.filter(
-      (item) =>
+    const sessions = sorted.filter((item) => {
+      return (
         dayjs(day1.createdAt).add(index, "day").format("ddd, MMM D, YYYY") ===
         dayjs(item.createdAt).format("ddd, MMM D, YYYY")
-    );
+      );
+    });
     return (
       <View
         style={{

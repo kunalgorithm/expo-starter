@@ -14,7 +14,7 @@ export function Stats({ meditations }: { meditations: Meditation[] }) {
         <Text style={styles.subtitle}>MINDFUL TIME</Text>
         <Text style={styles.number}>
           {Math.ceil(
-            meditations.map((a) => a.duration).reduce((a, b) => a + b) / 60
+            meditations.map((a) => a.duration).reduce((a, b) => a + b, 0) / 60
           )}
         </Text>
       </View>

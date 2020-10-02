@@ -30,7 +30,10 @@ export default function TimerScreen() {
 
   const day =
     me && me.meditations?.length > 0
-      ? dayjs().diff(dayjs(me.meditations[0].createdAt), "d")
+      ? dayjs().diff(
+          dayjs(me.meditations[0] ? me.meditations[0].createdAt : new Date()),
+          "d"
+        )
       : 1;
 
   const endMeditation = () => {

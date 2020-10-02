@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import { Meditation } from "../server/node_modules/@prisma/client";
 
 import { Image, StyleSheet } from "react-native";
+import { useMe } from "../hooks/fetcher";
 
 export const Box = ({
   index,
@@ -14,7 +15,10 @@ export const Box = ({
 
   meditations: Meditation[];
 }) => {
-  const boxDate = dayjs(meditations[0].createdAt).add(index, "day");
+  const { me } = useMe();
+  const boxDate = dayjs(
+    me.meditations[0] ? me.meditations[0].createdAt : new Date()
+  ).add(index, "day");
   const meditationsThisDay = meditations.filter(
     (item) =>
       boxDate.format("ddd, MMM D, YYYY") ===

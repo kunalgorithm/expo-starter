@@ -27,10 +27,11 @@ export default function TabOneScreen() {
       name,
       password,
     });
-    res.data &&
-      res.data.user &&
-      mutate("/api/me", { ...res.data.user, meditation: [] });
-    // console.log("login response --> ", res);
+    if (res.data && res.data.user) {
+      await mutate("/api/me", { ...res.data.user, meditation: [] });
+      return;
+    }
+
     setLoading(false);
     if (res.error) setError(res.error);
   };

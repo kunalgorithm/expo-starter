@@ -15,6 +15,8 @@ import CongratsScreen from "./CongratsScreen";
 import { DropDown } from "../components/DropDown";
 import { useMe } from "../hooks/fetcher";
 import dayjs from "dayjs";
+// @ts-ignore
+// import SoundPlayer from "react-native-sound-player";
 
 import { activateKeepAwake, deactivateKeepAwake } from "expo-keep-awake";
 const DEFAULT_TIMER = 15 * 60; // 15 minutes
@@ -32,11 +34,21 @@ export default function TabOneScreen() {
       : 1;
 
   const endMeditation = () => {
+    // try {
+    //   // play the file tone.mp3
+    //   SoundPlayer.playSoundFile(
+    //     "../assets/clock-chiming/Creepy-clock-chiming.mp3",
+    //     "mp3"
+    //   );
+    // } catch (e) {
+    //   console.log(`cannot play the sound file`, e);
+    // }
     setCongratsScreen(true);
     setTimerOn(false);
     setSecondsMeditated(0);
     setSeconds(DEFAULT_TIMER);
   };
+
   useInterval(async () => {
     if (timerOn && seconds > 0) {
       setSeconds(seconds - 1);
@@ -49,8 +61,8 @@ export default function TabOneScreen() {
 
   React.useEffect(() => {
     if (timerOn) activateKeepAwake();
-    // if (!timerOn) deactivateKeepAwake();
-    // return deactivateKeepAwake();
+
+    // return () => deactivateKeepAwake();
   }, [timerOn]);
 
   if (congratsScreen)

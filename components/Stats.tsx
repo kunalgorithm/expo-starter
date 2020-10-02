@@ -9,7 +9,7 @@ export function Stats({ meditations }: { meditations: Meditation[] }) {
       <View style={styles.col}>
         <Image
           style={styles.icon}
-          source={require("../assets/images/total_sessions.jpg")}
+          source={require("../assets/icons/total_sessions.jpg")}
         />
         <Text style={styles.subtitle}>MINDFUL TIME</Text>
         <Text style={styles.number}>
@@ -21,7 +21,7 @@ export function Stats({ meditations }: { meditations: Meditation[] }) {
       <View style={styles.col}>
         <Image
           style={styles.icon}
-          source={require("../assets/images/clock_icon.jpg")}
+          source={require("../assets/icons/clock_icon.jpg")}
         />
         <Text style={styles.subtitle}>TOTAL SESSIONS</Text>
         <Text style={styles.number}>{meditations.length}</Text>
@@ -29,7 +29,7 @@ export function Stats({ meditations }: { meditations: Meditation[] }) {
       <View style={styles.col}>
         <Image
           style={styles.icon}
-          source={require("../assets/images/longest_streak.jpg")}
+          source={require("../assets/icons/longest_streak.jpg")}
         />
         <Text style={styles.subtitle}>LONGEST STREAK</Text>
         <Text style={styles.number}>10</Text>

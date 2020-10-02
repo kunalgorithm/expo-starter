@@ -5,11 +5,13 @@ import * as React from "react";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
-import TabOneScreen from "../screens/TabOneScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
-import TabThreeScreen from "../screens/TabThreeScreen";
+import TabOneScreen from "../screens/TimerScreen";
+import TabTwoScreen from "../screens/ProfileScreen";
+import TabThreeScreen from "../screens/HistoryScreen";
 import { TabOneParamList, TabTwoParamList, TabThreeParamList } from "../types";
 import { Image, StyleSheet } from "react-native";
+import NotFoundScreen from "../screens/NotFoundScreen";
+import FeedScreen from "../screens/FeedScreen";
 
 const BottomTab = createBottomTabNavigator<any>();
 
@@ -23,12 +25,24 @@ export default function BottomTabNavigator(user: any) {
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
     >
       <BottomTab.Screen
-        name="Home"
+        name="Meditate"
         component={TabOneNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <Image
-              source={require("../assets/images/pray_icon.png")}
+              source={require("../assets/icons/pray_icon.png")}
+              style={styles.icon}
+            />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Feed"
+        component={FeedScreen}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Image
+              source={require("../assets/icons/pray_icon.png")}
               style={styles.icon}
             />
           ),
@@ -40,7 +54,19 @@ export default function BottomTabNavigator(user: any) {
         options={{
           tabBarIcon: ({ color }) => (
             <Image
-              source={require("../assets/images/cal_icon.png")}
+              source={require("../assets/icons/cal_icon.png")}
+              style={styles.icon}
+            />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Search"
+        component={TabThreeNavigator}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Image
+              source={require("../assets/icons/history_icon.png")}
               style={styles.icon}
             />
           ),
@@ -52,7 +78,7 @@ export default function BottomTabNavigator(user: any) {
         options={{
           tabBarIcon: ({ color }) => (
             <Image
-              source={require("../assets/images/history_icon.png")}
+              source={require("../assets/icons/history_icon.png")}
               style={styles.icon}
             />
           ),

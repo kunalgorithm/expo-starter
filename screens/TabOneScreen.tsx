@@ -12,8 +12,11 @@ import { useInterval } from "../hooks/useInterval";
 // @ts-ignore
 import logo from "../assets/images/logo.jpeg";
 import CongratsScreen from "./CongratsScreen";
-import { DropDown } from "./DropDown";
+import { DropDown } from "../components/DropDown";
+import { useMe } from "../hooks/fetcher";
+import dayjs from "dayjs";
 
+import { activateKeepAwake, deactivateKeepAwake } from "expo-keep-awake";
 const DEFAULT_TIMER = 15 * 60; // 15 minutes
 
 export default function TabOneScreen() {
@@ -21,6 +24,12 @@ export default function TabOneScreen() {
   const [secondsMeditated, setSecondsMeditated] = React.useState(0);
   const [timerOn, setTimerOn] = React.useState(false);
   const [congratsScreen, setCongratsScreen] = React.useState(false);
+  const { me } = useMe();
+
+  const day =
+    me && me.meditation.length > 0
+      ? dayjs().diff(dayjs(me.meditation[0].createdAt), "d")
+      : 1;
 
   const endMeditation = () => {
     setCongratsScreen(true);
@@ -37,6 +46,12 @@ export default function TabOneScreen() {
       endMeditation();
     }
   }, 1000);
+
+  React.useEffect(() => {
+    if (timerOn) activateKeepAwake();
+    // if (!timerOn) deactivateKeepAwake();
+    // return deactivateKeepAwake();
+  }, [timerOn]);
 
   if (congratsScreen)
     return (
@@ -60,7 +75,7 @@ export default function TabOneScreen() {
             <Text style={{ ...styles.buttonText, color: "#ccc" }}>{"End"}</Text>
           </TouchableOpacity>
         )}
-        <Text style={styles.title}>Day 1</Text>
+        <Text style={styles.title}>Day {day}</Text>
         <DropDown setSeconds={setSeconds} secondsMeditated={secondsMeditated} />
         <View style={styles.circle}>
           {/* <Image source={logo} /> */}

@@ -1,15 +1,10 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
 import { mutate } from "swr";
-import Button from "../components/Button";
-
-import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { fetcher, useMe } from "../hooks/fetcher";
-import { useMeditations } from "../hooks/useMeditations";
-import { Meditation, User } from "../server/node_modules/@prisma/client";
+
 export default function TabThreeScreen() {
-  const meditations = useMeditations();
   const { me } = useMe();
 
   const Row = ({ children }: { children: any }) => (

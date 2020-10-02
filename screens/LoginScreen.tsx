@@ -27,7 +27,9 @@ export default function TabOneScreen() {
       name,
       password,
     });
-    res.data && res.data.user && mutate("/api/me", res.data.user);
+    res.data &&
+      res.data.user &&
+      mutate("/api/me", { ...res.data.user, meditation: [] });
     // console.log("login response --> ", res);
     setLoading(false);
     if (res.error) setError(res.error);

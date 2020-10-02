@@ -42,6 +42,7 @@ const Button = ({
         style={{
           fontSize: small ? 12 : 20,
           color: invertColors ? primary : white,
+
           letterSpacing: 4,
           textTransform: "uppercase",
           fontFamily: "Calibre-Medium",

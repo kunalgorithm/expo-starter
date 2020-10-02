@@ -23,6 +23,10 @@ export function useFeed() {
   );
   return { feed };
 }
+export function useUsers() {
+  const { data: users }: { data?: User[] } = useSWR("/api/users", fetcher);
+  return { users };
+}
 export function useMe() {
   const {
     data: me,

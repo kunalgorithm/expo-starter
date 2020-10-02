@@ -1,14 +1,17 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
-
+import { StackScreenProps } from "@react-navigation/stack";
 import { Text, View } from "../components/Themed";
 import dayjs from "dayjs";
 import { useMe } from "../hooks/fetcher";
 import { Stats } from "../components/Stats";
 import { Box } from "../components/Box";
 import Button from "../components/Button";
+import { RootStackParamList } from "../types";
 
-export default function StreaksScreen() {
+export default function StreaksScreen({
+  navigation,
+}: StackScreenProps<RootStackParamList, "NotFound">) {
   const { me } = useMe();
 
   const meditations = me?.meditations;
@@ -23,7 +26,11 @@ export default function StreaksScreen() {
           <Text style={styles.title}>{me?.following?.length} following</Text>
         </View>
 
-        <Button onPress={() => {}} small invertColors style={{}}>
+        <Button
+          onPress={() => navigation.push("FindFriends")}
+          small
+          invertColors
+        >
           Find Friends
         </Button>
       </View>

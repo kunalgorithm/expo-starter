@@ -61,7 +61,7 @@ export default function BottomTabNavigator(user: any) {
         }}
       />
       <BottomTab.Screen
-        name="Search"
+        name="Todo"
         component={NotFoundScreen}
         options={{
           tabBarIcon: ({ color }) => (

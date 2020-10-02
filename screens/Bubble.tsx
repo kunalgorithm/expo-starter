@@ -7,7 +7,7 @@ export const Bubble = ({
   children,
 }: {
   title?: string;
-  children?: string;
+  children?: string | JSX.Element | any;
 }) => (
   <View style={styles.box}>
     {title && <Text style={styles.title}>{title}</Text>}

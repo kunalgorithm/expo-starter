@@ -3,15 +3,11 @@ import { StyleSheet } from "react-native";
 import { mutate } from "swr";
 import { Text, View } from "../components/Themed";
 import { fetcher, useMe } from "../hooks/fetcher";
+import { Bubble } from "./Bubble";
 
 export default function TabThreeScreen() {
   const { me } = useMe();
 
-  const Row = ({ children }: { children: any }) => (
-    <View style={styles.box}>
-      <Text style={styles.text}>{children}</Text>
-    </View>
-  );
   return (
     <View style={styles.container}>
       <Text
@@ -22,15 +18,15 @@ export default function TabThreeScreen() {
       >
         Log out{" "}
       </Text>
-      <Text style={styles.title}>{me?.email} 60 day meditation journal 🗒</Text>
 
-      {me?.meditation?.map((meditation, i) => (
+      {me?.meditations?.map((meditation, i) => (
         <View style={styles.row} key={i}>
-          <Row>
-            {new Date(meditation.createdAt).toDateString()} -{" "}
-            {Math.floor(meditation.duration / 60)} min {`\n`}
-            {meditation.notes}
-          </Row>
+          <Bubble
+            title={`${new Date(meditation.createdAt).toDateString()} - 
+            ${Math.floor(meditation.duration / 60)} min`}
+          >
+            {meditation.notes ? meditation.notes : ""}
+          </Bubble>
         </View>
       ))}
     </View>
@@ -50,13 +46,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "#FBFBFC",
   },
-  title: {
-    fontSize: 20,
-    color: "#4A4A4A",
-    fontWeight: "bold",
-    margin: 25,
-    fontFamily: "Calibre-Medium",
-  },
+
   text: {
     fontSize: 20,
     color: "#B6999B",

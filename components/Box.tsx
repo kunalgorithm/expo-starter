@@ -7,14 +7,14 @@ import { Image, StyleSheet } from "react-native";
 
 export const Box = ({
   index,
-  day1,
+
   meditations,
 }: {
   index: number;
-  day1: Meditation | { duration: number; createdAt: Date };
+
   meditations: Meditation[];
 }) => {
-  const boxDate = dayjs(day1.createdAt).add(index, "day");
+  const boxDate = dayjs(meditations[0].createdAt).add(index, "day");
   const meditationsThisDay = meditations.filter(
     (item) =>
       boxDate.format("ddd, MMM D, YYYY") ===

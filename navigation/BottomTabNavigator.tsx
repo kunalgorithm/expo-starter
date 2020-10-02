@@ -5,10 +5,10 @@ import * as React from "react";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
-import TabOneScreen from "../screens/TimerScreen";
-import TabTwoScreen from "../screens/ProfileScreen";
+import TimerScreen from "../screens/TimerScreen";
+import TabTwoScreen from "../screens/StreaksScreen";
 import TabThreeScreen from "../screens/HistoryScreen";
-import { TabOneParamList, TabTwoParamList, TabThreeParamList } from "../types";
+
 import { Image, StyleSheet } from "react-native";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import FeedScreen from "../screens/FeedScreen";
@@ -62,7 +62,7 @@ export default function BottomTabNavigator(user: any) {
       />
       <BottomTab.Screen
         name="Search"
-        component={TabThreeNavigator}
+        component={NotFoundScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <Image
@@ -96,21 +96,21 @@ function TabBarIcon(props: { name: string; color: string }) {
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
+const TabOneStack = createStackNavigator<any>();
 
 function TabOneNavigator() {
   return (
     <TabOneStack.Navigator>
       <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
+        name="TimerScreen"
+        component={TimerScreen}
         options={{ headerTitle: "The 60 Day Challenge" }}
       />
     </TabOneStack.Navigator>
   );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const TabTwoStack = createStackNavigator<any>();
 
 function TabTwoNavigator() {
   return (
@@ -124,7 +124,7 @@ function TabTwoNavigator() {
   );
 }
 
-const TabThreeStack = createStackNavigator<TabThreeParamList>();
+const TabThreeStack = createStackNavigator<any>();
 
 function TabThreeNavigator() {
   return (

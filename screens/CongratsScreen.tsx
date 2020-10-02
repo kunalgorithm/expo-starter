@@ -65,7 +65,7 @@ export default function CongratsScreen({
           mutate("/api/me", {
             ...me,
             meditation: [
-              ...me?.meditation!,
+              ...me?.meditations!,
               { duration, notes, createdAt: new Date() },
             ],
           });

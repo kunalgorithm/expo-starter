@@ -1,38 +1,58 @@
 import * as React from "react";
-import { TouchableOpacity, StyleSheet } from "react-native";
+import {
+  TouchableOpacity,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+} from "react-native";
 import { Text, View } from "../components/Themed";
 const Button = ({
   onPress,
   children,
+  small,
+  invertColors,
+  style,
 }: {
   children: any;
   onPress: (e: any) => any;
+  small?: boolean;
+  invertColors?: boolean;
+  style?: StyleProp<ViewStyle>;
 }) => {
+  const white = "#fff";
+  const primary = "#B6999B";
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.buttonText}>{children}</Text>
+    <TouchableOpacity
+      style={Object.assign(
+        {
+          backgroundColor: invertColors ? white : primary,
+          padding: small ? 5 : 15,
+          width: small ? 100 : 146,
+          borderRadius: 100,
+          marginVertical: small ? 10 : 50,
+          alignItems: "center",
+          borderWidth: invertColors ? 2 : 0,
+          borderColor: primary,
+        },
+        style
+      )}
+      onPress={onPress}
+    >
+      <Text
+        style={{
+          fontSize: small ? 12 : 20,
+          color: invertColors ? primary : white,
+          letterSpacing: 4,
+          textTransform: "uppercase",
+          fontFamily: "Calibre-Medium",
+          marginTop: 10,
+          marginLeft: 5,
+          alignItems: "center",
+        }}
+      >
+        {children}
+      </Text>
     </TouchableOpacity>
   );
 };
 export default Button;
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: "#B6999B",
-    padding: 15,
-    width: 146,
-    borderRadius: 100,
-    marginVertical: 50,
-    alignItems: "center",
-  },
-  buttonText: {
-    fontSize: 20,
-    color: "#fff",
-    letterSpacing: 4,
-    textTransform: 'uppercase',
-    fontFamily: "Calibre-Medium",
-    marginTop: 10,
-    marginLeft: 5,
-    alignItems: "center",
-  },
-});

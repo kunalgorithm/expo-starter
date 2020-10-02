@@ -21,7 +21,7 @@ import dayjs from "dayjs";
 import { activateKeepAwake, deactivateKeepAwake } from "expo-keep-awake";
 const DEFAULT_TIMER = 15 * 60; // 15 minutes
 
-export default function TabOneScreen() {
+export default function TimerScreen() {
   const [seconds, setSeconds] = React.useState(DEFAULT_TIMER);
   const [secondsMeditated, setSecondsMeditated] = React.useState(0);
   const [timerOn, setTimerOn] = React.useState(false);
@@ -29,8 +29,8 @@ export default function TabOneScreen() {
   const { me } = useMe();
 
   const day =
-    me && me.meditation.length > 0
-      ? dayjs().diff(dayjs(me.meditation[0].createdAt), "d")
+    me && me.meditations?.length > 0
+      ? dayjs().diff(dayjs(me.meditations[0].createdAt), "d")
       : 1;
 
   const endMeditation = () => {

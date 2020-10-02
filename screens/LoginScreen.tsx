@@ -7,7 +7,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { fetcher, useMe } from "../hooks/fetcher";
 import { mutate } from "swr";
 
-export default function TabOneScreen() {
+export default function LoginScreen() {
   const [login, setLogin] = React.useState(false);
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");

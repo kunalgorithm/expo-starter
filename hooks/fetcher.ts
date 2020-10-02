@@ -1,4 +1,8 @@
-import { Meditation, User } from "../server/node_modules/@prisma/client";
+import {
+  Meditation,
+  User,
+  Follow,
+} from "../server/node_modules/@prisma/client";
 import useSWR from "swr";
 
 const API_URL = "https://mindstreaks-api.onrender.com";
@@ -13,16 +17,21 @@ export const fetcher = (url: string, data?: any): any =>
   }).then((r) => r.json());
 
 export function useFeed() {
-  const { data: feed }: { data?: (Meditation & { author: User })[] } = useSWR(
+  const { data: feed }: { data?: (Meditation & { user: User })[] } = useSWR(
     "/api/feed",
     fetcher
   );
   return { feed };
 }
 export function useMe() {
-  const { data: me }: { data?: User & { meditation: Meditation[] } } = useSWR(
-    "/api/me",
-    fetcher
-  );
+  const {
+    data: me,
+  }: {
+    data?: User & {
+      meditations: Meditation[];
+      followers: Follow[];
+      following: Follow[];
+    };
+  } = useSWR("/api/me", fetcher);
   return { me };
 }

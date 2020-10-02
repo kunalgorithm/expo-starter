@@ -39,7 +39,7 @@ export default function LoginScreen() {
     <View style={styles.container}>
       <Image
         style={styles.logo}
-        source={require("../assets/images/bestlogo.png")}
+        source={require("../assets/images/login_logo.png")}
       />
       <Text style={styles.title}>{login ? "Log in" : "Sign up"}</Text>
       <KeyboardAwareScrollView

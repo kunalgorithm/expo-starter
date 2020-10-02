@@ -22,14 +22,12 @@ export default function CongratsScreen({
       <View style={styles.container}>
         <Text style={styles.title}>Congrats! ✨</Text>
         <Text style={styles.subtitle}>Day 5 of 60 days completed </Text>
-        <View>
-          <View style={styles.box}>
-            <Text style={styles.quote}>
-              Life is really a single player game. It's all going on in your
-              head
-            </Text>
-            <Text style={styles.author}>Naval</Text>
-          </View>
+
+        <View style={styles.box}>
+          <Text style={styles.quote}>
+            Life is really a single player game. It's all going on in your head
+          </Text>
+          <Text style={styles.author}>Naval</Text>
         </View>
 
         <TouchableOpacity onPress={() => setScreen(1)} style={styles.button}>

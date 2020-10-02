@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
 import { Text, View } from "../components/Themed";
 import dayjs from "dayjs";
@@ -20,7 +20,13 @@ export default function StreaksScreen({
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <View style={{ width: "60%" }}>
+        <View style={{ width: "20%" }}>
+          <Image
+            style={styles.profilePic}
+            source={require("../assets/images/Profile_Placeholder.png")}
+          ></Image>
+        </View>
+        <View style={{ width: "40%" }}>
           <Text style={styles.title}>{me?.name}</Text>
           <Text style={styles.title}>{me?.followers?.length} followers</Text>
           <Text style={styles.title}>{me?.following?.length} following</Text>
@@ -83,5 +89,9 @@ const styles = StyleSheet.create({
     color: "#E7DDDE",
     marginTop: 10,
     fontFamily: "Calibre-Regular",
+  },
+  profilePic: {
+    height: 70,
+    width: 70,
   },
 });

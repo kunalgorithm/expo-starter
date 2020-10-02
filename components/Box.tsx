@@ -17,7 +17,7 @@ export const Box = ({
 }) => {
   const { me } = useMe();
   const boxDate = dayjs(
-    me.meditations[0] ? me.meditations[0].createdAt : new Date()
+    me?.meditations[0] ? me?.meditations[0].createdAt : new Date()
   ).add(index, "day");
   const meditationsThisDay = meditations.filter(
     (item) =>

@@ -5,6 +5,7 @@ import { Meditation } from "../server/node_modules/@prisma/client";
 
 import { Image, StyleSheet } from "react-native";
 import { useMe } from "../hooks/fetcher";
+import Colors from "../constants/Colors";
 
 export const Box = ({
   index,
@@ -24,6 +25,9 @@ export const Box = ({
       boxDate.format("ddd, MMM D, YYYY") ===
       dayjs(item.createdAt).format("ddd, MMM D, YYYY")
   );
+  const timeMeditated = meditationsThisDay
+    .map((a) => a.duration)
+    .reduce((a, b) => a + b, 0);
   const isToday: boolean =
     boxDate.format("ddd, MMM D, YYYY") === dayjs().format("ddd, MMM D, YYYY");
   return (
@@ -32,8 +36,10 @@ export const Box = ({
         ...styles.box,
         backgroundColor: isToday
           ? "#84B9C8"
-          : meditationsThisDay.length > 0
-          ? "#ccc"
+          : timeMeditated > 10
+          ? `rgba(182,153,154,${timeMeditated / 60})`
+          : timeMeditated > 0
+          ? Colors.pink
           : "#fff",
       }}
     ></View>

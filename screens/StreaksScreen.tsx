@@ -11,6 +11,7 @@ import { RootStackParamList } from "../types";
 import * as ImagePicker from "expo-image-picker";
 import { openImagePickerAsync } from "../hooks/uploadImage";
 import { Avatar } from "../components/Avatar";
+import Colors from "../constants/Colors";
 
 export default function StreaksScreen({
   navigation,
@@ -23,12 +24,12 @@ export default function StreaksScreen({
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <View style={{ width: "20%", backgroundColor: "#B6999A00" }}>
+        <View style={{ width: "20%", backgroundColor: Colors.grayBg }}>
           <TouchableOpacity onPress={() => openImagePickerAsync()}>
             <Avatar user={me!} />
           </TouchableOpacity>
         </View>
-        <View style={{ width: "40%", backgroundColor: "#B6999A00" }}>
+        <View style={{ width: "40%", backgroundColor: Colors.grayBg }}>
           <View style={styles.follower_container}>
             <Text style={styles.titlename}>{me?.name}</Text>
             <Text style={styles.titlefollow}>
@@ -50,11 +51,10 @@ export default function StreaksScreen({
           </Button>
         </View>
       </View>
+      <Stats meditations={meditations} />
       <Text style={styles.title}>
         {me?.name?.split(" ")[0]}, you're on a 4 day streak ✨
       </Text>
-      {/* TODO swap with Follow on others' profiles */}
-      <Stats meditations={meditations} />
 
       {Array(9)
         .fill(0)
@@ -76,7 +76,7 @@ export default function StreaksScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 120,
+    paddingTop: 70,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#FBFBFC",
@@ -89,17 +89,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#B6999A00",
+    backgroundColor: Colors.grayBg,
   },
   title: {
     fontSize: 20,
-    paddingTop: 30,
+    paddingTop: 7,
     paddingBottom: 10,
     color: "gray",
     fontWeight: "bold",
     letterSpacing: 0,
     margin: 5,
-    backgroundColor: "#B6999A00",
+    backgroundColor: Colors.grayBg,
     fontFamily: "Calibre-Regular",
   },
   titlename: {
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 0,
     paddingLeft: 20,
-    backgroundColor: "#B6999A00",
+    backgroundColor: Colors.grayBg,
     fontFamily: "Calibre-Medium",
   },
 
@@ -117,25 +117,25 @@ const styles = StyleSheet.create({
     color: "gray",
     letterSpacing: 0,
     paddingLeft: 20,
-    backgroundColor: "#B6999A00",
+    backgroundColor: Colors.grayBg,
     fontFamily: "Calibre-Regular",
   },
   text: {
     fontSize: 20,
     color: "#E7DDDE",
     marginTop: 0,
-    backgroundColor: "#B6999A00",
+    backgroundColor: Colors.grayBg,
     fontFamily: "Calibre-Regular",
   },
   profilePic: {
     height: 90,
     width: 90,
-    backgroundColor: "#B6999A00",
+    backgroundColor: Colors.grayBg,
   },
   friendbutton: {
-    paddingTop: 50,
+    paddingTop: 0,
     height: 75,
-    backgroundColor: "#B6999A00",
+    backgroundColor: Colors.grayBg,
   },
   button_title: {
     fontSize: 12,
@@ -145,6 +145,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   follower_container: {
-    backgroundColor: "#B6999A00",
+    backgroundColor: Colors.grayBg,
   },
 });

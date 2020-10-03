@@ -13,7 +13,7 @@ const Button = ({
   invertColors,
   style,
 }: {
-  children: any;
+  children: string | any;
   onPress: (e: any) => any;
   small?: boolean;
   invertColors?: boolean;

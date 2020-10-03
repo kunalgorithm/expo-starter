@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     color: "#B6999A",
     fontFamily: "Calibre-Regular",
     textAlign: "center",
-    paddingBottom: 30,
+    paddingBottom: 0,
   },
   col: {
     width: "30%",
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    margin: 10,
+    margin: 7,
     height: 35,
     width: 35,
   },

@@ -18,4 +18,5 @@ export default {
   },
   mauve: "#B6999B",
   pink: "#FFF6F7",
+  grayBg: "#B6999A00",
 };

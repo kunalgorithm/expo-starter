@@ -19,13 +19,13 @@ export default function TabThreeScreen() {
         Log out{" "}
       </Text>
       <ScrollView>
-        {me?.meditations?.map((meditation, i) => (
+        {me?.meditations?.reverse().map((meditation, i) => (
           <View style={styles.row} key={i}>
             <Bubble
               title={`${new Date(meditation.createdAt).toDateString()} - 
             ${Math.ceil(meditation.duration / 60)} min`}
             >
-              <Text>Session {i + 1}</Text>
+              <Text>Session {me?.meditations?.length - i}</Text>
               <Text>{meditation.notes ? meditation.notes : ""}</Text>
             </Bubble>
           </View>

@@ -12,6 +12,8 @@ import { useFeed } from "../hooks/fetcher";
 import { RootStackParamList } from "../types";
 import { Bubble } from "../components/Bubble";
 import { ScrollView } from "react-native-gesture-handler";
+import { Avatar } from "../components/Avatar";
+import dayjs from "dayjs";
 
 export default function FeedScreen({
   navigation,
@@ -21,20 +23,18 @@ export default function FeedScreen({
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Feed</Text>
-      <TouchableOpacity
-        onPress={() => navigation.replace("Root")}
-        style={styles.link}
-      >
-        <Text style={styles.linkText}>Meditate Now!</Text>
-      </TouchableOpacity>
+
       <ScrollView>
         {feed?.map((meditation) => (
           <Bubble
             key={meditation.id}
-            title={`${meditation.user.email} meditated for
+            title={`${meditation.user.name} meditated for
           ${Math.ceil(meditation.duration / 60)} minutes.`}
           >
+            <Avatar user={meditation.user}></Avatar>
             <Text>Notes: {meditation.notes}</Text>
+            <Text> {dayjs(meditation.createdAt).format("M.D.YY")}</Text>
+            <Text>⚡ on a 4 day streak</Text>
           </Bubble>
         ))}
       </ScrollView>

@@ -11,9 +11,10 @@ export function DropDown({
   return (
     <DropDownPicker
       items={[
+        { label: "5 min", value: 5 * 60 },
+        { label: "10 min", value: 10 * 60 },
         { label: "15 min", value: 15 * 60 },
-        { label: "30 min", value: 30 * 60 },
-        { label: "60 min", value: 60 * 60 },
+        { label: "20 min", value: 20 * 60 },
       ]}
       defaultValue={15 * 60}
       containerStyle={{

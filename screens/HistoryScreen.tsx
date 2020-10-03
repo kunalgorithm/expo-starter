@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { mutate } from "swr";
 import { Text, View } from "../components/Themed";
 import { fetcher, useMe } from "../hooks/fetcher";
-import { Bubble } from "./Bubble";
+import { Bubble } from "../components/Bubble";
 
 export default function TabThreeScreen() {
   const { me } = useMe();
@@ -25,7 +25,7 @@ export default function TabThreeScreen() {
             title={`${new Date(meditation.createdAt).toDateString()} - 
             ${Math.floor(meditation.duration / 60)} min`}
           >
-            {meditation.notes ? meditation.notes : ""}
+            <Text>{meditation.notes ? meditation.notes : ""}</Text>
           </Bubble>
         </View>
       ))}

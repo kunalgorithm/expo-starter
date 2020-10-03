@@ -10,6 +10,7 @@ import Button from "../components/Button";
 import { RootStackParamList } from "../types";
 import * as ImagePicker from "expo-image-picker";
 import { openImagePickerAsync } from "../hooks/uploadImage";
+import { Avatar } from "../components/Avatar";
 
 export default function StreaksScreen({
   navigation,
@@ -24,14 +25,7 @@ export default function StreaksScreen({
       <View style={styles.row}>
         <View style={{ width: "20%" }}>
           <TouchableOpacity onPress={() => openImagePickerAsync()}>
-            <Image
-              style={styles.profilePic}
-              source={
-                me?.imageUrl
-                  ? { uri: me?.imageUrl }
-                  : require("../assets/images/Profile_Placeholder.png")
-              }
-            ></Image>
+            <Avatar user={me!} />
           </TouchableOpacity>
         </View>
         <View style={{ width: "40%" }}>

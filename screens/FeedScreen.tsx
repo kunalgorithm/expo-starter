@@ -4,7 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useFeed } from "../hooks/fetcher";
 
 import { RootStackParamList } from "../types";
-import { Bubble } from "./Bubble";
+import { Bubble } from "../components/Bubble";
 
 export default function FeedScreen({
   navigation,
@@ -27,7 +27,7 @@ export default function FeedScreen({
             title={`${meditation.user.email} meditated for
           ${Math.ceil(meditation.duration / 60)} minutes.`}
           >
-            Notes: {meditation.notes}
+            <Text>Notes: {meditation.notes}</Text>
           </Bubble>
         ))}
       </View>

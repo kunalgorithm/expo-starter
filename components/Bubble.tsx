@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, View } from "../components/Themed";
+import { Text, View } from "./Themed";
 import { StyleSheet } from "react-native";
 
 export const Bubble = ({
@@ -11,7 +11,7 @@ export const Bubble = ({
 }) => (
   <View style={styles.box}>
     {title && <Text style={styles.title}>{title}</Text>}
-    <Text style={styles.text}>{children}</Text>
+    {children}
   </View>
 );
 

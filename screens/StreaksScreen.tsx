@@ -109,7 +109,6 @@ const styles = StyleSheet.create({
   profilePic: {
     height: 70,
     width: 70,
-<<<<<<< HEAD
     backgroundColor: "#B6999A00",
   },
   friendbutton: {
@@ -126,8 +125,5 @@ const styles = StyleSheet.create({
   },
   follower_container: {
     backgroundColor: "#B6999A00",
-=======
-    borderRadius: 50,
->>>>>>> 941b053df2518069dce17e2066ce6b392ad448a5
   },
 });

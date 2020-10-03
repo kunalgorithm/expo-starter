@@ -1,10 +1,17 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import * as React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { useFeed } from "../hooks/fetcher";
 
 import { RootStackParamList } from "../types";
 import { Bubble } from "../components/Bubble";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function FeedScreen({
   navigation,
@@ -12,7 +19,7 @@ export default function FeedScreen({
   const { feed } = useFeed();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Feed</Text>
       <TouchableOpacity
         onPress={() => navigation.replace("Root")}
@@ -20,7 +27,7 @@ export default function FeedScreen({
       >
         <Text style={styles.linkText}>Meditate Now!</Text>
       </TouchableOpacity>
-      <View>
+      <ScrollView>
         {feed?.map((meditation) => (
           <Bubble
             key={meditation.id}
@@ -30,8 +37,8 @@ export default function FeedScreen({
             <Text>Notes: {meditation.notes}</Text>
           </Bubble>
         ))}
-      </View>
-    </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 

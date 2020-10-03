@@ -14,7 +14,7 @@ import { Avatar } from "../components/Avatar";
 
 export default function StreaksScreen({
   navigation,
-}: StackScreenProps<RootStackParamList, "NotFound">) {
+}: StackScreenProps<RootStackParamList, "Profile">) {
   const { me } = useMe();
 
   const meditations = me?.meditations;

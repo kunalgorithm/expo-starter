@@ -25,6 +25,7 @@ export default function TabThreeScreen() {
               title={`${new Date(meditation.createdAt).toDateString()} - 
             ${Math.ceil(meditation.duration / 60)} min`}
             >
+              <Text>Session {i + 1}</Text>
               <Text>{meditation.notes ? meditation.notes : ""}</Text>
             </Bubble>
           </View>

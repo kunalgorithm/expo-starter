@@ -81,11 +81,13 @@ export default function CongratsScreen({
           />
         </View>
       </View>
-      <View style={{ backgroundColor: "#fff" }}>
+      <Text style={styles.titletwo}>How did it go? </Text>
+
+      <View style={styles.inputbox}>
         <TextInput
           style={styles.input}
           placeholderTextColor="#ccc"
-          placeholder="How did it go?"
+          placeholder="your reflections and thoughts.."
           onChangeText={(text) => setNotes(text)}
           value={notes}
           underlineColorAndroid="transparent"
@@ -102,14 +104,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "#FBFBFC",
     color: "#C4C4C4",
     alignItems: "center",
   },
   sliderContainer: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "#FBFBFC",
     alignItems: "stretch",
     marginVertical: 30,
     marginHorizontal: 30,
@@ -117,7 +119,14 @@ const styles = StyleSheet.create({
   row: {
     display: "flex",
     flexDirection: "row",
-    backgroundColor: "#fff",
+    backgroundColor: "#FBFBFC",
+    justifyContent: "space-around",
+  },
+  inputbox: {
+    display: "flex",
+    width: 360,
+    height: 200,
+    backgroundColor: "#Ffffff",
     justifyContent: "space-around",
   },
   title: {
@@ -125,8 +134,20 @@ const styles = StyleSheet.create({
     color: "#4A4A4A",
     fontWeight: "bold",
     letterSpacing: 1.5,
-    marginTop: 10,
-    fontFamily: "Calibre-Medium",
+    alignItems: "flex-start",
+    left: -40,
+    marginTop: 30,
+    fontFamily: "Calibre-Regular",
+  },
+  titletwo: {
+    fontSize: 30,
+    color: "#4A4A4A",
+    fontWeight: "bold",
+    letterSpacing: 1.5,
+    alignItems: "flex-start",
+    marginVertical: 20,
+    left: -60,
+    fontFamily: "Calibre-Regular",
   },
   subtitle: {
     fontSize: 20,

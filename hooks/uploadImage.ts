@@ -6,7 +6,7 @@ let CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/mindstreaks/upload";
 //allows user to upload a photo
 //asks phone for permission to access photos
 
-export const openImagePickerAsync = async () => {
+export const openImagePickerAsync = async (me: any) => {
   //   const [selectedImage, setSelectedImage] = useState<any>();
   //   const [photo, setPhoto] = useState<any>();
   let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
@@ -71,7 +71,7 @@ export const openImagePickerAsync = async () => {
       console.log(`➡️ upload`, data.secure_url);
       //   setPhoto(data.secure_url);/
       await fetcher("/api/updateProfile", { imageUrl: data.secure_url });
-      await fetcher("/api/me", { imageUrl: data.secure_url });
+      await mutate("/api/me");
     })
     .catch((err) => console.log(err));
 };

@@ -23,6 +23,7 @@ export default function FeedScreen({
       <View>
         {feed?.map((meditation) => (
           <Bubble
+            key={meditation.id}
             title={`${meditation.user.email} meditated for
           ${Math.ceil(meditation.duration / 60)} minutes.`}
           >

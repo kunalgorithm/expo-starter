@@ -9,6 +9,7 @@ import { RootStackParamList } from "../types";
 import Button from "../components/Button";
 import { User } from "../server/node_modules/@prisma/client";
 import { Avatar } from "../components/Avatar";
+import users from "../server/pages/api/users";
 export default function FindFriendsScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, "FindFriends">) {
@@ -44,6 +45,8 @@ export default function FindFriendsScreen({
 
 const FollowButton = ({ user }: { user: User }) => {
   const { me } = useMe();
+  const [loading, setLoading] = React.useState(false);
+
   const isFollowing = me?.following.find((u) => u.user_id === user.id);
   return (
     <View>
@@ -51,11 +54,21 @@ const FollowButton = ({ user }: { user: User }) => {
         small
         invertColors={!isFollowing}
         onPress={async () => {
-          const res = await fetcher(`/api/follow`);
-          mutate("/api/me", { id: user.id, unfollow: isFollowing });
+          setLoading(true);
+          const res = await fetcher(`/api/follow`, {
+            id: user.id,
+            unfollow: isFollowing,
+          });
+          await mutate("/api/me", {
+            ...me,
+            following: isFollowing
+              ? me?.following.filter((u) => u.user_id !== user.id)
+              : [...me?.following!, user],
+          });
+          setLoading(false);
         }}
       >
-        {isFollowing ? "Unfollow" : "Follow"}
+        {loading ? "..." : isFollowing ? "Unfollow" : "Follow"}
       </Button>
     </View>
   );

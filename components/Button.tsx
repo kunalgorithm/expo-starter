@@ -27,7 +27,7 @@ const Button = ({
         {
           backgroundColor: invertColors ? white : primary,
           padding: small ? 5 : 15,
-          width: small ? 100 : 146,
+          width: small ? 110 : 146,
           borderRadius: 100,
           marginVertical: small ? 10 : 50,
           alignItems: "center",

@@ -23,7 +23,7 @@ export default function TabThreeScreen() {
         <View style={styles.row} key={i}>
           <Bubble
             title={`${new Date(meditation.createdAt).toDateString()} - 
-            ${Math.floor(meditation.duration / 60)} min`}
+            ${Math.ceil(meditation.duration / 60)} min`}
           >
             <Text>{meditation.notes ? meditation.notes : ""}</Text>
           </Bubble>

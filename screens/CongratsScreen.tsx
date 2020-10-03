@@ -43,7 +43,7 @@ export default function CongratsScreen({
         <Button onPress={() => {}}>:|</Button>
         <Button onPress={() => {}}>:)</Button>
       </View>
-      <View>
+      <View style={{ backgroundColor: "#fff" }}>
         <TextInput
           style={styles.input}
           placeholderTextColor="#ccc"

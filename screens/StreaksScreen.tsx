@@ -27,18 +27,22 @@ export default function StreaksScreen({
           ></Image>
         </View>
         <View style={{ width: "40%" }}>
-          <Text style={styles.title}>{me?.name}</Text>
-          <Text style={styles.title}>{me?.followers?.length} followers</Text>
-          <Text style={styles.title}>{me?.following?.length} following</Text>
+          <View style={styles.follower_container}>
+            <Text style={styles.title}>{me?.name}</Text>
+            <Text style={styles.title}>{me?.followers?.length} followers</Text>
+            <Text style={styles.title}>{me?.following?.length} following</Text>
+          </View>
         </View>
 
-        <Button
-          onPress={() => navigation.push("FindFriends")}
-          small
-          invertColors
-        >
-          Find Friends
-        </Button>
+        <View style={styles.friendbutton}>
+          <Button
+            onPress={() => navigation.push("FindFriends")}
+            small
+            invertColors
+          >
+            <Text style={styles.button_title}>Find Friends</Text>
+          </Button>
+        </View>
       </View>
       <Text style={styles.title}>
         {me?.name?.split(" ")[0]}, you're on a 4 day streak ✨
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
   row: {
     display: "flex",
     flexDirection: "row",
-    backgroundColor: "#fbfbfc",
+    backgroundColor: "#B6999A00",
   },
   title: {
     fontSize: 20,
@@ -84,16 +88,34 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 1,
     margin: 5,
+    backgroundColor: "#B6999A00",
     fontFamily: "Calibre-Medium",
   },
   text: {
     fontSize: 20,
     color: "#E7DDDE",
     marginTop: 0,
+    backgroundColor: "#B6999A00",
     fontFamily: "Calibre-Regular",
   },
   profilePic: {
     height: 70,
     width: 70,
+    backgroundColor: "#B6999A00",
+  },
+  friendbutton: {
+    height: 60,
+    backgroundColor: "#B6999A00",
+  },
+  button_title: {
+    fontSize: 12,
+    marginTop: -10,
+    letterSpacing: 1,
+    color: "#B6999A",
+    fontFamily: "Calibre-Regular",
+    justifyContent: "center",
+  },
+  follower_container: {
+    backgroundColor: "#B6999A00",
   },
 });

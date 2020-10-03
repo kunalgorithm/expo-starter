@@ -49,7 +49,7 @@ export default function BottomTabNavigator(user: any) {
         }}
       />
       <BottomTab.Screen
-        name="Streaks"
+        name="Profile"
         component={TabTwoNavigator}
         options={{
           tabBarIcon: ({ color }) => (
@@ -60,26 +60,15 @@ export default function BottomTabNavigator(user: any) {
           ),
         }}
       />
+
       <BottomTab.Screen
-        name="Todo"
-        component={NotFoundScreen}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Image
-              source={require("../assets/icons/History.png")}
-              style={styles.icon}
-            />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="History"
+        name="Logs"
         component={TabThreeNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <Image
               source={require("../assets/icons/History.png")}
-              style={styles.icon}
+              style={{ ...styles.icon, width: styles.icon.width + 4 }}
             />
           ),
         }}
@@ -141,7 +130,7 @@ function TabThreeNavigator() {
 const styles = StyleSheet.create({
   icon: {
     marginTop: 10,
-    height: 20,
-    width: 20,
+    height: 25,
+    width: 25,
   },
 });

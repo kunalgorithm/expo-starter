@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { mutate } from "swr";
 import { Text, View } from "../components/Themed";
 import { fetcher, useMe } from "../hooks/fetcher";
@@ -9,7 +9,7 @@ export default function TabThreeScreen() {
   const { me } = useMe();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text
         onPress={async () => {
           const res = await fetcher(`/api/logout`);
@@ -18,18 +18,19 @@ export default function TabThreeScreen() {
       >
         Log out{" "}
       </Text>
-
-      {me?.meditations?.map((meditation, i) => (
-        <View style={styles.row} key={i}>
-          <Bubble
-            title={`${new Date(meditation.createdAt).toDateString()} - 
+      <ScrollView>
+        {me?.meditations?.map((meditation, i) => (
+          <View style={styles.row} key={i}>
+            <Bubble
+              title={`${new Date(meditation.createdAt).toDateString()} - 
             ${Math.ceil(meditation.duration / 60)} min`}
-          >
-            <Text>{meditation.notes ? meditation.notes : ""}</Text>
-          </Bubble>
-        </View>
-      ))}
-    </View>
+            >
+              <Text>{meditation.notes ? meditation.notes : ""}</Text>
+            </Bubble>
+          </View>
+        ))}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 

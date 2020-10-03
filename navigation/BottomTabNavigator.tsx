@@ -25,6 +25,18 @@ export default function BottomTabNavigator(user: any) {
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
     >
       <BottomTab.Screen
+        name="Feed"
+        component={FeedScreen}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Image
+              source={require("../assets/icons/social.png")}
+              style={styles.icon}
+            />
+          ),
+        }}
+      />
+      <BottomTab.Screen
         name="Meditate"
         component={TabOneNavigator}
         options={{
@@ -37,33 +49,21 @@ export default function BottomTabNavigator(user: any) {
         }}
       />
       <BottomTab.Screen
-        name="Feed"
-        component={FeedScreen}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Image
-              source={require("../assets/icons/newsfeed.png")}
-              style={styles.icon}
-            />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="Streaks"
+        name="Profile"
         component={TabTwoNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <Image
-              source={require("../assets/icons/profile.png")}
+              source={require("../assets/icons/profile_main.png")}
               style={styles.icon}
             />
           ),
         }}
       />
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="Todo"
         component={NotFoundScreen}
-        options={{
+        options={{ 
           tabBarIcon: ({ color }) => (
             <Image
               source={require("../assets/icons/History.png")}
@@ -71,14 +71,14 @@ export default function BottomTabNavigator(user: any) {
             />
           ),
         }}
-      />
+      /> */}
       <BottomTab.Screen
         name="History"
         component={TabThreeNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <Image
-              source={require("../assets/icons/History.png")}
+              source={require("../assets/icons/time_machine.png")}
               style={styles.icon}
             />
           ),
@@ -102,9 +102,11 @@ function TabOneNavigator() {
   return (
     <TabOneStack.Navigator>
       <TabOneStack.Screen
-        name="TimerScreen"
+        name=" "
         component={TimerScreen}
-        options={{ headerTitle: "The 60 Day Challenge" }}
+        options={{
+          headerTransparent: true,
+        }}
       />
     </TabOneStack.Navigator>
   );
@@ -116,9 +118,9 @@ function TabTwoNavigator() {
   return (
     <TabTwoStack.Navigator>
       <TabTwoStack.Screen
-        name="TabTwoScreen"
+        name=" "
         component={TabTwoScreen}
-        options={{ headerTitle: "Streaks" }}
+        options={{ headerTransparent: true }}
       />
     </TabTwoStack.Navigator>
   );
@@ -130,9 +132,9 @@ function TabThreeNavigator() {
   return (
     <TabThreeStack.Navigator>
       <TabThreeStack.Screen
-        name="TabThreeScreen"
+        name=" "
         component={TabThreeScreen}
-        options={{ headerTitle: "History" }}
+        options={{ headerTransparent: true }}
       />
     </TabThreeStack.Navigator>
   );
@@ -141,7 +143,7 @@ function TabThreeNavigator() {
 const styles = StyleSheet.create({
   icon: {
     marginTop: 10,
-    height: 20,
-    width: 20,
+    height: 25,
+    width: 25,
   },
 });

@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
 
   subtitle: {
-    fontSize: 14,
+    fontSize: 12,
     color: "gray",
     fontFamily: "Calibre-Regular",
     marginBottom: 4,
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     color: "#B6999A",
     fontFamily: "Calibre-Regular",
     textAlign: "center",
+    paddingBottom: 30,
   },
   col: {
     width: "30%",

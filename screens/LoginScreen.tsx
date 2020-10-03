@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: 120,
+    marginTop: -90,
     width: 200,
     alignSelf: "center",
     resizeMode: "contain",
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-    marginTop: -150,
+    marginTop: -190,
     fontWeight: "bold",
     color: "#4A4A4A",
     opacity: 0.8,

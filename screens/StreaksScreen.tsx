@@ -30,9 +30,13 @@ export default function StreaksScreen({
         </View>
         <View style={{ width: "40%", backgroundColor: "#B6999A00" }}>
           <View style={styles.follower_container}>
-            <Text style={styles.title}>{me?.name}</Text>
-            <Text style={styles.title}>{me?.followers?.length} followers</Text>
-            <Text style={styles.title}>{me?.following?.length} following</Text>
+            <Text style={styles.titlename}>{me?.name}</Text>
+            <Text style={styles.titlefollow}>
+              {me?.followers?.length} followers
+            </Text>
+            <Text style={styles.titlefollow}>
+              {me?.following?.length} following
+            </Text>
           </View>
         </View>
 
@@ -72,7 +76,7 @@ export default function StreaksScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
+    paddingTop: 120,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#FBFBFC",
@@ -81,17 +85,40 @@ const styles = StyleSheet.create({
 
   row: {
     display: "flex",
+    width: 340,
     flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "#B6999A00",
   },
   title: {
     fontSize: 20,
+    paddingTop: 30,
+    paddingBottom: 10,
     color: "gray",
     fontWeight: "bold",
-    letterSpacing: 1,
+    letterSpacing: 0,
     margin: 5,
     backgroundColor: "#B6999A00",
+    fontFamily: "Calibre-Regular",
+  },
+  titlename: {
+    fontSize: 20,
+    color: "gray",
+    fontWeight: "bold",
+    letterSpacing: 0,
+    paddingLeft: 20,
+    backgroundColor: "#B6999A00",
     fontFamily: "Calibre-Medium",
+  },
+
+  titlefollow: {
+    fontSize: 16,
+    color: "gray",
+    letterSpacing: 0,
+    paddingLeft: 20,
+    backgroundColor: "#B6999A00",
+    fontFamily: "Calibre-Regular",
   },
   text: {
     fontSize: 20,
@@ -101,17 +128,17 @@ const styles = StyleSheet.create({
     fontFamily: "Calibre-Regular",
   },
   profilePic: {
-    height: 70,
-    width: 70,
+    height: 90,
+    width: 90,
     backgroundColor: "#B6999A00",
   },
   friendbutton: {
-    height: 60,
+    paddingTop: 50,
+    height: 75,
     backgroundColor: "#B6999A00",
   },
   button_title: {
     fontSize: 12,
-    marginTop: -10,
     letterSpacing: 1,
     color: "#B6999A",
     fontFamily: "Calibre-Regular",

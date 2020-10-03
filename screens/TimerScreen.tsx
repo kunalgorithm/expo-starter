@@ -97,7 +97,7 @@ export default function TimerScreen() {
             <Text style={{ ...styles.buttonText, color: "#ccc" }}>{"End"}</Text>
           </TouchableOpacity>
         )}
-        <Text style={styles.title}>Day {day}</Text>
+        <Text style={styles.title}>Session {day}</Text>
         <DropDown setSeconds={setSeconds} secondsMeditated={secondsMeditated} />
         <View style={styles.circle}>
           {/* <Image source={logo} /> */}
@@ -136,14 +136,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 50,
     margin: 1,
+    paddingTop: 0,
     fontWeight: "bold",
     color: "#4A4A4A",
     opacity: 0.8,
-    letterSpacing: 7,
+    letterSpacing: 3,
     fontFamily: "Calibre-Regular",
   },
   circle: {
-    marginTop: 10,
+    marginTop: 30,
     backgroundColor: "#FBFBFC00",
     alignItems: "center",
     justifyContent: "center",

@@ -41,7 +41,7 @@ export default function StreaksScreen({
         </Button>
       </View>
       <Text style={styles.title}>
-        {me?.name?.split(" ")[0]}, you're on a 4 day streak
+        {me?.name?.split(" ")[0]}, you're on a 4 day streak ✨
       </Text>
       {/* TODO swap with Follow on others' profiles */}
       <Stats meditations={meditations} />
@@ -66,6 +66,7 @@ export default function StreaksScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 50,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#FBFBFC",
@@ -79,15 +80,16 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    color: "#4A4A4A",
+    color: "gray",
     fontWeight: "bold",
-    margin: 3,
+    letterSpacing: 1,
+    margin: 5,
     fontFamily: "Calibre-Medium",
   },
   text: {
     fontSize: 20,
     color: "#E7DDDE",
-    marginTop: 10,
+    marginTop: 0,
     fontFamily: "Calibre-Regular",
   },
   profilePic: {

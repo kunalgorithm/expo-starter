@@ -9,7 +9,7 @@ export function Stats({ meditations }: { meditations: Meditation[] }) {
       <View style={styles.col}>
         <Image
           style={styles.icon}
-          source={require("../assets/icons/total_sessions.png")}
+          source={require("../assets/icons/meditate_main.png")}
         />
         <Text style={styles.subtitle}>MINDFUL TIME</Text>
         <Text style={styles.number}>
@@ -21,7 +21,7 @@ export function Stats({ meditations }: { meditations: Meditation[] }) {
       <View style={styles.col}>
         <Image
           style={styles.icon}
-          source={require("../assets/icons/clock_icon.png")}
+          source={require("../assets/icons/clock.png")}
         />
         <Text style={styles.subtitle}>TOTAL SESSIONS</Text>
         <Text style={styles.number}>{meditations.length}</Text>
@@ -29,7 +29,7 @@ export function Stats({ meditations }: { meditations: Meditation[] }) {
       <View style={styles.col}>
         <Image
           style={styles.icon}
-          source={require("../assets/icons/longest_streak.png")}
+          source={require("../assets/icons/wavy_streaks.png")}
         />
         <Text style={styles.subtitle}>LONGEST STREAK</Text>
         <Text style={styles.number}>10</Text>
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   number: {
     fontSize: 25,
-    color: "gray",
+    color: "#B6999A",
     fontFamily: "Calibre-Regular",
     textAlign: "center",
   },
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
 
   icon: {
     margin: 10,
-    height: 50,
-    width: 50,
+    height: 35,
+    width: 35,
   },
 });

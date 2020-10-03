@@ -30,7 +30,7 @@ export default function BottomTabNavigator(user: any) {
         options={{
           tabBarIcon: ({ color }) => (
             <Image
-              source={require("../assets/icons/pray_icon.png")}
+              source={require("../assets/images/Official_Logo.png")}
               style={styles.icon}
             />
           ),
@@ -42,7 +42,7 @@ export default function BottomTabNavigator(user: any) {
         options={{
           tabBarIcon: ({ color }) => (
             <Image
-              source={require("../assets/icons/pray_icon.png")}
+              source={require("../assets/icons/newsfeed.png")}
               style={styles.icon}
             />
           ),
@@ -54,7 +54,7 @@ export default function BottomTabNavigator(user: any) {
         options={{
           tabBarIcon: ({ color }) => (
             <Image
-              source={require("../assets/icons/cal_icon.png")}
+              source={require("../assets/icons/profile.png")}
               style={styles.icon}
             />
           ),
@@ -66,7 +66,7 @@ export default function BottomTabNavigator(user: any) {
         options={{
           tabBarIcon: ({ color }) => (
             <Image
-              source={require("../assets/icons/history_icon.png")}
+              source={require("../assets/icons/History.png")}
               style={styles.icon}
             />
           ),
@@ -78,7 +78,7 @@ export default function BottomTabNavigator(user: any) {
         options={{
           tabBarIcon: ({ color }) => (
             <Image
-              source={require("../assets/icons/history_icon.png")}
+              source={require("../assets/icons/History.png")}
               style={styles.icon}
             />
           ),
@@ -140,6 +140,8 @@ function TabThreeNavigator() {
 
 const styles = StyleSheet.create({
   icon: {
-    // height: 40,
+    marginTop: 10,
+    height: 20,
+    width: 20,
   },
 });

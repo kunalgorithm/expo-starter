@@ -12,6 +12,12 @@ import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { fetcher, useMe } from "../hooks/fetcher";
 import { mutate } from "swr";
+import NavalQuotes from "../constants/NavalQuotes";
+
+function randomIntFromInterval(min: number, max: number) {
+  // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
 export default function CongratsScreen({
   duration,
@@ -50,7 +56,7 @@ export default function CongratsScreen({
 
         <View style={styles.box}>
           <Text style={styles.quote}>
-            Life is really a single player game. It's all going on in your head
+            {NavalQuotes[randomIntFromInterval(0, NavalQuotes.length)]}
           </Text>
           <Text style={styles.author}>Naval</Text>
         </View>

@@ -23,12 +23,12 @@ export default function StreaksScreen({
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <View style={{ width: "20%" }}>
+        <View style={{ width: "20%", backgroundColor: "#B6999A00" }}>
           <TouchableOpacity onPress={() => openImagePickerAsync()}>
             <Avatar user={me!} />
           </TouchableOpacity>
         </View>
-        <View style={{ width: "40%" }}>
+        <View style={{ width: "40%", backgroundColor: "#B6999A00" }}>
           <View style={styles.follower_container}>
             <Text style={styles.title}>{me?.name}</Text>
             <Text style={styles.title}>{me?.followers?.length} followers</Text>

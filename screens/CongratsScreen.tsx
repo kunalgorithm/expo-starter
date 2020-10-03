@@ -1,6 +1,12 @@
 import * as React from "react";
-import { StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Animated,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import Button from "../components/Button";
+import Slider from "react-native-slider";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
@@ -16,6 +22,7 @@ export default function CongratsScreen({
 }) {
   const [screen, setScreen] = React.useState(0);
   const [notes, setNotes] = React.useState("");
+  const [zenScore, setZenScore] = React.useState(50);
   const { me } = useMe();
   if (screen === 0)
     return (
@@ -39,9 +46,22 @@ export default function CongratsScreen({
     <View style={styles.container}>
       <Text style={styles.title}>How did you feel? </Text>
       <View style={styles.row}>
-        <Button onPress={() => {}}>:(</Button>
-        <Button onPress={() => {}}>:|</Button>
-        <Button onPress={() => {}}>:)</Button>
+        {/* <Text style={styles.title}>Zen Score: {zenScore}</Text> */}
+        <View style={styles.sliderContainer}>
+          <Slider
+            minimumValue={0}
+            maximumValue={100}
+            value={zenScore}
+            onValueChange={(value: number) => setZenScore(value)}
+            thumbStyle={{ height: 50, width: 50 }}
+            thumbTintColor={"#ffffff00"}
+            thumbTouchSize={{ width: 50, height: 50 }}
+            animationType={"spring"}
+            thumbImage={require("../assets/images/official_logo_medium.png")}
+            minimumTrackTintColor={"#ccc"}
+            maximumTrackTintColor={"#ccc"}
+          />
+        </View>
       </View>
       <View>
         <TextInput
@@ -80,10 +100,18 @@ export default function CongratsScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#fff",
     color: "#C4C4C4",
+    alignItems: "center",
+  },
+  sliderContainer: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#fff",
+    alignItems: "stretch",
+    marginVertical: 30,
+    marginHorizontal: 30,
   },
   row: {
     display: "flex",

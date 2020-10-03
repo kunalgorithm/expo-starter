@@ -88,6 +88,7 @@ export default function CongratsScreen({
           style={styles.input}
           placeholderTextColor="#ccc"
           placeholder="your reflections and thoughts.."
+          textAlign="left"
           onChangeText={(text) => setNotes(text)}
           value={notes}
           underlineColorAndroid="transparent"
@@ -124,10 +125,19 @@ const styles = StyleSheet.create({
   },
   inputbox: {
     display: "flex",
-    width: 360,
+    width: 300,
     height: 200,
     backgroundColor: "#Ffffff",
+    marginHorizontal: 30,
     justifyContent: "space-around",
+    shadowColor: "#8D8A8A",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    borderRadius: 35 / 5,
   },
   title: {
     fontSize: 30,
@@ -216,18 +226,18 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 48,
+    flexWrap: "wrap",
     borderRadius: 10,
-    borderWidth: 3,
     overflow: "hidden",
+    borderWidth: 0,
     backgroundColor: "#fff",
-    marginTop: 10,
+    marginTop: -120,
     marginBottom: 10,
-    fontSize: 25,
-    padding: 30,
-    fontFamily: "Calibre-Medium",
+    fontSize: 22,
+    fontFamily: "Calibre-Regular",
     color: "#4A4A4A",
-    marginLeft: 30,
-    marginRight: 30,
+    marginLeft: 0,
     paddingLeft: 16,
+    paddingRight: 16,
   },
 });

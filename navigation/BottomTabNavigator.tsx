@@ -72,8 +72,6 @@ export default function BottomTabNavigator(user: any) {
           ),
         }}
       /> */}
-      <BottomTab.Screen
-        name="History"
 
       <BottomTab.Screen
         name="Logs"

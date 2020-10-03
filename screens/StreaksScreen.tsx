@@ -1,13 +1,15 @@
 import * as React from "react";
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet, Image, TouchableOpacity } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
 import { Text, View } from "../components/Themed";
-import dayjs from "dayjs";
+
 import { useMe } from "../hooks/fetcher";
 import { Stats } from "../components/Stats";
 import { Box } from "../components/Box";
 import Button from "../components/Button";
 import { RootStackParamList } from "../types";
+import * as ImagePicker from "expo-image-picker";
+import { openImagePickerAsync } from "../hooks/uploadImage";
 
 export default function StreaksScreen({
   navigation,
@@ -21,10 +23,16 @@ export default function StreaksScreen({
     <View style={styles.container}>
       <View style={styles.row}>
         <View style={{ width: "20%" }}>
-          <Image
-            style={styles.profilePic}
-            source={require("../assets/images/Profile_Placeholder.png")}
-          ></Image>
+          <TouchableOpacity onPress={() => openImagePickerAsync()}>
+            <Image
+              style={styles.profilePic}
+              source={
+                me?.imageUrl
+                  ? { uri: me?.imageUrl }
+                  : require("../assets/images/Profile_Placeholder.png")
+              }
+            ></Image>
+          </TouchableOpacity>
         </View>
         <View style={{ width: "40%" }}>
           <Text style={styles.title}>{me?.name}</Text>
@@ -95,5 +103,6 @@ const styles = StyleSheet.create({
   profilePic: {
     height: 70,
     width: 70,
+    borderRadius: 50,
   },
 });

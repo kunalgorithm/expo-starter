@@ -8,10 +8,10 @@ import { fetcher, useMe } from "../hooks/fetcher";
 import { mutate } from "swr";
 
 export default function CongratsScreen({
-  setCongratsScreen,
   duration,
+  completeSubmission,
 }: {
-  setCongratsScreen: React.Dispatch<React.SetStateAction<boolean>>;
+  completeSubmission: () => void;
   duration: number;
 }) {
   const [screen, setScreen] = React.useState(0);
@@ -60,15 +60,15 @@ export default function CongratsScreen({
             duration,
             notes,
           });
-          mutate("/api/me", {
+          await mutate("/api/me", {
             ...me,
             meditation: [
               ...me?.meditations!,
               { duration, notes, createdAt: new Date() },
             ],
           });
-          console.log(res);
-          setCongratsScreen(false);
+          console.log(res, duration);
+          completeSubmission();
         }}
       >
         Submit

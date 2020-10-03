@@ -15,10 +15,8 @@ import CongratsScreen from "./CongratsScreen";
 import { DropDown } from "../components/DropDown";
 import { useMe } from "../hooks/fetcher";
 import dayjs from "dayjs";
-// @ts-ignore
-// import SoundPlayer from "react-native-sound-player";
-
-import { activateKeepAwake, deactivateKeepAwake } from "expo-keep-awake";
+import { activateKeepAwake } from "expo-keep-awake";
+import { Audio } from "expo-av";
 const DEFAULT_TIMER = 15 * 60; // 15 minutes
 
 export default function TimerScreen() {
@@ -36,19 +34,25 @@ export default function TimerScreen() {
         )
       : 1;
 
-  const endMeditation = () => {
-    // try {
-    //   // play the file tone.mp3
-    //   SoundPlayer.playSoundFile(
-    //     "../assets/clock-chiming/Creepy-clock-chiming.mp3",
-    //     "mp3"
-    //   );
-    // } catch (e) {
-    //   console.log(`cannot play the sound file`, e);
-    // }
+  const endMeditation = async () => {
+    const soundObject = new Audio.Sound();
+    try {
+      await soundObject.loadAsync(
+        require("../assets/sounds/Creepy-clock-chiming.mp3")
+      );
+      await soundObject.playAsync();
+      // Your sound is playing!
+
+      // Don't forget to unload the sound from memory
+      // when you are done using the Sound object
+      await soundObject.unloadAsync();
+    } catch (error) {
+      // An error occurred!
+      console.log(error);
+    }
     setCongratsScreen(true);
     setTimerOn(false);
-    setSecondsMeditated(0);
+
     setSeconds(DEFAULT_TIMER);
   };
 
@@ -71,8 +75,11 @@ export default function TimerScreen() {
   if (congratsScreen)
     return (
       <CongratsScreen
-        setCongratsScreen={setCongratsScreen}
         duration={secondsMeditated}
+        completeSubmission={() => {
+          setSecondsMeditated(0);
+          setCongratsScreen(false);
+        }}
       />
     );
 

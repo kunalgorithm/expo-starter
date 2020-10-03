@@ -72,8 +72,6 @@ export default function BottomTabNavigator(user: any) {
           ),
         }}
       /> */}
-      <BottomTab.Screen
-        name="History"
 
       <BottomTab.Screen
         name="Logs"
@@ -83,8 +81,6 @@ export default function BottomTabNavigator(user: any) {
             <Image
               source={require("../assets/icons/time_machine.png")}
               style={styles.icon}
-              source={require("../assets/icons/History.png")}
-              style={{ ...styles.icon, width: styles.icon.width + 4 }}
             />
           ),
         }}

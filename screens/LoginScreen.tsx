@@ -28,7 +28,7 @@ export default function LoginScreen() {
       password,
     });
     if (res.data && res.data.user) {
-      await mutate("/api/me", { ...res.data.user, meditation: [] });
+      await mutate("/api/me", { ...res.data.user, meditations: [] });
       return;
     }
 
@@ -75,6 +75,7 @@ export default function LoginScreen() {
           value={password}
           underlineColorAndroid="transparent"
           autoCapitalize="none"
+          onSubmitEditing={onSubmit}
         />
         <View style={styles.container}>
           {error && <Text>Error: {error}</Text>}

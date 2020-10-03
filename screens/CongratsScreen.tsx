@@ -23,7 +23,25 @@ export default function CongratsScreen({
   const [screen, setScreen] = React.useState(0);
   const [notes, setNotes] = React.useState("");
   const [zenScore, setZenScore] = React.useState(50);
+  const [loading, setLoading] = React.useState(false);
   const { me } = useMe();
+
+  const submitForm = async () => {
+    setLoading(true);
+    const res = await fetcher(`/api/meditation/create`, {
+      duration,
+      notes,
+    });
+    await mutate("/api/me", {
+      ...me,
+      meditation: [
+        ...me?.meditations!,
+        { duration, notes, createdAt: new Date() },
+      ],
+    });
+    console.log(res, duration);
+    completeSubmission();
+  };
   if (screen === 0)
     return (
       <View style={styles.container}>
@@ -63,7 +81,7 @@ export default function CongratsScreen({
           />
         </View>
       </View>
-      <View>
+      <View style={{ backgroundColor: "#fff" }}>
         <TextInput
           style={styles.input}
           placeholderTextColor="#ccc"
@@ -72,27 +90,10 @@ export default function CongratsScreen({
           value={notes}
           underlineColorAndroid="transparent"
           autoCapitalize="none"
+          onSubmitEditing={submitForm}
         />
       </View>
-      <Button
-        onPress={async () => {
-          const res = await fetcher(`/api/meditation/create`, {
-            duration,
-            notes,
-          });
-          await mutate("/api/me", {
-            ...me,
-            meditation: [
-              ...me?.meditations!,
-              { duration, notes, createdAt: new Date() },
-            ],
-          });
-          console.log(res, duration);
-          completeSubmission();
-        }}
-      >
-        Submit
-      </Button>
+      <Button onPress={submitForm}>{loading ? "..." : "Submit"}</Button>
     </View>
   );
 }
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
     color: "#4A4A4A",
     fontWeight: "bold",
     letterSpacing: 1.5,
-    marginTop: -1,
+    marginTop: 10,
     fontFamily: "Calibre-Medium",
   },
   subtitle: {
@@ -194,13 +195,14 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 48,
-    borderRadius: 5,
+    borderRadius: 10,
+    borderWidth: 3,
     overflow: "hidden",
     backgroundColor: "#fff",
     marginTop: 10,
     marginBottom: 10,
     fontSize: 25,
-    paddingTop: 10,
+    padding: 30,
     fontFamily: "Calibre-Medium",
     color: "#4A4A4A",
     marginLeft: 30,

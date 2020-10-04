@@ -10,11 +10,8 @@ import {
 import { useFeed } from "../hooks/fetcher";
 
 import { RootStackParamList } from "../types";
-import { Bubble } from "../components/Bubble";
 import { ScrollView } from "react-native-gesture-handler";
-import { Avatar } from "../components/Avatar";
-import dayjs from "dayjs";
-
+import { FeedItem } from "./FeedItem";
 export default function FeedScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, "Feed">) {
@@ -27,16 +24,7 @@ export default function FeedScreen({
       <ScrollView>
         {feed && feed.length > 0 ? (
           feed.map((meditation) => (
-            <Bubble
-              key={meditation.id}
-              title={`${meditation.user.name} meditated for
-          ${Math.ceil(meditation.duration / 60)} minutes.`}
-            >
-              <Avatar user={meditation.user}></Avatar>
-              <Text>Notes: {meditation.notes}</Text>
-              <Text> {dayjs(meditation.createdAt).format("M.D.YY")}</Text>
-              <Text>⚡ on a 4 day streak</Text>
-            </Bubble>
+            <FeedItem meditation={meditation} key={meditation.id} />
           ))
         ) : (
           <TouchableOpacity onPress={() => navigation.push("FindFriends")}>

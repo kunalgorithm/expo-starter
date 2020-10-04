@@ -3,11 +3,11 @@ import * as React from "react";
 import { StyleSheet, Image } from "react-native";
 import { User } from "../server/node_modules/@prisma/client";
 
-export const Avatar = ({ user }: { user: User }) => (
+export const Avatar = ({ user, size = 70 }: { user: User; size?: number }) => (
   <Image
     style={{
-      height: 70,
-      width: 70,
+      height: size,
+      width: size,
       borderRadius: 50,
     }}
     source={

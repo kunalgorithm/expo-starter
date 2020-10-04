@@ -59,7 +59,7 @@ export default function CongratsScreen({
         },
       ],
     });
-    console.log(res, res.error, duration);
+    console.log(res, duration);
 
     navigation.replace("Root");
   };

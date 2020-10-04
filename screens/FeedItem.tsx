@@ -18,14 +18,18 @@ export const FeedItem = ({
     <Bubble key={meditation.id}>
       <View style={{ display: "flex", flexDirection: "row" }}>
         <View style={{ width: "25%" }}>
-          <Avatar user={meditation.user} size={50}></Avatar>
+          <Avatar user={meditation.user} size={70}></Avatar>
         </View>
         <View style={{ width: "40%" }}>
-          <Text>{meditation.user.name}</Text>
-          <Text style={{ color: Colors.mauve }}>
+          <Text style={{ fontSize: 17, color: "gray", paddingBottom: 4 }}>
+            {meditation.user.name}
+          </Text>
+          <Text style={{ color: "gray" }}>
             {dayjs(meditation.createdAt).format("M.D.YY")}
           </Text>
-          <Text>⚡ 4 day streak</Text>
+          <Text style={{ color: "#B6999B", paddingTop: 5 }}>
+            ⚡ 4 day streak
+          </Text>
         </View>
         <View
           style={{
@@ -37,9 +41,9 @@ export const FeedItem = ({
         >
           <Image
             source={require("../assets/icons/pray_icon.png")}
-            style={{ width: 20, height: 20 }}
+            style={{ width: 15, height: 15 }}
           />
-          <Text style={{ color: Colors.mauve }}>
+          <Text style={{ color: Colors.mauve, fontSize: 14 }}>
             {Math.ceil(meditation.duration / 60)} min
           </Text>
         </View>
@@ -51,7 +55,9 @@ export const FeedItem = ({
           width: "80%",
         }}
       >
-        <Text style={{ fontSize: 18 }}>{meditation.notes}</Text>
+        <Text style={{ fontSize: 15, color: "#4A4A4A", marginLeft: -15 }}>
+          {meditation.notes}
+        </Text>
       </View>
 
       <LikeButton meditation={meditation}></LikeButton>
@@ -78,7 +84,7 @@ const LikeButton = ({ meditation }: { meditation: Meditation }) => {
         <Text
           style={{ color: Colors.mauve, fontWeight: liked ? "bold" : "normal" }}
         >
-          {liked ? "unlike" : "like"}
+          {liked ? " Liked" : " Like"}
         </Text>
       </View>
     </TouchableOpacity>

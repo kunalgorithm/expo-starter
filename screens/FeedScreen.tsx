@@ -19,7 +19,7 @@ export default function FeedScreen({
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Feed</Text>
+      <Text style={styles.title}>The Zen Feed</Text>
 
       <ScrollView>
         {feed && feed.length > 0 ? (
@@ -47,8 +47,14 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontSize: 20,
+    fontSize: 35,
+    color: "gray",
     fontWeight: "bold",
+    marginRight: "auto",
+    paddingLeft: 30,
+    paddingTop: 30,
+    paddingBottom: 30,
+    fontFamily: "Calibre-Regular",
   },
   link: {
     marginTop: 5,

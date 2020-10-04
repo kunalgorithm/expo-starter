@@ -52,8 +52,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginRight: "auto",
     paddingLeft: 30,
-    paddingTop: 30,
-    paddingBottom: 30,
+    paddingTop: 20,
+    paddingBottom: 10,
     fontFamily: "Calibre-Regular",
   },
   link: {

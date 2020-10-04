@@ -87,6 +87,12 @@ export default function CongratsScreen({
         back
       </Button>
       <Text style={styles.title}>How did you feel? </Text>
+      <View style={styles.rowtwo}>
+        <Text style={styles.mood}>restless</Text>
+        <Text style={styles.mood}>nuetral</Text>
+        <Text style={styles.mood}>nirvana</Text>
+      </View>
+
       <View style={styles.row}>
         {/* <Text style={styles.title}>Zen Score: {zenScore}</Text> */}
         <View style={styles.sliderContainer}>
@@ -122,41 +128,43 @@ export default function CongratsScreen({
 
       <Text style={styles.titlethree}>Who can see:</Text>
 
-      <Switch
-        onValueChange={() => setIsPublic(!isPublic)}
-        value={isPublic}
-        activeText="Followers"
-        inActiveText="Just you"
-        activeTextStyle={{
-          fontFamily: "Calibre-Medium",
-          fontSize: 18,
-          paddingTop: 9,
-        }}
-        inactiveTextStyle={{
-          fontFamily: "Calibre-Medium",
-          fontSize: 18,
-          paddingTop: 9,
-        }}
-        circleSize={30}
-        barHeight={40}
-        // circleBorderWidth={6}
-        backgroundActive={"#7EBFC7"}
-        backgroundInactive={"gray"}
-        circleActiveColor={"#ffffff"}
-        circleInActiveColor={"#ffffff"}
-        // outerCircleStyle={"#7EBFC7"}
-        // renderInsideCircle={() => <CustomComponent />} // custom component to render inside the Switch circle (Text, Image, etc.)
-        // changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
-        innerCircleStyle={{
-          alignItems: "center",
-          justifyContent: "center",
-          borderColor: "transparent",
-        }} // style for inner animated circle for what you (may) be rendering inside the circle
-        outerCircleStyle={{}} // style for outer animated circle
-        switchLeftPx={3} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-        switchRightPx={3} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-        switchWidthMultiplier={4.3} // multipled by the `circleSize` prop to calculate total width of the Switch
-      ></Switch>
+      <View style={styles.toggleposition}>
+        <Switch
+          onValueChange={() => setIsPublic(!isPublic)}
+          value={isPublic}
+          activeText="Followers"
+          inActiveText="Just you"
+          activeTextStyle={{
+            fontFamily: "Calibre-Medium",
+            fontSize: 16,
+            paddingTop: 9,
+          }}
+          inactiveTextStyle={{
+            fontFamily: "Calibre-Medium",
+            fontSize: 16,
+            paddingTop: 9,
+          }}
+          circleSize={29}
+          barHeight={40}
+          // circleBorderWidth={6}
+          backgroundActive={"#7EBFC7"}
+          backgroundInactive={"gray"}
+          circleActiveColor={"#ffffff"}
+          circleInActiveColor={"#ffffff"}
+          // outerCircleStyle={"#7EBFC7"}
+          // renderInsideCircle={() => <CustomComponent />} // custom component to render inside the Switch circle (Text, Image, etc.)
+          // changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
+          innerCircleStyle={{
+            alignItems: "center",
+            justifyContent: "center",
+            borderColor: "transparent",
+          }} // style for inner animated circle for what you (may) be rendering inside the circle
+          outerCircleStyle={{}} // style for outer animated circle
+          switchLeftPx={3} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
+          switchRightPx={3} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
+          switchWidthMultiplier={4.2} // multipled by the `circleSize` prop to calculate total width of the Switch
+        ></Switch>
+      </View>
       <Button onPress={submitForm}>{loading ? "..." : "Submit"}</Button>
     </View>
   );
@@ -169,6 +177,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#FBFBFC",
     color: "#C4C4C4",
     alignItems: "center",
+  },
+  rowtwo: {
+    display: "flex",
+    flexDirection: "row",
+    marginHorizontal: 20,
+    marginRight: 0,
+    alignItems: "center",
+    backgroundColor: "transparent",
+    justifyContent: "center",
   },
   sliderContainer: {
     flex: 1,
@@ -200,6 +217,25 @@ const styles = StyleSheet.create({
     shadowRadius: 1.41,
     borderRadius: 35 / 5,
   },
+  toggleposition: {
+    marginLeft: 180,
+    marginTop: -55,
+    justifyContent: "flex-end",
+  },
+
+  mood: {
+    fontSize: 12,
+    color: "#AEAEAE",
+    fontWeight: "bold",
+    letterSpacing: 1,
+    paddingHorizontal: 37,
+    alignItems: "center",
+    justifyContent: "center",
+    textTransform: "uppercase",
+    marginTop: 30,
+    backgroundColor: "transparent",
+    fontFamily: "Calibre-Regular",
+  },
   title: {
     fontSize: 30,
     color: "#4A4A4A",
@@ -226,6 +262,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 1.5,
     alignItems: "flex-start",
+    paddingTop: 20,
     marginVertical: 20,
     left: -70,
     fontFamily: "Calibre-Regular",

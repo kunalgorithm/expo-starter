@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    margin: 7,
-    height: 35,
+    margin: 12,
+    height: 32,
     width: 35,
   },
 });

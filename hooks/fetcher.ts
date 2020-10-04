@@ -1,6 +1,7 @@
 import {
   Meditation,
   User,
+  Like,
   Follow,
 } from "../server/node_modules/@prisma/client";
 import useSWR from "swr";
@@ -16,8 +17,13 @@ export const fetcher = (url: string, data?: any): any =>
     body: data ? JSON.stringify(data) : "",
   }).then((r) => r.json());
 
+export interface FeedMeditation extends Meditation {
+  user: User;
+  likes: (Like & { user: User })[];
+}
+
 export function useFeed() {
-  const { data: feed }: { data?: (Meditation & { user: User })[] } = useSWR(
+  const { data: feed }: { data?: FeedMeditation[] } = useSWR(
     "/api/feed",
     fetcher
   );

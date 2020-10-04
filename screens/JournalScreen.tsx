@@ -73,6 +73,13 @@ export default function CongratsScreen({
         {Math.ceil(duration / 60)} minute meditation{" "}
       </Text>
       <Text style={styles.title}>How did you feel? </Text>
+      <View style={styles.rowtwo}>
+        {" "}
+        <Text style={styles.subtitle}>Day 5 of 60 days completed </Text>
+        <Text style={styles.mood}>restless</Text>
+        <Text style={styles.mood}>nuetral</Text>
+        <Text style={styles.mood}>nirvana</Text>
+      </View>
       <View style={styles.row}>
         <View style={styles.sliderContainer}>
           <Slider
@@ -155,6 +162,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#FBFBFC",
     color: "#C4C4C4",
     alignItems: "center",
+  },
+  rowtwo: {
+    display: "flex",
+    flexDirection: "row",
+    marginHorizontal: 20,
+    marginRight: 0,
+    alignItems: "center",
+    backgroundColor: "transparent",
+    justifyContent: "center",
   },
   sliderContainer: {
     flex: 1,
@@ -250,5 +266,19 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     paddingLeft: 16,
     paddingRight: 16,
+  },
+
+  mood: {
+    fontSize: 12,
+    color: "#AEAEAE",
+    fontWeight: "bold",
+    letterSpacing: 1,
+    paddingHorizontal: 37,
+    alignItems: "center",
+    justifyContent: "center",
+    textTransform: "uppercase",
+    marginTop: 30,
+    backgroundColor: "transparent",
+    fontFamily: "Calibre-Regular",
   },
 });

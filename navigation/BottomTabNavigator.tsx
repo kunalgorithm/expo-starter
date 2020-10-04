@@ -9,7 +9,7 @@ import TimerScreen from "../screens/TimerScreen";
 import TabTwoScreen from "../screens/StreaksScreen";
 import TabThreeScreen from "../screens/HistoryScreen";
 
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, Text } from "react-native";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import FeedScreen from "../screens/FeedScreen";
 
@@ -60,18 +60,6 @@ export default function BottomTabNavigator(user: any) {
           ),
         }}
       />
-      {/* <BottomTab.Screen
-        name="Todo"
-        component={NotFoundScreen}
-        options={{ 
-          tabBarIcon: ({ color }) => (
-            <Image
-              source={require("../assets/icons/History.png")}
-              style={styles.icon}
-            />
-          ),
-        }}
-      /> */}
 
       <BottomTab.Screen
         name="Logs"
@@ -121,7 +109,10 @@ function TabTwoNavigator() {
       <TabTwoStack.Screen
         name=" "
         component={TabTwoScreen}
-        options={{ headerTransparent: true }}
+        options={{
+          headerTransparent: true,
+          // headerLeft: () => <Text>Back</Text>,
+        }}
       />
     </TabTwoStack.Navigator>
   );

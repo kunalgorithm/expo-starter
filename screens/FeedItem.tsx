@@ -7,12 +7,10 @@ import dayjs from "dayjs";
 import { Meditation, User } from "../server/node_modules/@prisma/client";
 import Colors from "../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { LikeButton } from "./LikeButton";
+import { FeedMeditation } from "../hooks/fetcher";
 
-export const FeedItem = ({
-  meditation,
-}: {
-  meditation: Meditation & { user: User };
-}) => {
+export const FeedItem = ({ meditation }: { meditation: FeedMeditation }) => {
   if (!meditation) return null;
   return (
     <Bubble key={meditation.id}>
@@ -62,31 +60,5 @@ export const FeedItem = ({
 
       <LikeButton meditation={meditation}></LikeButton>
     </Bubble>
-  );
-};
-
-const LikeButton = ({ meditation }: { meditation: Meditation }) => {
-  const [liked, setLiked] = React.useState(false);
-  return (
-    <TouchableOpacity onPress={() => setLiked(!liked)}>
-      <View
-        style={{
-          width: "95%",
-          flexDirection: "row",
-          alignItems: "flex-end",
-          justifyContent: "flex-end",
-        }}
-      >
-        <Image
-          source={require("../assets/icons/like.jpeg")}
-          style={{ width: 20, height: 20 }}
-        />
-        <Text
-          style={{ color: Colors.mauve, fontWeight: liked ? "bold" : "normal" }}
-        >
-          {liked ? " Liked" : " Like"}
-        </Text>
-      </View>
-    </TouchableOpacity>
   );
 };

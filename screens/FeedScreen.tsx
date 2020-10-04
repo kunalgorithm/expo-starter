@@ -41,20 +41,20 @@ export default function FeedScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#FBFBFC",
     alignItems: "center",
     justifyContent: "center",
     padding: 20,
   },
   title: {
-    fontSize: 35,
+    fontSize: 32,
     color: "gray",
     fontWeight: "bold",
     marginRight: "auto",
     paddingLeft: 30,
     paddingTop: 20,
     paddingBottom: 10,
-    fontFamily: "Calibre-Regular",
+    fontFamily: "Calibre-Light",
   },
   link: {
     marginTop: 5,

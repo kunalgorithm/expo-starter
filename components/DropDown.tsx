@@ -1,5 +1,6 @@
 import * as React from "react";
 import DropDownPicker from "react-native-dropdown-picker";
+import Colors from "../constants/Colors";
 
 export function DropDown({
   setSeconds,
@@ -23,9 +24,16 @@ export function DropDown({
         borderRadius: 200,
         marginVertical: 15,
       }}
+      arrowColor={Colors.mauve}
       style={{
         backgroundColor: "#FBFBFC",
         shadowColor: "#8D8A8A",
+        borderBottomEndRadius: 30,
+        borderBottomStartRadius: 30,
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
+        borderTopRightRadius: 30,
+        borderTopLeftRadius: 30,
         shadowOffset: {
           width: 0,
           height: 2,

@@ -3,7 +3,7 @@ import { View } from "./Themed";
 import dayjs from "dayjs";
 import { Meditation } from "../server/node_modules/@prisma/client";
 
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, Text } from "react-native";
 import { useMe } from "../hooks/fetcher";
 import Colors from "../constants/Colors";
 
@@ -31,18 +31,29 @@ export const Box = ({
   const isToday: boolean =
     boxDate.format("ddd, MMM D, YYYY") === dayjs().format("ddd, MMM D, YYYY");
   return (
-    <View
-      style={{
-        ...styles.box,
-        backgroundColor: isToday
-          ? "#84B9C8"
-          : timeMeditated > 10
-          ? `rgba(182,153,154,${timeMeditated / 60})`
-          : timeMeditated > 0
-          ? Colors.pink
-          : "#fff",
-      }}
-    ></View>
+    <View style={{ backgroundColor: "transparent" }}>
+      {index < 7 && (
+        <Text style={{ textAlign: "center" }}>
+          {boxDate.format("dd") === "Su"
+            ? "Su"
+            : boxDate.format("dd") == "Th"
+            ? "Th"
+            : boxDate.format("dd")[0]}
+        </Text>
+      )}
+      <View
+        style={{
+          ...styles.box,
+          backgroundColor: isToday
+            ? "#84B9C8"
+            : timeMeditated > 10
+            ? `rgba(182,153,154,${timeMeditated / 60})`
+            : timeMeditated > 0
+            ? Colors.pink
+            : "#fff",
+        }}
+      ></View>
+    </View>
   );
 };
 

@@ -20,6 +20,7 @@ export default function StreaksScreen({
 
   const meditations = me?.meditations;
   if (!meditations) return null;
+  console.log("med", meditations.length);
 
   return (
     <View style={styles.container}>

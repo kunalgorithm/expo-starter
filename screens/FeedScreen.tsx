@@ -32,6 +32,7 @@ export default function FeedScreen({
           ${Math.ceil(meditation.duration / 60)} minutes.`}
           >
             <Avatar user={meditation.user}></Avatar>
+
             <Text>Notes: {meditation.notes}</Text>
             <Text> {dayjs(meditation.createdAt).format("M.D.YY")}</Text>
             <Text>⚡ on a 4 day streak</Text>
@@ -58,6 +59,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     paddingVertical: 15,
   },
+
   linkText: {
     fontSize: 14,
     color: "#2e78b7",

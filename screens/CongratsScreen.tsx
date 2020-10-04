@@ -16,6 +16,7 @@ import NavalQuotes from "../constants/NavalQuotes";
 import { Switch } from "react-native-switch";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
+import { FontDisplay } from "expo-font";
 
 function randomIntFromInterval(min: number, max: number) {
   // min and max included
@@ -118,25 +119,43 @@ export default function CongratsScreen({
           // onSubmitEditing={submitForm}
         />
       </View>
+
+      <Text style={styles.titlethree}>Who can see:</Text>
+
       <Switch
         onValueChange={() => setIsPublic(!isPublic)}
         value={isPublic}
         activeText="Followers"
         inActiveText="Just you"
-        circleSize={40}
-        // barHeight={1}
-        circleBorderWidth={3}
-        backgroundActive={"green"}
+        activeTextStyle={{
+          fontFamily: "Calibre-Medium",
+          fontSize: 18,
+          paddingTop: 9,
+        }}
+        inactiveTextStyle={{
+          fontFamily: "Calibre-Medium",
+          fontSize: 18,
+          paddingTop: 9,
+        }}
+        circleSize={30}
+        barHeight={40}
+        // circleBorderWidth={6}
+        backgroundActive={"#7EBFC7"}
         backgroundInactive={"gray"}
-        circleActiveColor={"#30a566"}
-        circleInActiveColor={"#000000"}
+        circleActiveColor={"#ffffff"}
+        circleInActiveColor={"#ffffff"}
+        // outerCircleStyle={"#7EBFC7"}
         // renderInsideCircle={() => <CustomComponent />} // custom component to render inside the Switch circle (Text, Image, etc.)
         // changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
-        innerCircleStyle={{ alignItems: "center", justifyContent: "center" }} // style for inner animated circle for what you (may) be rendering inside the circle
+        innerCircleStyle={{
+          alignItems: "center",
+          justifyContent: "center",
+          borderColor: "transparent",
+        }} // style for inner animated circle for what you (may) be rendering inside the circle
         outerCircleStyle={{}} // style for outer animated circle
         switchLeftPx={3} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
         switchRightPx={3} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-        switchWidthMultiplier={3} // multipled by the `circleSize` prop to calculate total width of the Switch
+        switchWidthMultiplier={4.3} // multipled by the `circleSize` prop to calculate total width of the Switch
       ></Switch>
       <Button onPress={submitForm}>{loading ? "..." : "Submit"}</Button>
     </View>
@@ -199,6 +218,16 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     marginVertical: 20,
     left: -60,
+    fontFamily: "Calibre-Regular",
+  },
+  titlethree: {
+    fontSize: 30,
+    color: "#4A4A4A",
+    fontWeight: "bold",
+    letterSpacing: 1.5,
+    alignItems: "flex-start",
+    marginVertical: 20,
+    left: -70,
     fontFamily: "Calibre-Regular",
   },
   subtitle: {

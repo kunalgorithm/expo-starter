@@ -20,7 +20,7 @@ export const LikeButton = ({ meditation }: { meditation: FeedMeditation }) => {
     setLoading(true);
     const res = await fetcher(`/api/like`, {
       id: meditation.id,
-      unlike: isLiked,
+      unlike: isLiked ? true : false,
     });
     console.log(res.error);
     await mutate(
@@ -29,7 +29,7 @@ export const LikeButton = ({ meditation }: { meditation: FeedMeditation }) => {
         m.id === meditation.id
           ? {
               ...m,
-              likes: [...m.likes, { user_id: me?.id, meditation_id: m.id }],
+              likes: [...m.likes, { user_id: me?.id }],
             }
           : m
       )
@@ -47,6 +47,14 @@ export const LikeButton = ({ meditation }: { meditation: FeedMeditation }) => {
           justifyContent: "flex-end",
         }}
       >
+        {meditation.likes.length > 0 && (
+          <View>
+            <Text style={{ fontSize: 15, color: "#4A4A4A", marginLeft: -15 }}>
+              {meditation.likes.length} likes
+            </Text>
+          </View>
+        )}
+
         <Image
           source={require("../assets/icons/like.jpeg")}
           style={{ width: 20, height: 20 }}

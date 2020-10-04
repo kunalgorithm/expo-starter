@@ -19,7 +19,7 @@ export default function FeedScreen({
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>The Zen Feed</Text>
+      <Text style={styles.title}>The Zen Feed 🧘🏻</Text>
 
       <ScrollView>
         {feed && feed.length > 0 ? (

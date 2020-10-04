@@ -27,7 +27,7 @@ export default function FeedScreen({
             <FeedItem meditation={meditation} key={meditation.id} />
           ))
         ) : (
-          <TouchableOpacity onPress={() => navigation.push("FindFriends")}>
+          <TouchableOpacity onPress={() => navigation.navigate("FindFriends")}>
             <Text style={{ color: "blue" }}>
               Follow people to see their activity on your feed ▶️
             </Text>

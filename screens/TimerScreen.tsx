@@ -40,6 +40,7 @@ export default function TimerScreen({
 
   const endMeditation = async () => {
     const soundObject = new Audio.Sound();
+    await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
     try {
       await soundObject.loadAsync(
         require("../assets/sounds/Creepy-clock-chiming.mp3")
@@ -47,8 +48,7 @@ export default function TimerScreen({
       await soundObject.playAsync();
       // Your sound is playing!
 
-      // Don't forget to unload the sound from memory
-      // when you are done using the Sound object
+      // unload the sound from memory
       await soundObject.unloadAsync();
     } catch (error) {
       // An error occurred!
@@ -56,7 +56,7 @@ export default function TimerScreen({
     }
     setTimerOn(false);
 
-    navigation.push("Congrats", { duration: secondsMeditated });
+    navigation.navigate("Congrats", { duration: secondsMeditated });
 
     // setSeconds(DEFAULT_TIMER);
   };

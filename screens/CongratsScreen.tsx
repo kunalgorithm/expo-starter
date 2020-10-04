@@ -29,143 +29,27 @@ export default function CongratsScreen({
 }: StackScreenProps<RootStackParamList, "Congrats"> & {
   route: { params: { duration: number } };
 }) {
-  const [screen, setScreen] = React.useState(0);
-  const [notes, setNotes] = React.useState("");
-  const [zenScore, setZenScore] = React.useState(50);
-  const [isPublic, setIsPublic] = React.useState(true);
-  const [loading, setLoading] = React.useState(false);
-  const { me } = useMe();
-
-  const submitForm = async () => {
-    if (loading) return;
-    setLoading(true);
-    const { duration } = route.params;
-    const res = await fetcher(`/api/meditation/create`, {
-      duration,
-      notes,
-      isPublic,
-      zenScore,
-    });
-    await mutate("/api/me", {
-      ...me,
-      meditation: [
-        ...me?.meditations!,
-        {
-          duration,
-          notes,
-          isPublic,
-          zenScore: Math.ceil(zenScore),
-          createdAt: new Date(),
-        },
-      ],
-    });
-    console.log(res, duration);
-
-    navigation.replace("Root");
-  };
-  if (screen === 0)
-    return (
-      <View style={styles.container}>
-        <Button small invertColors onPress={() => navigation.goBack()}>
-          back
-        </Button>
-        <Text style={styles.title}>Congrats! ✨</Text>
-        <Text style={styles.subtitle}>Day 5 of 60 days completed </Text>
-
-        <View style={styles.box}>
-          <Text style={styles.quote}>
-            {NavalQuotes[randomIntFromInterval(0, NavalQuotes.length)]}
-          </Text>
-          <Text style={styles.author}>Naval</Text>
-        </View>
-        <Button onPress={() => setScreen(1)}>Next</Button>
-      </View>
-    );
   return (
     <View style={styles.container}>
-      <Button small invertColors onPress={() => setScreen(0)}>
+      {/* <Button small invertColors onPress={() => navigation.goBack()}>
         back
+      </Button> */}
+      <Text style={styles.title}>Congrats! ✨</Text>
+      <Text style={styles.subtitle}>Day 5 of 60 days completed </Text>
+
+      <View style={styles.box}>
+        <Text style={styles.quote}>
+          {NavalQuotes[randomIntFromInterval(0, NavalQuotes.length)]}
+        </Text>
+        <Text style={styles.author}>Naval</Text>
+      </View>
+      <Button
+        onPress={() =>
+          navigation.navigate("Journal", { duration: route.params.duration })
+        }
+      >
+        Next
       </Button>
-      <Text style={styles.title}>How did you feel? </Text>
-      <View style={styles.rowtwo}>
-        <Text style={styles.mood}>restless</Text>
-        <Text style={styles.mood}>nuetral</Text>
-        <Text style={styles.mood}>nirvana</Text>
-      </View>
-
-      <View style={styles.row}>
-        {/* <Text style={styles.title}>Zen Score: {zenScore}</Text> */}
-        <View style={styles.sliderContainer}>
-          <Slider
-            minimumValue={0}
-            maximumValue={100}
-            value={zenScore}
-            onValueChange={(value: number) => setZenScore(value)}
-            thumbStyle={{ height: 50, width: 50 }}
-            thumbTintColor={"#ffffff00"}
-            thumbTouchSize={{ width: 50, height: 50 }}
-            animationType={"spring"}
-            thumbImage={require("../assets/images/official_logo_medium.png")}
-            minimumTrackTintColor={"#ccc"}
-            maximumTrackTintColor={"#ccc"}
-          />
-        </View>
-      </View>
-      <Text style={styles.titletwo}>How did it go? </Text>
-
-      <View style={styles.inputbox}>
-        <TextInput
-          style={styles.input}
-          placeholderTextColor="#ccc"
-          placeholder="your reflections and thoughts.."
-          onChangeText={(text) => setNotes(text)}
-          value={notes}
-          underlineColorAndroid="transparent"
-          autoCapitalize="none"
-          // onSubmitEditing={submitForm}
-        />
-      </View>
-
-      <Text style={styles.titlethree}>Who can see:</Text>
-
-      <View style={styles.toggleposition}>
-        <Switch
-          onValueChange={() => setIsPublic(!isPublic)}
-          value={isPublic}
-          activeText="Followers"
-          inActiveText="Just you"
-          activeTextStyle={{
-            fontFamily: "Calibre-Medium",
-            fontSize: 16,
-            paddingTop: 9,
-          }}
-          inactiveTextStyle={{
-            fontFamily: "Calibre-Medium",
-            fontSize: 16,
-            paddingTop: 9,
-          }}
-          circleSize={29}
-          barHeight={40}
-          // circleBorderWidth={6}
-          backgroundActive={"#7EBFC7"}
-          backgroundInactive={"gray"}
-          circleActiveColor={"#ffffff"}
-          circleInActiveColor={"#ffffff"}
-          // outerCircleStyle={"#7EBFC7"}
-          // renderInsideCircle={() => <CustomComponent />} // custom component to render inside the Switch circle (Text, Image, etc.)
-          // changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
-          innerCircleStyle={{
-            alignItems: "center",
-            justifyContent: "center",
-            borderColor: "transparent",
-          }} // style for inner animated circle for what you (may) be rendering inside the circle
-          outerCircleStyle={{}} // style for outer animated circle
-          switchLeftPx={3} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-          switchRightPx={3} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-          switchWidthMultiplier={4.2} // multipled by the `circleSize` prop to calculate total width of the Switch
-        ></Switch>
-      </View>
-      <Button onPress={submitForm}>{loading ? "..." : "Submit"}</Button>
     </View>
   );
 }
@@ -216,11 +100,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
     borderRadius: 35 / 5,
-  },
-  toggleposition: {
-    marginLeft: 180,
-    marginTop: -55,
-    justifyContent: "flex-end",
   },
 
   mood: {

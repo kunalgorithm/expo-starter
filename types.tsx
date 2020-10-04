@@ -2,6 +2,7 @@ export type RootStackParamList = {
   Root: undefined;
   FindFriends: undefined;
   Congrats: { duration: number };
+  Journal: { meditation?: any; duration?: number };
   NotFound: undefined;
   Feed: undefined;
   Streaks: undefined;

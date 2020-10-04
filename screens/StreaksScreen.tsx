@@ -20,7 +20,6 @@ export default function StreaksScreen({
 
   const meditations = me?.meditations;
   if (!meditations) return null;
-  console.log("med", meditations.length);
 
   return (
     <View style={styles.container}>
@@ -44,7 +43,7 @@ export default function StreaksScreen({
 
         <View style={styles.friendbutton}>
           <Button
-            onPress={() => navigation.push("FindFriends")}
+            onPress={() => navigation.navigate("FindFriends")}
             small
             invertColors
           >

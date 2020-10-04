@@ -1,13 +1,13 @@
 import * as React from "react";
 import { StyleSheet, Image, TouchableOpacity } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
+import { RootStackParamList } from "../types";
 import { Text, View } from "../components/Themed";
 
 import { useMe } from "../hooks/fetcher";
 import { Stats } from "../components/Stats";
 import { Box } from "../components/Box";
 import Button from "../components/Button";
-import { RootStackParamList } from "../types";
 import * as ImagePicker from "expo-image-picker";
 import { openImagePickerAsync } from "../hooks/uploadImage";
 import { Avatar } from "../components/Avatar";

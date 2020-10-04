@@ -42,6 +42,7 @@
     "react-native-screens": "~2.9.0",
     "react-native-slider": "^0.11.0",
     "react-native-sound-player": "^0.10.4",
+    "react-native-switch": "^2.0.0",
     "react-native-web": "~0.11.7",
     "swr": "^0.3.5"
   },

@@ -1,6 +1,7 @@
 export type RootStackParamList = {
   Root: undefined;
   FindFriends: undefined;
+  Congrats: { duration: number };
   NotFound: undefined;
   Feed: undefined;
   Streaks: undefined;

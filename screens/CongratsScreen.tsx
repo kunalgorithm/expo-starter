@@ -6,13 +6,16 @@ import {
   TextInput,
 } from "react-native";
 import Button from "../components/Button";
+// @ts-ignore
 import Slider from "react-native-slider";
-
-import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { fetcher, useMe } from "../hooks/fetcher";
 import { mutate } from "swr";
 import NavalQuotes from "../constants/NavalQuotes";
+
+import { Switch } from "react-native-switch";
+import { StackScreenProps } from "@react-navigation/stack";
+import { RootStackParamList } from "../types";
 
 function randomIntFromInterval(min: number, max: number) {
   // min and max included
@@ -20,37 +23,45 @@ function randomIntFromInterval(min: number, max: number) {
 }
 
 export default function CongratsScreen({
-  duration,
-  completeSubmission,
-}: {
-  completeSubmission: () => void;
-  duration: number;
+  navigation,
+  route,
+}: StackScreenProps<RootStackParamList, "Congrats"> & {
+  route: { params: { duration: number } };
 }) {
   const [screen, setScreen] = React.useState(0);
   const [notes, setNotes] = React.useState("");
   const [zenScore, setZenScore] = React.useState(50);
+  const [isPublic, setIsPublic] = React.useState(true);
   const [loading, setLoading] = React.useState(false);
   const { me } = useMe();
 
   const submitForm = async () => {
+    if (loading) return;
     setLoading(true);
+    const { duration } = route.params;
     const res = await fetcher(`/api/meditation/create`, {
       duration,
       notes,
+      isPublic,
+      zenScore,
     });
     await mutate("/api/me", {
       ...me,
       meditation: [
         ...me?.meditations!,
-        { duration, notes, createdAt: new Date() },
+        { duration, notes, isPublic, zenScore, createdAt: new Date() },
       ],
     });
-    console.log(res, duration);
-    completeSubmission();
+    console.log(res, res.error, duration);
+
+    navigation.replace("Root");
   };
   if (screen === 0)
     return (
       <View style={styles.container}>
+        <Button small invertColors onPress={() => navigation.goBack()}>
+          back
+        </Button>
         <Text style={styles.title}>Congrats! ✨</Text>
         <Text style={styles.subtitle}>Day 5 of 60 days completed </Text>
 
@@ -60,14 +71,14 @@ export default function CongratsScreen({
           </Text>
           <Text style={styles.author}>Naval</Text>
         </View>
-
-        <TouchableOpacity onPress={() => setScreen(1)} style={styles.button}>
-          <Text style={styles.buttonText}>Next</Text>
-        </TouchableOpacity>
+        <Button onPress={() => setScreen(1)}>Next</Button>
       </View>
     );
   return (
     <View style={styles.container}>
+      <Button small invertColors onPress={() => setScreen(0)}>
+        back
+      </Button>
       <Text style={styles.title}>How did you feel? </Text>
       <View style={styles.row}>
         {/* <Text style={styles.title}>Zen Score: {zenScore}</Text> */}
@@ -94,14 +105,33 @@ export default function CongratsScreen({
           style={styles.input}
           placeholderTextColor="#ccc"
           placeholder="your reflections and thoughts.."
-          textAlign="left"
           onChangeText={(text) => setNotes(text)}
           value={notes}
           underlineColorAndroid="transparent"
           autoCapitalize="none"
-          onSubmitEditing={submitForm}
+          // onSubmitEditing={submitForm}
         />
       </View>
+      <Switch
+        onValueChange={() => setIsPublic(!isPublic)}
+        value={isPublic}
+        activeText="Followers"
+        inActiveText="Just you"
+        circleSize={40}
+        // barHeight={1}
+        circleBorderWidth={3}
+        backgroundActive={"green"}
+        backgroundInactive={"gray"}
+        circleActiveColor={"#30a566"}
+        circleInActiveColor={"#000000"}
+        // renderInsideCircle={() => <CustomComponent />} // custom component to render inside the Switch circle (Text, Image, etc.)
+        // changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
+        innerCircleStyle={{ alignItems: "center", justifyContent: "center" }} // style for inner animated circle for what you (may) be rendering inside the circle
+        outerCircleStyle={{}} // style for outer animated circle
+        switchLeftPx={3} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
+        switchRightPx={3} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
+        switchWidthMultiplier={3} // multipled by the `circleSize` prop to calculate total width of the Switch
+      ></Switch>
       <Button onPress={submitForm}>{loading ? "..." : "Submit"}</Button>
     </View>
   );
@@ -210,26 +240,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     color: "#B6999B",
-    // fontWeight: "",
   },
-  button: {
-    backgroundColor: "#B6999B",
-    padding: 15,
-    width: 146,
-    borderRadius: 100,
-    marginVertical: 20,
-    alignItems: "center",
-  },
-  buttonText: {
-    fontSize: 20,
-    color: "#fff",
-    letterSpacing: 4,
-    textTransform: "uppercase",
-    marginTop: 10,
-    marginLeft: 5,
-    alignItems: "center",
-    fontFamily: "Calibre-Medium",
-  },
+
   input: {
     height: 48,
     flexWrap: "wrap",

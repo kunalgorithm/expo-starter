@@ -17,9 +17,13 @@ import { useMe } from "../hooks/fetcher";
 import dayjs from "dayjs";
 import { activateKeepAwake } from "expo-keep-awake";
 import { Audio } from "expo-av";
+import { StackScreenProps } from "@react-navigation/stack";
+import { RootStackParamList } from "../types";
 const DEFAULT_TIMER = 15 * 60; // 15 minutes
 
-export default function TimerScreen() {
+export default function TimerScreen({
+  navigation,
+}: StackScreenProps<RootStackParamList, "Root">) {
   const [seconds, setSeconds] = React.useState(DEFAULT_TIMER);
   const [secondsMeditated, setSecondsMeditated] = React.useState(0);
   const [timerOn, setTimerOn] = React.useState(false);
@@ -50,10 +54,11 @@ export default function TimerScreen() {
       // An error occurred!
       console.log(error);
     }
-    setCongratsScreen(true);
     setTimerOn(false);
 
-    setSeconds(DEFAULT_TIMER);
+    navigation.push("Congrats", { duration: secondsMeditated });
+
+    // setSeconds(DEFAULT_TIMER);
   };
 
   useInterval(async () => {
@@ -72,16 +77,16 @@ export default function TimerScreen() {
     // return () => deactivateKeepAwake();
   }, [timerOn]);
 
-  if (congratsScreen)
-    return (
-      <CongratsScreen
-        duration={secondsMeditated}
-        completeSubmission={() => {
-          setSecondsMeditated(0);
-          setCongratsScreen(false);
-        }}
-      />
-    );
+  // if (congratsScreen)
+  //   return (
+  //     <CongratsScreen
+  //       duration={secondsMeditated}
+  //       completeSubmission={() => {
+  //         setSecondsMeditated(0);
+  //         setCongratsScreen(false);
+  //       }}
+  //     />
+  //   );
 
   return (
     <View style={styles.container}>

@@ -27,6 +27,8 @@ export default function TabThreeScreen() {
             >
               <Text>Session {me?.meditations?.length - i}</Text>
               <Text>{meditation.notes ? meditation.notes : ""}</Text>
+              <Text>Zen Score: {meditation.zenScore}</Text>
+              <Text>{meditation.isPublic ? "Public " : "Private"}</Text>
             </Bubble>
           </View>
         ))}

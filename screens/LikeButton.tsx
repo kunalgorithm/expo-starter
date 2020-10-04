@@ -8,6 +8,7 @@ import Button from "../components/Button";
 import { Meditation, User, Like } from "../server/node_modules/@prisma/client";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Colors from "../constants/Colors";
+import { Avatar } from "../components/Avatar";
 
 export const LikeButton = ({ meditation }: { meditation: FeedMeditation }) => {
   const { feed } = useFeed();
@@ -51,6 +52,9 @@ export const LikeButton = ({ meditation }: { meditation: FeedMeditation }) => {
           <View>
             <Text style={{ fontSize: 15, color: "#4A4A4A", marginLeft: -15 }}>
               {meditation.likes.length} likes
+              {meditation.likes.map((like) => (
+                <Avatar size={20} user={like.user}></Avatar>
+              ))}
             </Text>
           </View>
         )}

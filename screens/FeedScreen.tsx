@@ -25,18 +25,26 @@ export default function FeedScreen({
       <Text style={styles.title}>Feed</Text>
 
       <ScrollView>
-        {feed?.map((meditation) => (
-          <Bubble
-            key={meditation.id}
-            title={`${meditation.user.name} meditated for
+        {feed && feed.length > 0 ? (
+          feed.map((meditation) => (
+            <Bubble
+              key={meditation.id}
+              title={`${meditation.user.name} meditated for
           ${Math.ceil(meditation.duration / 60)} minutes.`}
-          >
-            <Avatar user={meditation.user}></Avatar>
-            <Text>Notes: {meditation.notes}</Text>
-            <Text> {dayjs(meditation.createdAt).format("M.D.YY")}</Text>
-            <Text>⚡ on a 4 day streak</Text>
-          </Bubble>
-        ))}
+            >
+              <Avatar user={meditation.user}></Avatar>
+              <Text>Notes: {meditation.notes}</Text>
+              <Text> {dayjs(meditation.createdAt).format("M.D.YY")}</Text>
+              <Text>⚡ on a 4 day streak</Text>
+            </Bubble>
+          ))
+        ) : (
+          <TouchableOpacity onPress={() => navigation.push("FindFriends")}>
+            <Text style={{ color: "blue" }}>
+              Follow people to see their activity on your feed ▶️
+            </Text>
+          </TouchableOpacity>
+        )}
       </ScrollView>
     </SafeAreaView>
   );

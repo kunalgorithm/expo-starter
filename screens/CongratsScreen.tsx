@@ -49,7 +49,13 @@ export default function CongratsScreen({
       ...me,
       meditation: [
         ...me?.meditations!,
-        { duration, notes, isPublic, zenScore, createdAt: new Date() },
+        {
+          duration,
+          notes,
+          isPublic,
+          zenScore: Math.ceil(zenScore),
+          createdAt: new Date(),
+        },
       ],
     });
     console.log(res, res.error, duration);

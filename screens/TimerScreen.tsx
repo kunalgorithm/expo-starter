@@ -77,7 +77,7 @@ export default function TimerScreen({
     <View style={styles.container}>
       <ImageBackground
         style={styles.backgroundImage}
-        source={require("../assets/images/ocean_bg.jpg")}
+        source={require("../assets/images/ocean_bg_small.jpg")}
       >
         <Text style={styles.title}>Session {day}</Text>
         <DropDown setSeconds={setSeconds} secondsMeditated={secondsMeditated} />

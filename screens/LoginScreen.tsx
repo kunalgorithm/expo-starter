@@ -15,9 +15,6 @@ export default function LoginScreen() {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
 
-  // const { me } = useMe();
-  // console.log(me);
-
   const onSubmit = async () => {
     setLoading(true);
     setError(false);
@@ -75,10 +72,10 @@ export default function LoginScreen() {
           value={password}
           underlineColorAndroid="transparent"
           autoCapitalize="none"
-          onSubmitEditing={onSubmit}
+          // onSubmitEditing={onSubmit}
         />
         <View style={styles.container}>
-          {error && <Text>Error: {error}</Text>}
+          {error && <Text style={{ color: "red" }}>{error}</Text>}
           <Button onPress={onSubmit}>
             {login ? (loading ? "..." : "Login") : loading ? "..." : "Sign Up"}
           </Button>

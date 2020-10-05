@@ -2,11 +2,12 @@
   "expo": {
     "name": "mindstreaks",
     "slug": "mindstreaks",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "sdkVersion": "39.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/ms_splash.png",
     "scheme": "myapp",
+    "backgroundColor": "#B6999A00",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/mindstreaks_name.png",

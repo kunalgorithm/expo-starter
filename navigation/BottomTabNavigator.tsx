@@ -21,8 +21,9 @@ export default function BottomTabNavigator(user: any) {
   if (!user) return null;
   return (
     <BottomTab.Navigator
-      initialRouteName="Home"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+      initialRouteName="Meditate"
+      // tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+      tabBarOptions={{ activeTintColor: Colors["light"].tint }}
     >
       <BottomTab.Screen
         name="Feed"

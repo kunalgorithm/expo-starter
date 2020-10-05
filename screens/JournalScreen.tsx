@@ -1,28 +1,16 @@
 import * as React from "react";
-import {
-  StyleSheet,
-  Animated,
-  TouchableOpacity,
-  TextInput,
-} from "react-native";
+import { StyleSheet, TextInput } from "react-native";
 import Button from "../components/Button";
 // @ts-ignore
 import Slider from "react-native-slider";
 import { Text, View } from "../components/Themed";
 import { fetcher, useMe } from "../hooks/fetcher";
 import { mutate } from "swr";
-import NavalQuotes from "../constants/NavalQuotes";
 
 import { Switch } from "react-native-switch";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
-import { FontDisplay } from "expo-font";
 import { Meditation } from "../server/node_modules/@prisma/client";
-
-function randomIntFromInterval(min: number, max: number) {
-  // min and max included
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
 
 export default function CongratsScreen({
   navigation,
@@ -35,7 +23,7 @@ export default function CongratsScreen({
   const [isPublic, setIsPublic] = React.useState(true);
   const [loading, setLoading] = React.useState(false);
   const { me } = useMe();
-  const { meditation, duration } = route.params;
+  const { duration } = route.params;
 
   const submitForm = async () => {
     if (loading) return;
@@ -66,16 +54,11 @@ export default function CongratsScreen({
 
   return (
     <View style={styles.container}>
-      {/* <Button small invertColors onPress={() => navigation.goBack()}>
-        back
-      </Button> */}
       <Text style={styles.title}>
         {Math.ceil(duration / 60)} minute meditation{" "}
       </Text>
       <Text style={styles.title}>How did you feel? </Text>
       <View style={styles.rowtwo}>
-        {" "}
-        <Text style={styles.subtitle}>Day 5 of 60 days completed </Text>
         <Text style={styles.mood}>restless</Text>
         <Text style={styles.mood}>nuetral</Text>
         <Text style={styles.mood}>nirvana</Text>

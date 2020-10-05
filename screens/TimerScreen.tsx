@@ -19,6 +19,7 @@ import { activateKeepAwake } from "expo-keep-awake";
 import { Audio } from "expo-av";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
+import Button from "../components/Button";
 const DEFAULT_TIMER = 15 * 60; // 15 minutes
 
 export default function TimerScreen({
@@ -27,7 +28,6 @@ export default function TimerScreen({
   const [seconds, setSeconds] = React.useState(DEFAULT_TIMER);
   const [secondsMeditated, setSecondsMeditated] = React.useState(0);
   const [timerOn, setTimerOn] = React.useState(false);
-  const [congratsScreen, setCongratsScreen] = React.useState(false);
   const { me } = useMe();
 
   const day =
@@ -43,21 +43,19 @@ export default function TimerScreen({
     await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
     try {
       await soundObject.loadAsync(
-        require("../assets/sounds/Creepy-clock-chiming.mp3")
+        require("../assets/sounds/gong_small_soft.mp3"),
+        {
+          shouldPlay: true,
+        }
       );
       await soundObject.playAsync();
-      // Your sound is playing!
-
-      // unload the sound from memory
-      await soundObject.unloadAsync();
     } catch (error) {
-      // An error occurred!
       console.log(error);
     }
+
     setTimerOn(false);
 
     navigation.navigate("Congrats", { duration: secondsMeditated });
-
     // setSeconds(DEFAULT_TIMER);
   };
 
@@ -73,27 +71,32 @@ export default function TimerScreen({
 
   React.useEffect(() => {
     if (timerOn) activateKeepAwake();
-
-    // return () => deactivateKeepAwake();
   }, [timerOn]);
-
-  // if (congratsScreen)
-  //   return (
-  //     <CongratsScreen
-  //       duration={secondsMeditated}
-  //       completeSubmission={() => {
-  //         setSecondsMeditated(0);
-  //         setCongratsScreen(false);
-  //       }}
-  //     />
-  //   );
 
   return (
     <View style={styles.container}>
       <ImageBackground
         style={styles.backgroundImage}
-        source={require("../assets/images/ocean_bg.jpg")}
+        source={require("../assets/images/ocean_bg_small.jpg")}
       >
+        <Text style={styles.title}>Session {day}</Text>
+        <DropDown setSeconds={setSeconds} secondsMeditated={secondsMeditated} />
+        <View style={styles.circle}>
+          <Text style={styles.timer} onPress={(e) => setTimerOn(!timerOn)}>
+            {Math.floor(seconds / 60)}:
+            {seconds % 60 < 10 ? "0" + (seconds % 60) : seconds % 60}
+          </Text>
+          <TouchableOpacity onPress={() => setTimerOn(!timerOn)}>
+            <Image
+              style={{ height: 50, width: 50 }}
+              source={
+                timerOn
+                  ? require("../assets/icons/meditation_pause_button.png")
+                  : require("../assets/icons/meditation_start_button.png")
+              }
+            />
+          </TouchableOpacity>
+        </View>
         {timerOn && (
           <TouchableOpacity
             onPress={endMeditation}
@@ -102,22 +105,6 @@ export default function TimerScreen({
             <Text style={{ ...styles.buttonText, color: "#ccc" }}>{"End"}</Text>
           </TouchableOpacity>
         )}
-        <Text style={styles.title}>Session {day}</Text>
-        <DropDown setSeconds={setSeconds} secondsMeditated={secondsMeditated} />
-        <View style={styles.circle}>
-          {/* <Image source={logo} /> */}
-          <Text style={styles.timer} onPress={(e) => setTimerOn(!timerOn)}>
-            {Math.floor(seconds / 60)}:
-            {seconds % 60 < 10 ? "0" + (seconds % 60) : seconds % 60}
-          </Text>
-        </View>
-
-        <TouchableOpacity
-          onPress={() => setTimerOn(!timerOn)}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>{timerOn ? "PAUSE" : "START"}</Text>
-        </TouchableOpacity>
       </ImageBackground>
     </View>
   );
@@ -140,7 +127,7 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 50,
-    margin: 1,
+    marginTop: 70,
     paddingTop: 0,
     fontWeight: "bold",
     color: "#4A4A4A",
@@ -171,28 +158,7 @@ const styles = StyleSheet.create({
     fontFamily: "Calibre-Regular",
     letterSpacing: 15,
   },
-  picker: {
-    height: 0,
-    width: 0,
-  },
-  subtitle: {
-    fontSize: 20,
 
-    fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 0,
-    height: 1,
-    width: "80%",
-  },
-  button: {
-    backgroundColor: "#B6999B",
-    padding: 15,
-    width: 146,
-    borderRadius: 100,
-    marginVertical: 20,
-    alignItems: "center",
-  },
   buttonText: {
     fontSize: 20,
     color: "#fff",

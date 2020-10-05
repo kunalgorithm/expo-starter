@@ -52,8 +52,8 @@ export const LikeButton = ({ meditation }: { meditation: FeedMeditation }) => {
           <View>
             <Text style={{ fontSize: 15, color: "#4A4A4A", marginLeft: -15 }}>
               {meditation.likes.length} likes
-              {meditation.likes.map((like) => (
-                <Avatar size={20} user={like.user}></Avatar>
+              {meditation.likes.map((like, i) => (
+                <Avatar size={20} user={like.user} key={i}></Avatar>
               ))}
             </Text>
           </View>

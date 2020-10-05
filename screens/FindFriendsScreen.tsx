@@ -7,7 +7,7 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
 import Button from "../components/Button";
 import { Avatar } from "../components/Avatar";
-import users from "../server/pages/api/users";
+
 import { FollowButton } from "./FollowButton";
 export default function FindFriendsScreen({
   navigation,

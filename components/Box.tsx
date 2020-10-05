@@ -1,9 +1,8 @@
 import * as React from "react";
 
 import dayjs from "dayjs";
-import { Meditation } from "../server/node_modules/@prisma/client";
-
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Meditation } from "../types";
+import { StyleSheet, Text, View } from "react-native";
 import { useMe } from "../hooks/fetcher";
 import Colors from "../constants/Colors";
 

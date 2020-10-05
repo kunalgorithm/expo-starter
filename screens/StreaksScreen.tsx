@@ -4,39 +4,57 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
 import { Text, View } from "../components/Themed";
 
-import { useMe } from "../hooks/fetcher";
+import { UserProfile, useMe, useUser } from "../hooks/fetcher";
 import { Stats } from "../components/Stats";
 import { Box } from "../components/Box";
 import Button from "../components/Button";
-import * as ImagePicker from "expo-image-picker";
+
 import { openImagePickerAsync } from "../hooks/uploadImage";
 import { Avatar } from "../components/Avatar";
 import Colors from "../constants/Colors";
 
 export default function StreaksScreen({
   navigation,
-}: StackScreenProps<RootStackParamList, "Profile">) {
-  const { me } = useMe();
+  route,
+}: StackScreenProps<RootStackParamList, "Profile"> & {
+  route: { params: { userId?: number } };
+}) {
+  const userId = route.params;
+  const data = userId ? useUser(userId as number) : useMe();
 
-  const meditations = me?.meditations;
-  if (!meditations) return null;
+  return (
+    <Profile
+      // @ts-ignore
+      user={userId ? data.user! : data.me!}
+      navigation={navigation}
+    />
+  );
+}
 
+const Profile = ({
+  user,
+  navigation,
+}: {
+  user: UserProfile;
+  navigation: any;
+}) => {
+  if (!user.meditations) return null;
   return (
     <View style={styles.container}>
       <View style={styles.row}>
         <View style={{ width: "20%", backgroundColor: Colors.grayBg }}>
           <TouchableOpacity onPress={() => openImagePickerAsync()}>
-            <Avatar user={me!} />
+            <Avatar user={user!} />
           </TouchableOpacity>
         </View>
         <View style={{ width: "40%", backgroundColor: Colors.grayBg }}>
           <View style={styles.follower_container}>
-            <Text style={styles.titlename}>{me?.name}</Text>
+            <Text style={styles.titlename}>{user.name}</Text>
             <Text style={styles.titlefollow}>
-              {me?.followers?.length} followers
+              {user.followers?.length} followers
             </Text>
             <Text style={styles.titlefollow}>
-              {me?.following?.length} following
+              {user.following?.length} following
             </Text>
           </View>
         </View>
@@ -51,27 +69,27 @@ export default function StreaksScreen({
           </Button>
         </View>
       </View>
-      <Stats meditations={meditations} />
+      <Stats meditations={user.meditations} />
       <Text style={styles.title}>
-        {me?.name?.split(" ")[0]}, you're on a 4 day streak ✨
+        {user.name?.split(" ")[0]}, you're on a 4 day streak ✨
       </Text>
 
       {Array(9)
         .fill(0)
         .map((row, i) => (
           <View style={styles.row} key={i}>
-            <Box index={i * 7} meditations={meditations} />
-            <Box index={i * 7 + 1} meditations={meditations} />
-            <Box index={i * 7 + 2} meditations={meditations} />
-            <Box index={i * 7 + 3} meditations={meditations} />
-            <Box index={i * 7 + 4} meditations={meditations} />
-            <Box index={i * 7 + 5} meditations={meditations} />
-            <Box index={i * 7 + 6} meditations={meditations} />
+            <Box index={i * 7} meditations={user.meditations} />
+            <Box index={i * 7 + 1} meditations={user.meditations} />
+            <Box index={i * 7 + 2} meditations={user.meditations} />
+            <Box index={i * 7 + 3} meditations={user.meditations} />
+            <Box index={i * 7 + 4} meditations={user.meditations} />
+            <Box index={i * 7 + 5} meditations={user.meditations} />
+            <Box index={i * 7 + 6} meditations={user.meditations} />
           </View>
         ))}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

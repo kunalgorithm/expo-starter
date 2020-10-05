@@ -3,7 +3,7 @@ import { mutate } from "swr";
 import { View } from "../components/Themed";
 import { fetcher, useMe } from "../hooks/fetcher";
 import Button from "../components/Button";
-import { User } from "../server/node_modules/@prisma/client";
+import { User } from "../types";
 
 export const FollowButton = ({ user }: { user: User }) => {
   const { me } = useMe();

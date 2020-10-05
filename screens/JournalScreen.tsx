@@ -4,25 +4,26 @@ import Button from "../components/Button";
 // @ts-ignore
 import Slider from "react-native-slider";
 import { Text, View } from "../components/Themed";
-import { fetcher, useMe } from "../hooks/fetcher";
+import { fetcher, useFeed, useMe } from "../hooks/fetcher";
 import { mutate } from "swr";
 
 import { Switch } from "react-native-switch";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
-import { Meditation } from "../server/node_modules/@prisma/client";
+import { Meditation, User } from "../types";
 
 export default function CongratsScreen({
   navigation,
   route,
 }: StackScreenProps<RootStackParamList, "Journal"> & {
-  route: { params: { meditation?: Meditation; duration: number } };
+  route: { params: { userId?: number } };
 }) {
   const [notes, setNotes] = React.useState("");
   const [zenScore, setZenScore] = React.useState(50);
   const [isPublic, setIsPublic] = React.useState(true);
   const [loading, setLoading] = React.useState(false);
   const { me } = useMe();
+  const { feed } = useFeed();
   const { duration } = route.params;
 
   const submitForm = async () => {
@@ -47,7 +48,18 @@ export default function CongratsScreen({
         ...me?.meditations!,
       ],
     });
-    console.log(res, duration);
+    await mutate("/api/feed", [
+      {
+        duration,
+        notes,
+        isPublic,
+        zenScore: Math.ceil(zenScore),
+        createdAt: new Date(),
+        likes: [],
+        user: me,
+      },
+      ...feed!,
+    ]);
 
     navigation.replace("Root");
   };
@@ -55,7 +67,7 @@ export default function CongratsScreen({
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
-        {Math.ceil(duration / 60)} minute meditation{" "}
+        {Math.ceil(duration! / 60)} minute meditation{" "}
       </Text>
       <Text style={styles.title}>How did you feel? </Text>
       <View style={styles.rowtwo}>

@@ -7,7 +7,7 @@ import {
   ViewStyle,
   ImageStyle,
 } from "react-native";
-import { User } from "../server/node_modules/@prisma/client";
+import { User } from "../types";
 
 export const Avatar = ({
   user,

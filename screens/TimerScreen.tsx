@@ -50,7 +50,7 @@ export default function TimerScreen({
       );
       await soundObject.playAsync();
     } catch (error) {
-      console.log(error);
+      console.log("error playing sound: ", error);
     }
 
     setTimerOn(false);

@@ -4,7 +4,7 @@ import { mutate } from "swr";
 import { Text, View } from "../components/Themed";
 import { fetcher, useMe } from "../hooks/fetcher";
 import { Bubble } from "../components/Bubble";
-
+import { Meditation } from "../types";
 export default function TabThreeScreen() {
   const { me } = useMe();
 
@@ -19,7 +19,7 @@ export default function TabThreeScreen() {
         Log out{" "}
       </Text>
       <ScrollView>
-        {me?.meditations?.reverse().map((meditation, i) => (
+        {me?.meditations?.reverse().map((meditation: Meditation, i: number) => (
           <View style={styles.row} key={i}>
             <Bubble
               title={`${new Date(meditation.createdAt).toDateString()} - 

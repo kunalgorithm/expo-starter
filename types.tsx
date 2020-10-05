@@ -1,3 +1,10 @@
+export {
+  Meditation,
+  User,
+  Like,
+  Follow,
+} from "./server/node_modules/@prisma/client";
+
 export type RootStackParamList = {
   Root: undefined;
   FindFriends: undefined;
@@ -6,7 +13,8 @@ export type RootStackParamList = {
   NotFound: undefined;
   Feed: undefined;
   Streaks: undefined;
-  Profile: undefined;
+  Profile: { userId?: number };
+  UserProfile: { userId: number };
 };
 
 export type BottomTabParamList = {

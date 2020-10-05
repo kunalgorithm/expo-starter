@@ -1,10 +1,7 @@
 import * as React from "react";
 import { mutate } from "swr";
 import { Image, Text, View } from "react-native";
-
 import { FeedMeditation, fetcher, useFeed, useMe } from "../hooks/fetcher";
-import Button from "../components/Button";
-import { Meditation, User, Like } from "../server/node_modules/@prisma/client";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Colors from "../constants/Colors";
 import { Avatar } from "../components/Avatar";
@@ -22,14 +19,16 @@ export const LikeButton = ({ meditation }: { meditation: FeedMeditation }) => {
       id: meditation.id,
       unlike: isLiked ? true : false,
     });
-    console.log(res.error);
+
     await mutate(
       "/api/feed",
       feed?.map((m) =>
         m.id === meditation.id
           ? {
               ...m,
-              likes: [...m.likes, { user_id: me?.id }],
+              likes: isLiked
+                ? m.likes.filter((l) => l.user_id !== me?.id)
+                : [...m.likes, { user_id: me?.id, user: me }],
             }
           : m
       )

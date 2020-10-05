@@ -21,6 +21,11 @@ export interface FeedMeditation extends Meditation {
   user: User;
   likes: (Like & { user: User })[];
 }
+export interface UserProfile extends User {
+  meditations: Meditation[];
+  followers: Follow[];
+  following: Follow[];
+}
 
 export function useFeed() {
   const { data: feed }: { data?: FeedMeditation[] } = useSWR(
@@ -37,11 +42,15 @@ export function useMe() {
   const {
     data: me,
   }: {
-    data?: User & {
-      meditations: Meditation[];
-      followers: Follow[];
-      following: Follow[];
-    };
+    data?: UserProfile;
   } = useSWR("/api/me", fetcher);
   return { me };
+}
+export function useUser(userId: number) {
+  const {
+    data: user,
+  }: {
+    data?: UserProfile;
+  } = useSWR("/api/user", fetcher);
+  return { user };
 }

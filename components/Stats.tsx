@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Image, StyleSheet } from "react-native";
 import { Text, View } from "./Themed";
-import { Meditation } from "../server/node_modules/@prisma/client";
+import { Meditation } from "../types";
 
 export function Stats({ meditations }: { meditations: Meditation[] }) {
   return (

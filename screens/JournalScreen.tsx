@@ -3,7 +3,7 @@ import { StyleSheet, TextInput } from "react-native";
 import Button from "../components/Button";
 // @ts-ignore
 import Slider from "react-native-slider";
-import { Text, View } from "../components/Themed";
+import { Text, View } from "../components/react-native";
 import { fetcher, useFeed, useMe } from "../hooks/fetcher";
 import { mutate } from "swr";
 
@@ -66,7 +66,7 @@ export default function CongratsScreen({
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
+      <Text style={styles.titlefirst}>
         {Math.ceil(duration! / 60)} minute meditation{" "}
       </Text>
       <Text style={styles.title}>How did you feel? </Text>
@@ -224,6 +224,16 @@ const styles = StyleSheet.create({
   },
   titlethree: {
     fontSize: 30,
+    color: "#4A4A4A",
+    fontWeight: "bold",
+    letterSpacing: 1.5,
+    alignItems: "flex-start",
+    marginVertical: 20,
+    left: -70,
+    fontFamily: "Calibre-Regular",
+  },
+  titlefirst: {
+    fontSize: ,
     color: "#4A4A4A",
     fontWeight: "bold",
     letterSpacing: 1.5,

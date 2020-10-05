@@ -1,14 +1,29 @@
 import * as React from "react";
 
-import { StyleSheet, Image } from "react-native";
+import {
+  StyleSheet,
+  Image,
+  StyleProp,
+  ViewStyle,
+  ImageStyle,
+} from "react-native";
 import { User } from "../server/node_modules/@prisma/client";
 
-export const Avatar = ({ user, size = 70 }: { user: User; size?: number }) => (
+export const Avatar = ({
+  user,
+  size = 70,
+  style,
+}: {
+  user: User;
+  size?: number;
+  style?: StyleProp<any>;
+}) => (
   <Image
     style={{
       height: size,
       width: size,
       borderRadius: 50,
+      ...style,
     }}
     source={
       user?.imageUrl

@@ -75,7 +75,7 @@ export default function LoginScreen() {
           // onSubmitEditing={onSubmit}
         />
         <View style={styles.container}>
-          {error && <Text>Error: {error}</Text>}
+          {error && <Text style={{ color: "red" }}>{error}</Text>}
           <Button onPress={onSubmit}>
             {login ? (loading ? "..." : "Login") : loading ? "..." : "Sign Up"}
           </Button>

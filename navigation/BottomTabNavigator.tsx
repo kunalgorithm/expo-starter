@@ -22,7 +22,8 @@ export default function BottomTabNavigator(user: any) {
   return (
     <BottomTab.Navigator
       initialRouteName="Meditate"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+      // tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+      tabBarOptions={{ activeTintColor: Colors["light"].tint }}
     >
       <BottomTab.Screen
         name="Feed"

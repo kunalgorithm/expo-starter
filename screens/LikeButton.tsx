@@ -1,8 +1,7 @@
 import * as React from "react";
 import { mutate } from "swr";
-import { Image, Text } from "react-native";
+import { Image, Text, View } from "react-native";
 
-import { View } from "../components/Themed";
 import { FeedMeditation, fetcher, useFeed, useMe } from "../hooks/fetcher";
 import Button from "../components/Button";
 import { Meditation, User, Like } from "../server/node_modules/@prisma/client";
@@ -51,9 +50,14 @@ export const LikeButton = ({ meditation }: { meditation: FeedMeditation }) => {
         {meditation.likes.length > 0 && (
           <View>
             <Text style={{ fontSize: 15, color: "#4A4A4A", marginLeft: -15 }}>
-              {meditation.likes.length} likes
+              {/* {meditation.likes.length} likes */}
               {meditation.likes.map((like, i) => (
-                <Avatar size={20} user={like.user} key={i}></Avatar>
+                <Avatar
+                  size={20}
+                  user={like.user}
+                  key={i}
+                  style={{ marginLeft: 0 }}
+                ></Avatar>
               ))}
             </Text>
           </View>

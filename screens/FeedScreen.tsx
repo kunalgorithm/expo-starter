@@ -23,9 +23,11 @@ export default function FeedScreen({
 
       <ScrollView>
         {feed && feed.length > 0 ? (
-          feed.map((meditation) => (
-            <FeedItem meditation={meditation} key={meditation.id} />
-          ))
+          feed
+            .filter((m) => m.isPublic)
+            .map((meditation) => (
+              <FeedItem meditation={meditation} key={meditation.id} />
+            ))
         ) : (
           <TouchableOpacity onPress={() => navigation.navigate("FindFriends")}>
             <Text style={{ color: "blue" }}>

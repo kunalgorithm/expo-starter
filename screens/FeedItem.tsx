@@ -1,10 +1,9 @@
 import * as React from "react";
-import { Image, Text } from "react-native";
+import { Image, Text, View } from "react-native";
 import { Bubble } from "../components/Bubble";
 import { Avatar } from "../components/Avatar";
-import { View } from "../components/Themed";
 import dayjs from "dayjs";
-import { Meditation, User } from "../server/node_modules/@prisma/client";
+
 import Colors from "../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { LikeButton } from "./LikeButton";

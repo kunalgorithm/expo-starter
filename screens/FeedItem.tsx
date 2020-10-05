@@ -20,7 +20,7 @@ export const FeedItem = ({ meditation }: { meditation: FeedMeditation }) => {
     <Bubble key={meditation.id}>
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate("Profile", { userId: meditation.user.id })
+          navigation.navigate("UserProfile", { userId: meditation.user.id })
         }
       >
         <View style={{ display: "flex", flexDirection: "row" }}>

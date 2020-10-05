@@ -42,15 +42,15 @@ export function useMe() {
   const {
     data: me,
   }: {
-    data?: Profile;
+    data?: UserProfile;
   } = useSWR("/api/me", fetcher);
   return { me };
 }
-export function useUser(id: number) {
+export function useUser(userId: number) {
   const {
     data: user,
   }: {
-    data?: Profile;
+    data?: UserProfile;
   } = useSWR("/api/user", fetcher);
   return { user };
 }

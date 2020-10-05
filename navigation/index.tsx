@@ -16,6 +16,7 @@ import CongratsScreen from "../screens/CongratsScreen";
 import JournalScreen from "../screens/JournalScreen";
 import Button from "../components/Button";
 import StreaksScreen from "../screens/StreaksScreen";
+import UserScreen from "../screens/UserScreen";
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -45,7 +46,7 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator} />
       <Stack.Screen name="FindFriends" component={FindFriendsScreen} />
       <Stack.Screen name="Journal" component={JournalScreen} />
-      <Stack.Screen name="Profile" component={StreaksScreen} />
+      <Stack.Screen name="UserProfile" component={UserScreen} />
       <Stack.Screen
         name="Congrats"
         component={CongratsScreen}

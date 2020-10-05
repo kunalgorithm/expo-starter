@@ -14,6 +14,7 @@ export type RootStackParamList = {
   Feed: undefined;
   Streaks: undefined;
   Profile: { userId?: number };
+  UserProfile: { userId: number };
 };
 
 export type BottomTabParamList = {

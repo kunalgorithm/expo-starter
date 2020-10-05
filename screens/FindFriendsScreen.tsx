@@ -1,5 +1,10 @@
 import * as React from "react";
-import { StyleSheet, ScrollView, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  ScrollView,
+  SafeAreaView,
+  TouchableOpacity,
+} from "react-native";
 import { Text, View } from "../components/Themed";
 import { useMe, useUsers } from "../hooks/fetcher";
 import { Bubble } from "../components/Bubble";
@@ -28,10 +33,22 @@ export default function FindFriendsScreen({
             <Bubble key={user.id}>
               <View style={styles.row}>
                 <View style={{ width: "40%" }}>
-                  <Avatar user={user} />
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate("UserProfile", { userId: user.id })
+                    }
+                  >
+                    <Avatar user={user} />
+                  </TouchableOpacity>
                 </View>
                 <View style={{ width: "40%" }}>
-                  <Text style={styles.title}>{user.name}</Text>
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate("UserProfile", { userId: user.id })
+                    }
+                  >
+                    <Text style={styles.title}>{user.name}</Text>
+                  </TouchableOpacity>
                   <FollowButton user={user} />
                 </View>
               </View>

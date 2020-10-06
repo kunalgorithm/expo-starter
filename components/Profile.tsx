@@ -17,18 +17,32 @@ import dayjs from "dayjs";
 
 function useStreak({ user }: { user: UserProfile }) {
   // const [streak, setStreak] = React.useState(1);
-  let longestStreak = 1;
+  let longestStreak = 0;
   let streak = 0;
+  let currentStreak = 0;
+  let currentStreakBroken = false;
   const today = dayjs();
+  if (user.meditations.length === 0) return { streak, longestStreak };
 
-  user.meditations.map((m, i) => {
-    if (dayjs(m.createdAt).subtract(i, "date").isSame(today, "date")) {
-      // setStreak(streak + 1);
-      streak += 1;
+  const firstDay = dayjs(user.meditations[0].createdAt);
+  let day = today;
+
+  // Iterate from today to the first meditation day
+  for (let i = 0; i < today.diff(firstDay, "d"); i++) {
+    console.log(day.format("ddd, MMM D, YYYY"));
+
+    // increment streaks if a meditation is found
+    if (user.meditations.find((m) => dayjs(m.createdAt).isSame(day, "d"))) {
+      currentStreak += 1;
+      if (currentStreak > longestStreak) longestStreak = currentStreak;
+      if (!currentStreakBroken && currentStreak > streak)
+        streak = currentStreak;
     } else {
-      console.log();
+      currentStreak = 0;
+      currentStreakBroken = true;
     }
-  });
+    day = day.subtract(1, "d");
+  }
 
   return { streak, longestStreak };
 }

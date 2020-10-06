@@ -1,14 +1,10 @@
 import * as React from "react";
 import { mutate } from "swr";
-import { Image, Text } from "react-native";
-
-import { View } from "./Themed";
+import { Image, Text, View } from "react-native";
 import { FeedMeditation, fetcher, useFeed, useMe } from "../hooks/fetcher";
-import Button from "./Button";
-import { Meditation, User, Like } from "../server/node_modules/@prisma/client";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Colors from "../constants/Colors";
-import { Avatar } from "./Avatar";
+import { Avatar } from "../components/Avatar";
 
 export const LikeButton = ({ meditation }: { meditation: FeedMeditation }) => {
   const { feed } = useFeed();
@@ -23,14 +19,16 @@ export const LikeButton = ({ meditation }: { meditation: FeedMeditation }) => {
       id: meditation.id,
       unlike: isLiked ? true : false,
     });
-    console.log(res.error);
+
     await mutate(
       "/api/feed",
       feed?.map((m) =>
         m.id === meditation.id
           ? {
               ...m,
-              likes: [...m.likes, { user_id: me?.id }],
+              likes: isLiked
+                ? m.likes.filter((l) => l.user_id !== me?.id)
+                : [...m.likes, { user_id: me?.id, user: me }],
             }
           : m
       )
@@ -52,8 +50,13 @@ export const LikeButton = ({ meditation }: { meditation: FeedMeditation }) => {
           <View>
             <Text style={{ fontSize: 15, color: "#4A4A4A", marginLeft: -15 }}>
               {meditation.likes.length} kudos
-              {meditation.likes.map((like) => (
-                <Avatar size={20} user={like.user}></Avatar>
+              {meditation.likes.map((like, i) => (
+                <Avatar
+                  size={20}
+                  user={like.user}
+                  key={i}
+                  style={{ marginLeft: 0 }}
+                ></Avatar>
               ))}
             </Text>
           </View>
@@ -69,7 +72,7 @@ export const LikeButton = ({ meditation }: { meditation: FeedMeditation }) => {
             fontWeight: isLiked ? "bold" : "normal",
           }}
         >
-          {isLiked ? " Kudos" : " Kudos"}
+          Kudos
         </Text>
       </View>
     </TouchableOpacity>

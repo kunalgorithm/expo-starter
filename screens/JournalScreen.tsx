@@ -3,7 +3,7 @@ import { StyleSheet, TextInput } from "react-native";
 import Button from "../components/Button";
 // @ts-ignore
 import Slider from "react-native-slider";
-import { Text, View } from "../components/react-native";
+import { Text, View } from "react-native";
 import { fetcher, useFeed, useMe } from "../hooks/fetcher";
 import { mutate } from "swr";
 
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     fontFamily: "Calibre-Regular",
   },
   titlefirst: {
-    fontSize: ,
+    fontSize: 20,
     color: "#4A4A4A",
     fontWeight: "bold",
     letterSpacing: 1.5,

@@ -51,7 +51,9 @@ export const Box = ({
             ? Colors.pink
             : "#fff",
         }}
-      ></View>
+      >
+        {/* <Text>{meditationsThisDay.length}</Text> */}
+      </View>
     </View>
   );
 };

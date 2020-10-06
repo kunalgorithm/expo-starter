@@ -178,6 +178,7 @@ const styles = StyleSheet.create({
   toggleposition: {
     marginLeft: 180,
     marginTop: -55,
+    backgroundColor: "#fff",
     justifyContent: "flex-end",
   },
   row: {

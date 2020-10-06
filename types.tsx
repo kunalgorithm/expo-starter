@@ -15,6 +15,7 @@ export type RootStackParamList = {
   Streaks: undefined;
   Profile: { userId?: number };
   UserProfile: { userId: number };
+  EditProfile: { me: User };
 };
 
 export type BottomTabParamList = {

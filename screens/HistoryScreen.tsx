@@ -10,28 +10,28 @@ export default function TabThreeScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text
-        onPress={async () => {
-          const res = await fetcher(`/api/logout`);
-          mutate("/api/me", {});
-        }}
-      >
-        Log out{" "}
-      </Text>
       <ScrollView>
-        {me?.meditations?.reverse().map((meditation: Meditation, i: number) => (
-          <View style={styles.row} key={i}>
-            <Bubble
-              title={`${new Date(meditation.createdAt).toDateString()} - 
+        {me?.meditations?.length! > 0 ? (
+          me?.meditations
+            ?.reverse()
+            .map((meditation: Meditation, i: number) => (
+              <View style={styles.row} key={i}>
+                <Bubble
+                  title={`${new Date(meditation.createdAt).toDateString()} - 
             ${Math.ceil(meditation.duration / 60)} min`}
-            >
-              <Text>Session {me?.meditations?.length - i}</Text>
-              <Text>{meditation.notes ? meditation.notes : ""}</Text>
-              <Text>Zen Score: {meditation.zenScore}</Text>
-              <Text>{meditation.isPublic ? "Public " : "Private"}</Text>
-            </Bubble>
+                >
+                  <Text>Session {me?.meditations?.length - i}</Text>
+                  <Text>{meditation.notes ? meditation.notes : ""}</Text>
+                  <Text>Zen Score: {meditation.zenScore}</Text>
+                  <Text>{meditation.isPublic ? "Public " : "Private"}</Text>
+                </Bubble>
+              </View>
+            ))
+        ) : (
+          <View style={styles.row}>
+            Your meditation sessions will appear here.
           </View>
-        ))}
+        )}
       </ScrollView>
     </SafeAreaView>
   );

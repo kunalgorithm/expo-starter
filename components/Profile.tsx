@@ -3,7 +3,7 @@ import { StyleSheet, Image, TouchableOpacity } from "react-native";
 
 import { Text, View } from "../components/Themed";
 
-import { UserProfile } from "../hooks/fetcher";
+import { useMe, UserProfile } from "../hooks/fetcher";
 import { Stats } from "../components/Stats";
 import { Box } from "../components/Box";
 import Button from "../components/Button";
@@ -12,10 +12,38 @@ import { openImagePickerAsync } from "../hooks/uploadImage";
 import { Avatar } from "../components/Avatar";
 import Colors from "../constants/Colors";
 import { useNavigation } from "@react-navigation/native";
+import { FollowButton } from "../screens/FollowButton";
+import dayjs from "dayjs";
+
+function useStreak({ user }: { user: UserProfile }) {
+  // const [streak, setStreak] = React.useState(1);
+  let longestStreak = 1;
+  let streak = 0;
+  const today = dayjs();
+
+  user.meditations.map((m, i) => {
+    if (dayjs(m.createdAt).subtract(i, "date").isSame(today, "date")) {
+      // setStreak(streak + 1);
+      streak += 1;
+    } else {
+      console.log();
+    }
+  });
+
+  return { streak, longestStreak };
+}
 
 export const Profile = ({ user }: { user: UserProfile | undefined }) => {
   if (!user || !user.meditations) return null;
   const navigation = useNavigation();
+  const { me } = useMe();
+  const { streak, longestStreak } = useStreak({ user });
+
+  console.log("meditations", me?.meditations.length);
+
+  const meditations = me?.meditations.sort((a, b) =>
+    a.createdAt < b.createdAt ? -1 : 1
+  );
   return (
     <View style={styles.container}>
       <View style={styles.row}>
@@ -37,31 +65,46 @@ export const Profile = ({ user }: { user: UserProfile | undefined }) => {
         </View>
 
         <View style={styles.friendbutton}>
-          <Button
-            onPress={() => navigation.navigate("FindFriends")}
-            small
-            invertColors
-          >
-            <Text style={styles.button_title}>Find Friends</Text>
-          </Button>
+          {user.id === me?.id ? (
+            <>
+              <Button
+                onPress={() => navigation.navigate("FindFriends")}
+                small
+                invertColors
+                style={{ marginBottom: 0, marginTop: 0 }}
+              >
+                <Text style={styles.button_title}>Find Friends</Text>
+              </Button>
+              <Button
+                onPress={() => navigation.navigate("EditProfile", { me })}
+                small
+                invertColors
+                style={{ marginTop: 2 }}
+              >
+                <Text style={styles.button_title}>Edit Profile</Text>
+              </Button>
+            </>
+          ) : (
+            <FollowButton user={user} />
+          )}
         </View>
       </View>
-      <Stats meditations={user.meditations} />
+      <Stats meditations={user.meditations} longestStreak={longestStreak} />
       <Text style={styles.title}>
-        {user.name?.split(" ")[0]}, you're on a 4 day streak ✨
+        {user.name?.split(" ")[0]}, you're on a {streak} day streak ✨
       </Text>
 
       {Array(9)
         .fill(0)
         .map((row, i) => (
           <View style={styles.row} key={i}>
-            <Box index={i * 7} meditations={user.meditations} />
-            <Box index={i * 7 + 1} meditations={user.meditations} />
-            <Box index={i * 7 + 2} meditations={user.meditations} />
-            <Box index={i * 7 + 3} meditations={user.meditations} />
-            <Box index={i * 7 + 4} meditations={user.meditations} />
-            <Box index={i * 7 + 5} meditations={user.meditations} />
-            <Box index={i * 7 + 6} meditations={user.meditations} />
+            <Box index={i * 7} meditations={meditations!} />
+            <Box index={i * 7 + 1} meditations={meditations!} />
+            <Box index={i * 7 + 2} meditations={meditations!} />
+            <Box index={i * 7 + 3} meditations={meditations!} />
+            <Box index={i * 7 + 4} meditations={meditations!} />
+            <Box index={i * 7 + 5} meditations={meditations!} />
+            <Box index={i * 7 + 6} meditations={meditations!} />
           </View>
         ))}
     </View>

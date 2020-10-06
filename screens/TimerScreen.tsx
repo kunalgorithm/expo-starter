@@ -64,7 +64,8 @@ export default function TimerScreen({
       setSeconds(seconds - 1);
       setSecondsMeditated(secondsMeditated + 1);
     }
-    if (seconds === 0) {
+    if (seconds === 0 && timerOn) {
+      setTimerOn(false);
       endMeditation();
     }
   }, 1000);

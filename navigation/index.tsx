@@ -15,7 +15,7 @@ import FindFriendsScreen from "../screens/FindFriendsScreen";
 import CongratsScreen from "../screens/CongratsScreen";
 import JournalScreen from "../screens/JournalScreen";
 import Button from "../components/Button";
-import StreaksScreen from "../screens/StreaksScreen";
+import EditProfileScreen from "../screens/EditProfileScreen";
 import UserScreen from "../screens/UserScreen";
 
 // If you are not familiar with React Navigation, we recommend going through the
@@ -47,17 +47,8 @@ function RootNavigator() {
       <Stack.Screen name="FindFriends" component={FindFriendsScreen} />
       <Stack.Screen name="Journal" component={JournalScreen} />
       <Stack.Screen name="UserProfile" component={UserScreen} />
-      <Stack.Screen
-        name="Congrats"
-        component={CongratsScreen}
-        options={{
-          headerLeft: () => (
-            <Button small invertColors onPress={() => {}}>
-              Go back
-            </Button>
-          ),
-        }}
-      />
+      <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+      <Stack.Screen name="Congrats" component={CongratsScreen} options={{}} />
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}

@@ -3,7 +3,13 @@ import { Image, StyleSheet } from "react-native";
 import { Text, View } from "./Themed";
 import { Meditation } from "../types";
 
-export function Stats({ meditations }: { meditations: Meditation[] }) {
+export function Stats({
+  meditations,
+  longestStreak,
+}: {
+  meditations: Meditation[];
+  longestStreak: number;
+}) {
   return (
     <View style={styles.row}>
       <View style={styles.col}>
@@ -15,7 +21,8 @@ export function Stats({ meditations }: { meditations: Meditation[] }) {
         <Text style={styles.number}>
           {Math.ceil(
             meditations.map((a) => a.duration).reduce((a, b) => a + b, 0) / 60
-          )}
+          )}{" "}
+          m
         </Text>
       </View>
       <View style={styles.col}>
@@ -32,7 +39,7 @@ export function Stats({ meditations }: { meditations: Meditation[] }) {
           source={require("../assets/icons/wavy_streaks.png")}
         />
         <Text style={styles.subtitle}>LONGEST STREAK</Text>
-        <Text style={styles.number}>10</Text>
+        <Text style={styles.number}>{longestStreak} d</Text>
       </View>
     </View>
   );

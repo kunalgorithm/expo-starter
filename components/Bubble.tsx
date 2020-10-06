@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Text, View } from "./Themed";
-import { StyleSheet } from "react-native";
+
+import { StyleSheet, Text, View } from "react-native";
 
 export const Bubble = ({
   title,

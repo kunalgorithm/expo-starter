@@ -19,7 +19,6 @@ export default function UserScreen({
       setUser(user);
     });
   }, []);
-  console.log("UserProfile", userId, user);
 
   return <Profile user={user} />;
 }

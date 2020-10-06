@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import Colors from "../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { LikeButton } from "../components/LikeButton";
-import { FeedMeditation } from "../hooks/fetcher";
+import { FeedMeditation, useMe } from "../hooks/fetcher";
 
 import { useNavigation } from "@react-navigation/native";
 var relativeTime = require("dayjs/plugin/relativeTime");
@@ -14,12 +14,15 @@ dayjs.extend(relativeTime);
 
 export const FeedItem = ({ meditation }: { meditation: FeedMeditation }) => {
   if (!meditation) return null;
+  const { me } = useMe();
   const navigation = useNavigation();
   return (
     <Bubble key={meditation.id}>
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate("UserProfile", { userId: meditation.user.id })
+          meditation.user.id === me?.id
+            ? navigation.navigate("Profile")
+            : navigation.navigate("UserProfile", { userId: meditation.user.id })
         }
       >
         <View style={{ display: "flex", flexDirection: "row" }}>

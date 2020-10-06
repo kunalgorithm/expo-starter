@@ -22,10 +22,6 @@ export default function FindFriendsScreen({
 
   return (
     <SafeAreaView style={styles.container}>
-      <Button small invertColors onPress={() => navigation.goBack()}>
-        Go Back
-      </Button>
-
       <ScrollView style={styles.scrollView}>
         {users
           ?.filter((u) => u.id !== me?.id)
@@ -81,5 +77,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     height: "60%",
+    marginTop: 50,
   },
 });

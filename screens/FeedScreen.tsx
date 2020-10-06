@@ -25,8 +25,8 @@ export default function FeedScreen({
         {feed && feed.length > 0 ? (
           feed
             .filter((m) => m.isPublic)
-            .map((meditation) => (
-              <FeedItem meditation={meditation} key={meditation.id} />
+            .map((meditation, i) => (
+              <FeedItem meditation={meditation} key={i} />
             ))
         ) : (
           <TouchableOpacity onPress={() => navigation.navigate("FindFriends")}>

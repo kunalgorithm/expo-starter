@@ -13,7 +13,7 @@ export type RootStackParamList = {
   NotFound: undefined;
   Feed: undefined;
   Streaks: undefined;
-  Profile: { userId?: number };
+  MyProfile: { userId?: number };
   UserProfile: { userId: number };
   EditProfile: { me: User };
 };

@@ -4,6 +4,7 @@ import {
   Animated,
   TouchableOpacity,
   TextInput,
+  Image,
 } from "react-native";
 import Button from "../components/Button";
 // @ts-ignore
@@ -38,6 +39,10 @@ export default function CongratsScreen({
       <Text style={styles.subtitle}>Day 5 of 60 days completed </Text>
 
       <View style={styles.box}>
+        <Image
+          style={styles.icon}
+          source={require("../assets/images/quote.png")}
+        />
         <Text style={styles.quote}>
           {NavalQuotes[randomIntFromInterval(0, NavalQuotes.length)]}
         </Text>
@@ -61,6 +66,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#FBFBFC",
     color: "#C4C4C4",
     alignItems: "center",
+  },
+  col: {
+    width: "30%",
+    textAlign: "center",
+    alignItems: "center",
+    backgroundColor: "transparent",
+  },
+
+  icon: {
+    height: 40,
+    width: 55,
+    marginBottom: 10,
   },
   rowtwo: {
     display: "flex",
@@ -120,8 +137,7 @@ const styles = StyleSheet.create({
     color: "#4A4A4A",
     fontWeight: "bold",
     letterSpacing: 1.5,
-    alignItems: "flex-start",
-    left: -40,
+    alignItems: "center",
     marginTop: 30,
     fontFamily: "Calibre-Regular",
   },
@@ -157,13 +173,23 @@ const styles = StyleSheet.create({
   quote: {
     paddingTop: 0,
     padding: 20,
-    fontSize: 35,
+    fontSize: 22,
     color: "#4A4A4A",
     fontWeight: "bold",
     fontFamily: "Calibre-Medium",
+    textAlign: "center",
+  },
+  quotemark: {
+    paddingTop: 0,
+    padding: 20,
+    fontSize: 90,
+    color: "#4A4A4A",
+    fontWeight: "bold",
+    fontFamily: "Calibre-Medium",
+    textAlign: "center",
   },
   box: {
-    height: 280,
+    height: 320,
     width: 300,
     shadowColor: "#8D8A8A",
     shadowOffset: {

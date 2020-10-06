@@ -23,11 +23,12 @@ export function DropDown({
         width: 146,
         borderRadius: 200,
         marginVertical: 15,
+        searchablePlaceholderTextColor: "#B6999B",
       }}
       arrowColor={Colors.mauve}
       style={{
         backgroundColor: "#FBFBFC",
-        shadowColor: "#8D8A8A",
+        shadowColor: "#D0D0D0",
         borderBottomEndRadius: 30,
         borderBottomStartRadius: 30,
         borderBottomLeftRadius: 30,
@@ -35,16 +36,29 @@ export function DropDown({
         borderTopRightRadius: 30,
         borderTopLeftRadius: 30,
         shadowOffset: {
-          width: 0,
+          width: -1,
           height: 2,
         },
-        shadowOpacity: 0.2,
-        shadowRadius: 1.41,
+        shadowOpacity: 1,
+        shadowRadius: 10,
+      }}
+      labelStyle={{
+        paddingTop: 5,
+        fontSize: 20,
+        fontFamily: "Calibre-Regular",
+        textAlign: "left",
+        color: "#B6999B",
       }}
       itemStyle={{
         justifyContent: "flex-start",
       }}
-      dropDownStyle={{ backgroundColor: "#FBFBFC" }}
+      dropDownStyle={{
+        backgroundColor: "#FBFBFC",
+        borderTopRightRadius: 15,
+        borderTopLeftRadius: 15,
+        borderBottomEndRadius: 15,
+        borderBottomStartRadius: 15,
+      }}
       onChangeItem={(item: { value: number }) =>
         setSeconds(item.value - secondsMeditated)
       }

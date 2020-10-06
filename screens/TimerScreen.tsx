@@ -99,11 +99,18 @@ export default function TimerScreen({
           </TouchableOpacity>
         </View>
         {timerOn && (
-          <TouchableOpacity
-            onPress={endMeditation}
-            style={{ marginVertical: 0 }}
-          >
-            <Text style={{ ...styles.buttonText, color: "#ccc" }}>{"End"}</Text>
+          <TouchableOpacity onPress={endMeditation} style={{ zIndex: 10 }}>
+            <Text
+              style={{
+                ...styles.buttonText,
+                color: "#ccc",
+                fontSize: 30,
+                marginBottom: -80,
+                marginTop: 50,
+              }}
+            >
+              {"End"}
+            </Text>
           </TouchableOpacity>
         )}
       </ImageBackground>
@@ -127,8 +134,8 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 50,
-    marginTop: 70,
+    fontSize: 30,
+    marginTop: 0,
     paddingTop: 0,
     fontWeight: "bold",
     color: "#4A4A4A",
@@ -137,20 +144,21 @@ const styles = StyleSheet.create({
     fontFamily: "Calibre-Regular",
   },
   circle: {
-    marginTop: 30,
+    marginTop: 20,
     backgroundColor: "#FBFBFC00",
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 15,
     borderColor: "#EBECEF",
     borderRadius: 400,
-
+    zIndex: 0,
     width: 330,
     height: 330,
   },
   timer: {
     // fontFamily: "Calibre",
     fontSize: 56,
+    zIndex: 0,
     lineHeight: 90,
     marginTop: 30,
     marginLeft: 20,

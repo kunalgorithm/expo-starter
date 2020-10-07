@@ -37,9 +37,9 @@ export const FeedItem = ({ meditation }: { meditation: FeedMeditation }) => {
               {/* @ts-ignore */}
               {dayjs(meditation.createdAt).from(dayjs())}
             </Text>
-            <Text style={{ color: "#B6999B", paddingTop: 5 }}>
+            {/* <Text style={{ color: "#B6999B", paddingTop: 5 }}>
               ⚡ 4 day streak
-            </Text>
+            </Text> */}
           </View>
           <View
             style={{

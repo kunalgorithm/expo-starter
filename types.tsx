@@ -5,6 +5,8 @@ export {
   Follow,
 } from "./server/node_modules/@prisma/client";
 
+// see https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/advanced-usage-of-generated-types
+
 export type RootStackParamList = {
   Root: undefined;
   FindFriends: undefined;

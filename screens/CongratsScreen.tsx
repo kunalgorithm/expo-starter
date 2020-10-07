@@ -36,7 +36,7 @@ export default function CongratsScreen({
         back
       </Button> */}
       <Text style={styles.title}>Congrats! ✨</Text>
-      <Text style={styles.subtitle}>Day 5 of 60 days completed </Text>
+      {/* <Text style={styles.subtitle}>Day 5 of 60 days completed </Text> */}
 
       <View style={styles.box}>
         <Image

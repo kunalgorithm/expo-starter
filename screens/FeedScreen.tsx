@@ -30,8 +30,8 @@ export default function FeedScreen({
             ))
         ) : (
           <TouchableOpacity onPress={() => navigation.navigate("FindFriends")}>
-            <Text style={{ color: "blue" }}>
-              Follow people to see their activity on your feed ▶️
+            <Text style={{ color: "#B6999B", fontFamily: "Calibre-Regular" }}>
+              Follow friends to see their meditations ▶️
             </Text>
           </TouchableOpacity>
         )}

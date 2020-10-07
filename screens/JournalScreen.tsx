@@ -3,7 +3,7 @@ import { StyleSheet, TextInput } from "react-native";
 import Button from "../components/Button";
 // @ts-ignore
 import Slider from "react-native-slider";
-import { Text, View } from "react-native";
+import { Text, View, Keyboard } from "react-native";
 import { fetcher, useFeed, useMe } from "../hooks/fetcher";
 import { mutate } from "swr";
 
@@ -11,6 +11,7 @@ import { Switch } from "react-native-switch";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
 import { Meditation, User } from "../types";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export default function CongratsScreen({
   navigation,
@@ -66,15 +67,21 @@ export default function CongratsScreen({
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titlefirst}>
-        {Math.ceil(duration! / 60)} minute meditation{" "}
-      </Text>
-      <Text style={styles.title}>How did you feel? </Text>
-      <View style={styles.rowtwo}>
-        <Text style={styles.mood}>restless</Text>
-        <Text style={styles.mood}>nuetral</Text>
-        <Text style={styles.mood}>nirvana</Text>
-      </View>
+      <TouchableWithoutFeedback
+        onPressIn={() => {
+          Keyboard.dismiss();
+        }}
+      >
+        <Text style={styles.titlefirst}>
+          {Math.ceil(duration! / 60)} min meditation 🙌{" "}
+        </Text>
+        <Text style={styles.title}>How did you feel? </Text>
+        <View style={styles.rowtwo}>
+          <Text style={styles.mood}>restless</Text>
+          <Text style={styles.mood}>nuetral</Text>
+          <Text style={styles.mood}>nirvana</Text>
+        </View>
+      </TouchableWithoutFeedback>
       <View style={styles.row}>
         <View style={styles.sliderContainer}>
           <Slider
@@ -86,26 +93,33 @@ export default function CongratsScreen({
             thumbTintColor={"#ffffff00"}
             thumbTouchSize={{ width: 50, height: 50 }}
             animationType={"spring"}
-            thumbImage={require("../assets/images/official_logo_medium.png")}
+            thumbImage={require("../assets/images/newslider.png")}
             minimumTrackTintColor={"#ccc"}
             maximumTrackTintColor={"#ccc"}
           />
         </View>
       </View>
-      <Text style={styles.titletwo}>How did it go? </Text>
+      <TouchableWithoutFeedback
+        onPressIn={() => {
+          Keyboard.dismiss();
+        }}
+      >
+        <Text style={styles.titletwo}>How did it go? </Text>
 
-      <View style={styles.inputbox}>
-        <TextInput
-          style={styles.input}
-          placeholderTextColor="#ccc"
-          placeholder="your reflections and thoughts.."
-          onChangeText={(text) => setNotes(text)}
-          value={notes}
-          underlineColorAndroid="transparent"
-          autoCapitalize="none"
-          // onSubmitEditing={submitForm}
-        />
-      </View>
+        <View style={styles.inputbox}>
+          <TextInput
+            style={styles.input}
+            placeholderTextColor="#ccc"
+            autoCapitalize="sentences"
+            placeholder="your reflections and thoughts.."
+            onChangeText={(text) => setNotes(text)}
+            value={notes}
+            underlineColorAndroid="transparent"
+            multiline={true}
+            // onSubmitEditing={submitForm}
+          />
+        </View>
+      </TouchableWithoutFeedback>
 
       <Text style={styles.titlethree}>Who can see:</Text>
       <View style={styles.toggleposition}>
@@ -116,13 +130,13 @@ export default function CongratsScreen({
           inActiveText="Just you"
           activeTextStyle={{
             fontFamily: "Calibre-Medium",
-            fontSize: 16,
-            paddingTop: 9,
+            fontSize: 18,
+            paddingTop: 5,
           }}
           inactiveTextStyle={{
             fontFamily: "Calibre-Medium",
-            fontSize: 16,
-            paddingTop: 9,
+            fontSize: 18,
+            paddingTop: 5,
           }}
           circleSize={29}
           barHeight={40}
@@ -142,7 +156,7 @@ export default function CongratsScreen({
           outerCircleStyle={{}} // style for outer animated circle
           switchLeftPx={3} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
           switchRightPx={3} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-          switchWidthMultiplier={4.2} // multipled by the `circleSize` prop to calculate total width of the Switch
+          switchWidthMultiplier={4.4} // multipled by the `circleSize` prop to calculate total width of the Switch
         ></Switch>
       </View>
       <Button onPress={submitForm}>{loading ? "..." : "Submit"}</Button>
@@ -177,7 +191,7 @@ const styles = StyleSheet.create({
   },
   toggleposition: {
     marginLeft: 180,
-    marginTop: -55,
+    marginTop: -30,
     backgroundColor: "#fff",
     justifyContent: "flex-end",
   },
@@ -204,43 +218,44 @@ const styles = StyleSheet.create({
     borderRadius: 35 / 5,
   },
   title: {
-    fontSize: 30,
-    color: "#4A4A4A",
+    fontSize: 25,
+    color: "gray",
     fontWeight: "bold",
-    letterSpacing: 1.5,
+    letterSpacing: 0,
     alignItems: "flex-start",
-    left: -40,
+    left: 40,
     marginTop: 30,
-    fontFamily: "Calibre-Regular",
+    fontFamily: "Calibre-Medium",
   },
   titletwo: {
-    fontSize: 30,
-    color: "#4A4A4A",
+    fontSize: 25,
+    color: "gray",
     fontWeight: "bold",
-    letterSpacing: 1.5,
+    letterSpacing: 0,
     alignItems: "flex-start",
     marginVertical: 20,
-    left: -60,
-    fontFamily: "Calibre-Regular",
+    left: 40,
+    fontFamily: "Calibre-Medium",
   },
   titlethree: {
-    fontSize: 30,
-    color: "#4A4A4A",
+    fontSize: 25,
+    color: "gray",
     fontWeight: "bold",
-    letterSpacing: 1.5,
+    letterSpacing: 0,
     alignItems: "flex-start",
-    marginVertical: 20,
+    marginTop: 30,
     left: -70,
-    fontFamily: "Calibre-Regular",
+    fontFamily: "Calibre-Medium",
   },
   titlefirst: {
-    fontSize: 20,
-    color: "#4A4A4A",
+    fontSize: 35,
+    color: "gray",
     fontWeight: "bold",
     letterSpacing: 1.5,
-    alignItems: "flex-start",
-    marginVertical: 20,
-    left: -70,
+    alignItems: "center",
+    marginLeft: 50,
+    marginTop: 80,
+    marginBottom: 5,
     fontFamily: "Calibre-Regular",
   },
   subtitle: {

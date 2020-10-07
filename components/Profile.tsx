@@ -14,9 +14,9 @@ import Colors from "../constants/Colors";
 import { useNavigation } from "@react-navigation/native";
 import { FollowButton } from "../screens/FollowButton";
 import dayjs from "dayjs";
+import { Meditation } from "../types";
 
 function useStreak({ user }: { user: UserProfile }) {
-  // const [streak, setStreak] = React.useState(1);
   let longestStreak = 0;
   let streak = 0;
   let currentStreak = 0;
@@ -48,6 +48,7 @@ function useStreak({ user }: { user: UserProfile }) {
 export const Profile = ({ user }: { user: UserProfile | undefined }) => {
   if (!user || !user.meditations) return null;
   const navigation = useNavigation();
+
   const { me } = useMe();
   const { streak, longestStreak } = useStreak({ user });
 
@@ -117,10 +118,29 @@ export const Profile = ({ user }: { user: UserProfile | undefined }) => {
             <Box index={i * 7 + 4} meditations={meditations!} />
             <Box index={i * 7 + 5} meditations={meditations!} />
             <Box index={i * 7 + 6} meditations={meditations!} />
+            <Month index={i * 7 + 6} meditations={meditations!} />
           </View>
         ))}
     </View>
   );
+};
+
+const Month = ({
+  index,
+  meditations,
+}: {
+  index: number;
+  meditations: Meditation[];
+}) => {
+  const date = dayjs(
+    meditations.length > 0 ? meditations[0].createdAt : new Date()
+  ).add(index, "day");
+
+  const month = date.format("MMM");
+  if (index > 6 && parseInt(date.format("D")) > 7)
+    return <Text style={{ width: 30 }}></Text>;
+
+  return <Text style={{ color: "gray", width: 30 }}>{month}</Text>;
 };
 
 const styles = StyleSheet.create({

@@ -52,7 +52,7 @@ export const Box = ({
             : "#fff",
         }}
       >
-        {/* <Text>{meditationsThisDay.length}</Text> */}
+        {/* {index % 7 === 6 && <Text>{boxDate.format("MMM")}</Text>} */}
       </View>
     </View>
   );

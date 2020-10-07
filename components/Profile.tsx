@@ -52,7 +52,7 @@ export const Profile = ({ user }: { user: UserProfile | undefined }) => {
   const { me } = useMe();
   const { streak, longestStreak } = useStreak({ user });
 
-  const meditations = me?.meditations.sort((a, b) =>
+  const meditations = user?.meditations.sort((a, b) =>
     a.createdAt < b.createdAt ? -1 : 1
   );
   return (

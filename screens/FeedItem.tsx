@@ -25,11 +25,11 @@ export const FeedItem = ({ meditation }: { meditation: FeedMeditation }) => {
             : navigation.navigate("UserProfile", { userId: meditation.user.id })
         }
       >
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <View style={{ width: "25%" }}>
+        <View style={{ display: "flex", flexDirection: "row", paddingTop: 10 }}>
+          <View style={{ width: "27%" }}>
             <Avatar user={meditation.user} size={70}></Avatar>
           </View>
-          <View style={{ width: "40%", marginLeft: 10 }}>
+          <View style={{ width: "40%", marginLeft: 0 }}>
             <Text style={{ fontSize: 17, color: "gray", paddingBottom: 4 }}>
               {meditation.user.name}
             </Text>
@@ -43,7 +43,7 @@ export const FeedItem = ({ meditation }: { meditation: FeedMeditation }) => {
           </View>
           <View
             style={{
-              width: "27%",
+              width: "29%",
               flexDirection: "row",
               alignItems: "flex-start",
               justifyContent: "flex-end",
@@ -71,7 +71,11 @@ export const FeedItem = ({ meditation }: { meditation: FeedMeditation }) => {
         </Text>
       </View>
 
-      <LikeButton meditation={meditation}></LikeButton>
+      <View
+        style={{ display: "flex", flexDirection: "row", paddingBottom: 10 }}
+      >
+        <LikeButton meditation={meditation}></LikeButton>
+      </View>
     </Bubble>
   );
 };

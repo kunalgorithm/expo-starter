@@ -53,8 +53,6 @@ export const Profile = ({ user }: { user: UserProfile | undefined }) => {
   const { me } = useMe();
   const { streak, longestStreak } = useStreak({ user });
 
-  console.log("meditations", me?.meditations.length);
-
   const meditations = me?.meditations.sort((a, b) =>
     a.createdAt < b.createdAt ? -1 : 1
   );

@@ -6,7 +6,7 @@ import { Profile } from "../components/Profile";
 
 export default function UserScreen({
   navigation,
-}: StackScreenProps<RootStackParamList, "UserProfile">) {
+}: StackScreenProps<RootStackParamList, "MyProfile">) {
   const { me } = useMe();
 
   return <Profile user={me} />;

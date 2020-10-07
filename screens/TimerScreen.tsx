@@ -4,14 +4,10 @@ import {
   Image,
   ImageBackground,
   TouchableOpacity,
-  AsyncStorage,
 } from "react-native";
-import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { useInterval } from "../hooks/useInterval";
-// @ts-ignore
-import logo from "../assets/images/logo.jpeg";
-import CongratsScreen from "./CongratsScreen";
+
 import { DropDown } from "../components/DropDown";
 import { useMe } from "../hooks/fetcher";
 import dayjs from "dayjs";
@@ -19,7 +15,6 @@ import { activateKeepAwake } from "expo-keep-awake";
 import { Audio } from "expo-av";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
-import Button from "../components/Button";
 const DEFAULT_TIMER = 15 * 60; // 15 minutes
 
 export default function TimerScreen({

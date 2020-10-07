@@ -23,7 +23,6 @@ export function DropDown({
         width: 146,
         borderRadius: 200,
         marginVertical: 15,
-        searchablePlaceholderTextColor: "#B6999B",
       }}
       arrowColor={Colors.mauve}
       style={{

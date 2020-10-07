@@ -6,12 +6,14 @@ import * as React from "react";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import TimerScreen from "../screens/TimerScreen";
-import TabTwoScreen from "../screens/StreaksScreen";
+import StreaksScreen from "../screens/StreaksScreen";
 import TabThreeScreen from "../screens/HistoryScreen";
 
 import { Image, StyleSheet, Text } from "react-native";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import FeedScreen from "../screens/FeedScreen";
+import EditProfileScreen from "../screens/EditProfileScreen";
+import FindFriendsScreen from "../screens/FindFriendsScreen";
 
 const BottomTab = createBottomTabNavigator<any>();
 
@@ -96,26 +98,46 @@ function TabOneNavigator() {
         component={TimerScreen}
         options={{
           headerTransparent: true,
+          headerBackTitle: "Back",
         }}
       />
     </TabOneStack.Navigator>
   );
 }
 
-const TabTwoStack = createStackNavigator<any>();
+const ProfileStack = createStackNavigator<any>();
 
 function TabTwoNavigator() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen
         name=" "
-        component={TabTwoScreen}
+        component={StreaksScreen}
         options={{
           headerTransparent: true,
-          // headerLeft: () => <Text>Back</Text>,
         }}
       />
-    </TabTwoStack.Navigator>
+      <ProfileStack.Screen
+        name="EditProfile"
+        component={EditProfileScreen}
+        options={{
+          headerTransparent: true,
+          headerTintColor: Colors.mauve,
+          headerTitle: "Edit Profile",
+          headerBackTitle: "Profile",
+        }}
+      />
+      <ProfileStack.Screen
+        name="FindFriends"
+        component={FindFriendsScreen}
+        options={{
+          headerTransparent: true,
+          headerTintColor: Colors.mauve,
+          headerTitle: "Find Friends",
+          headerBackTitle: "Profile",
+        }}
+      />
+    </ProfileStack.Navigator>
   );
 }
 

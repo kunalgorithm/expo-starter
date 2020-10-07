@@ -40,8 +40,6 @@ export default function EditProfileScreen({
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Edit Profile</Text>
-
       <KeyboardAwareScrollView
         style={{ flex: 1, width: "100%" }}
         keyboardShouldPersistTaps="always"
@@ -91,6 +89,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#FBFBFC",
+    paddingTop: 110,
   },
   logo: {
     flex: 1,
@@ -117,13 +116,5 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginRight: 30,
     paddingLeft: 16,
-  },
-  title: {
-    fontSize: 30,
-    marginTop: 100,
-    fontWeight: "bold",
-    color: "#4A4A4A",
-    opacity: 0.8,
-    fontFamily: "Calibre-Medium",
   },
 });

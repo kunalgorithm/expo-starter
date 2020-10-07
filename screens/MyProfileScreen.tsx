@@ -4,7 +4,7 @@ import { RootStackParamList } from "../types";
 import { useMe } from "../hooks/fetcher";
 import { Profile } from "../components/Profile";
 
-export default function UserScreen({
+export default function MyProfileScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, "MyProfile">) {
   const { me } = useMe();

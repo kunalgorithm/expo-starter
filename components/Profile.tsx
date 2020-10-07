@@ -29,8 +29,6 @@ function useStreak({ user }: { user: UserProfile }) {
 
   // Iterate from today to the first meditation day
   for (let i = 0; i < today.diff(firstDay, "d"); i++) {
-    console.log(day.format("ddd, MMM D, YYYY"));
-
     // increment streaks if a meditation is found
     if (user.meditations.find((m) => dayjs(m.createdAt).isSame(day, "d"))) {
       currentStreak += 1;

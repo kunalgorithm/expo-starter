@@ -45,14 +45,6 @@ function RootNavigator() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Root" component={BottomTabNavigator} />
 
-      <Stack.Screen name="Journal" component={JournalScreen} />
-      <Stack.Screen name="UserProfile" component={UserScreen} />
-      {/* <Stack.Screen
-        name="EditProfile"
-        component={EditProfileScreen}
-        options={{ headerBackTitle: "Back to Profile" }}
-      /> */}
-      <Stack.Screen name="Congrats" component={CongratsScreen} options={{}} />
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}

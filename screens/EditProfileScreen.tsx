@@ -30,7 +30,6 @@ export default function EditProfileScreen({
       email,
       name,
     });
-    console.log(res);
 
     await mutate("/api/me", { ...me, name, email });
 

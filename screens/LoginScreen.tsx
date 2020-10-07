@@ -18,7 +18,7 @@ export default function LoginScreen() {
   const onSubmit = async () => {
     setLoading(true);
     setError(false);
-    console.log("logging in");
+
     const res = await fetcher(`/api/${login ? "login" : "signup"}`, {
       email,
       name,

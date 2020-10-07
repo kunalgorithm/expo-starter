@@ -6,14 +6,17 @@ import * as React from "react";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import TimerScreen from "../screens/TimerScreen";
-import StreaksScreen from "../screens/StreaksScreen";
-import TabThreeScreen from "../screens/HistoryScreen";
+import MyProfileScreen from "../screens/MyProfileScreen";
+import HistoryScreen from "../screens/HistoryScreen";
 
 import { Image, StyleSheet, Text } from "react-native";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import FeedScreen from "../screens/FeedScreen";
 import EditProfileScreen from "../screens/EditProfileScreen";
 import FindFriendsScreen from "../screens/FindFriendsScreen";
+import CongratsScreen from "../screens/CongratsScreen";
+import JournalScreen from "../screens/JournalScreen";
+import UserScreen from "../screens/UserScreen";
 
 const BottomTab = createBottomTabNavigator<any>();
 
@@ -29,7 +32,7 @@ export default function BottomTabNavigator(user: any) {
     >
       <BottomTab.Screen
         name="Feed"
-        component={FeedScreen}
+        component={TabZeroNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <Image
@@ -88,12 +91,37 @@ function TabBarIcon(props: { name: string; color: string }) {
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<any>();
+const FeedStack = createStackNavigator<any>();
+
+function TabZeroNavigator() {
+  return (
+    <FeedStack.Navigator>
+      <FeedStack.Screen
+        name=" "
+        component={FeedScreen}
+        options={{
+          headerTransparent: true,
+        }}
+      />
+      <FeedStack.Screen
+        name="UserProfile"
+        component={UserScreen}
+        options={{
+          headerTransparent: true,
+          headerTintColor: Colors.mauve,
+          headerTitle: " ",
+          headerBackTitle: "Feed",
+        }}
+      />
+    </FeedStack.Navigator>
+  );
+}
+const TimerStack = createStackNavigator<any>();
 
 function TabOneNavigator() {
   return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
+    <TimerStack.Navigator>
+      <TimerStack.Screen
         name=" "
         component={TimerScreen}
         options={{
@@ -101,7 +129,27 @@ function TabOneNavigator() {
           headerBackTitle: "Back",
         }}
       />
-    </TabOneStack.Navigator>
+      <TimerStack.Screen
+        name="Congrats"
+        component={CongratsScreen}
+        options={{
+          headerTransparent: true,
+          headerTintColor: Colors.mauve,
+          headerTitle: " ",
+          headerBackTitle: "Discard",
+        }}
+      />
+      <TimerStack.Screen
+        name="Journal"
+        component={JournalScreen}
+        options={{
+          headerTransparent: true,
+          headerTintColor: Colors.mauve,
+          headerTitle: " ",
+          headerBackTitle: "Go Back",
+        }}
+      />
+    </TimerStack.Navigator>
   );
 }
 
@@ -112,7 +160,7 @@ function TabTwoNavigator() {
     <ProfileStack.Navigator>
       <ProfileStack.Screen
         name=" "
-        component={StreaksScreen}
+        component={MyProfileScreen}
         options={{
           headerTransparent: true,
         }}
@@ -137,6 +185,16 @@ function TabTwoNavigator() {
           headerBackTitle: "Profile",
         }}
       />
+      <ProfileStack.Screen
+        name="UserProfile"
+        component={UserScreen}
+        options={{
+          headerTransparent: true,
+          headerTintColor: Colors.mauve,
+          headerTitle: " ",
+          headerBackTitle: "Find Friends",
+        }}
+      />
     </ProfileStack.Navigator>
   );
 }
@@ -148,7 +206,7 @@ function TabThreeNavigator() {
     <TabThreeStack.Navigator>
       <TabThreeStack.Screen
         name=" "
-        component={TabThreeScreen}
+        component={HistoryScreen}
         options={{ headerTransparent: true }}
       />
     </TabThreeStack.Navigator>

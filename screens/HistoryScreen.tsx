@@ -10,6 +10,7 @@ export default function TabThreeScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={styles.firsttitle}>past logs</Text>
       <ScrollView>
         {me?.meditations?.length! > 0 ? (
           me?.meditations
@@ -50,7 +51,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "#FBFBFC",
   },
-
+  firsttitle: {
+    fontSize: 32,
+    color: "gray",
+    fontWeight: "bold",
+    marginRight: "auto",
+    paddingLeft: 30,
+    paddingTop: 20,
+    letterSpacing: 1,
+    paddingBottom: 10,
+    fontFamily: "Calibre-Regular",
+  },
   text: {
     fontSize: 20,
     color: "#B6999B",

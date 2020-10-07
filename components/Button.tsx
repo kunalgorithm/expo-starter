@@ -32,7 +32,7 @@ const Button = ({
           marginVertical: small ? 10 : 50,
           alignItems: "center",
           borderWidth: invertColors ? 2 : 0,
-          borderColor: primary,
+          borderColor: "#fff",
         },
         style
       )}
@@ -46,7 +46,7 @@ const Button = ({
           letterSpacing: 4,
           textTransform: "uppercase",
           fontFamily: "Calibre-Medium",
-          marginTop: 10,
+          marginTop: 5,
           marginLeft: 5,
           alignItems: "center",
         }}

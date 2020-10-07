@@ -48,6 +48,7 @@ export function Stats({
 const styles = StyleSheet.create({
   row: {
     display: "flex",
+    paddingVertical: 20,
     flexDirection: "row",
     backgroundColor: "#fbfbfc",
   },
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
 
   icon: {
     margin: 12,
-    height: 32,
-    width: 35,
+    height: 27,
+    width: 30,
   },
 });

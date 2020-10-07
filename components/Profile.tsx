@@ -56,6 +56,7 @@ export const Profile = ({ user }: { user: UserProfile | undefined }) => {
   );
   return (
     <View style={styles.container}>
+      <Text style={styles.titlename}>{user.name}</Text>
       <View style={styles.row}>
         <View style={{ width: "20%", backgroundColor: Colors.grayBg }}>
           <TouchableOpacity onPress={() => openImagePickerAsync()}>
@@ -64,12 +65,13 @@ export const Profile = ({ user }: { user: UserProfile | undefined }) => {
         </View>
         <View style={{ width: "40%", backgroundColor: Colors.grayBg }}>
           <View style={styles.follower_container}>
-            <Text style={styles.titlename}>{user.name}</Text>
-            <Text style={styles.titlefollow}>
-              {user.followers?.length} followers
+            <Text style={styles.titlefollownum}>
+              {user.followers?.length} {"\n"}
+              <Text style={styles.titlefollow}>followers</Text>
             </Text>
-            <Text style={styles.titlefollow}>
-              {user.following?.length} following
+            <Text style={styles.titlefollownum}>
+              {user.following?.length} {"\n"}
+              <Text style={styles.titlefollow}>following</Text>
             </Text>
           </View>
         </View>
@@ -81,7 +83,7 @@ export const Profile = ({ user }: { user: UserProfile | undefined }) => {
                 onPress={() => navigation.navigate("FindFriends")}
                 small
                 invertColors
-                style={{ marginBottom: 0, marginTop: 0 }}
+                style={{ marginBottom: 2, marginTop: 0 }}
               >
                 <Text style={styles.button_title}>Find Friends</Text>
               </Button>
@@ -151,20 +153,34 @@ const styles = StyleSheet.create({
     fontFamily: "Calibre-Regular",
   },
   titlename: {
-    fontSize: 20,
+    fontSize: 30,
     color: "gray",
     fontWeight: "bold",
-    letterSpacing: 0,
-    paddingLeft: 20,
+    letterSpacing: 1,
+    textAlign: "left",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    paddingBottom: 10,
+    paddingTop: 20,
     backgroundColor: Colors.grayBg,
-    fontFamily: "Calibre-Medium",
+    fontFamily: "Calibre-Regular",
   },
 
   titlefollow: {
-    fontSize: 16,
+    fontSize: 14,
     color: "gray",
     letterSpacing: 0,
     paddingLeft: 20,
+    textTransform: "uppercase",
+    backgroundColor: Colors.grayBg,
+    fontFamily: "Calibre-Regular",
+  },
+  titlefollownum: {
+    fontSize: 20,
+    color: "#B6999B",
+    letterSpacing: 0,
+    paddingLeft: 20,
+    textTransform: "uppercase",
     backgroundColor: Colors.grayBg,
     fontFamily: "Calibre-Regular",
   },

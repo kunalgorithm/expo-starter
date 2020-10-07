@@ -9,7 +9,7 @@ import TimerScreen from "../screens/TimerScreen";
 import MyProfileScreen from "../screens/MyProfileScreen";
 import HistoryScreen from "../screens/HistoryScreen";
 
-import { Image, StyleSheet, Text } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import FeedScreen from "../screens/FeedScreen";
 import EditProfileScreen from "../screens/EditProfileScreen";
@@ -101,6 +101,11 @@ function TabZeroNavigator() {
         component={FeedScreen}
         options={{
           headerTransparent: true,
+          headerRight: () => (
+            <TouchableOpacity onPress={() => {}}>
+              <Text style={{ color: Colors.mauve }}>Find Friends</Text>
+            </TouchableOpacity>
+          ),
         }}
       />
       <FeedStack.Screen

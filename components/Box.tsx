@@ -32,7 +32,7 @@ export const Box = ({
   return (
     <View style={{ backgroundColor: "transparent" }}>
       {index < 7 && (
-        <Text style={{ textAlign: "center" }}>
+        <Text style={{ textAlign: "center", paddingBottom: 10 }}>
           {boxDate.format("dd") === "Su"
             ? "Su"
             : boxDate.format("dd") == "Th"
@@ -69,13 +69,13 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
-    borderRadius: 35 / 5,
+    borderRadius: 35 / 7,
 
     elevation: 9,
     backgroundColor: "#fff",
     color: "#FFF",
     alignItems: "center",
     justifyContent: "center",
-    margin: 5,
+    margin: 3,
   },
 });

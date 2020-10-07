@@ -43,7 +43,7 @@ export const FeedItem = ({ meditation }: { meditation: FeedMeditation }) => {
           </View>
           <View
             style={{
-              width: "25%",
+              width: "27%",
               flexDirection: "row",
               alignItems: "flex-start",
               justifyContent: "flex-end",

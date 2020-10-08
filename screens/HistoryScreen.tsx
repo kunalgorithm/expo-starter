@@ -1,7 +1,7 @@
 import * as React from "react";
 import { StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { mutate } from "swr";
-import { Text, View } from "../components/Themed";
+import { Text, View } from "react-native";
 import { fetcher, useMe } from "../hooks/fetcher";
 import { Bubble } from "../components/Bubble";
 import { Meditation } from "../types";
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 4,
     },
-    shadowOpacity: 0.32,
+    shadowOpacity: 0,
     shadowRadius: 5.46,
     borderRadius: 100 / 2,
 

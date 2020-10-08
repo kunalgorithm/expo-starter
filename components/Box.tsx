@@ -32,7 +32,7 @@ export const Box = ({
   return (
     <View style={{ backgroundColor: "transparent" }}>
       {index < 7 && (
-        <Text style={{ textAlign: "center", paddingBottom: 10 }}>
+        <Text style={{ textAlign: "center", color: "gray", paddingBottom: 10 }}>
           {boxDate.format("dd") === "Su"
             ? "Su"
             : boxDate.format("dd") == "Th"
@@ -43,13 +43,14 @@ export const Box = ({
       <View
         style={{
           ...styles.box,
-          backgroundColor: isToday
-            ? "#84B9C8"
-            : timeMeditated > 10
-            ? `rgba(182,153,154,${timeMeditated / 60})`
-            : timeMeditated > 0
-            ? Colors.pink
-            : "#fff",
+          borderColor: "#84B9C8",
+          borderWidth: isToday ? 3 : 0,
+          backgroundColor:
+            timeMeditated > 10
+              ? `rgba(182,153,154,${timeMeditated / 60})`
+              : timeMeditated > 0
+              ? Colors.pink
+              : "#fff",
         }}
       >
         {/* {index % 7 === 6 && <Text>{boxDate.format("MMM")}</Text>} */}

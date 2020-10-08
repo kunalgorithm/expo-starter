@@ -103,9 +103,11 @@ export const Profile = ({ user }: { user: UserProfile | undefined }) => {
         </View>
       </View>
       <Stats meditations={user.meditations} longestStreak={longestStreak} />
-      <Text style={styles.title}>
-        {user.name?.split(" ")[0]}, you're on a {streak} day streak ✨
-      </Text>
+      {streak > 0 && (
+        <Text style={styles.title}>
+          {user.name?.split(" ")[0]}, you're on a {streak} day streak ✨
+        </Text>
+      )}
 
       {Array(9)
         .fill(0)
@@ -138,9 +140,20 @@ const Month = ({
 
   const month = date.format("MMM");
   if (index > 6 && parseInt(date.format("D")) > 7)
-    return <Text style={{ width: 30 }}></Text>;
+    return <Text style={{ width: 40 }}></Text>;
 
-  return <Text style={{ color: "gray", width: 30 }}>{month}</Text>;
+  return (
+    <Text
+      style={{
+        paddingLeft: 3,
+        color: "gray",
+        width: 40,
+        marginTop: 10,
+      }}
+    >
+      {month}
+    </Text>
+  );
 };
 
 const styles = StyleSheet.create({

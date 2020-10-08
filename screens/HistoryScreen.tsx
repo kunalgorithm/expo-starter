@@ -5,6 +5,8 @@ import { Text, View } from "react-native";
 import { fetcher, useMe } from "../hooks/fetcher";
 import { Bubble } from "../components/Bubble";
 import { Meditation } from "../types";
+import OptionsMenu from "react-native-options-menu";
+
 export default function TabThreeScreen() {
   const { me } = useMe();
 
@@ -21,6 +23,35 @@ export default function TabThreeScreen() {
                   title={`${new Date(meditation.createdAt).toDateString()} - 
             ${Math.ceil(meditation.duration / 60)} min`}
                 >
+                  <OptionsMenu
+                    button={require("../assets/icons/editdots.png")}
+                    buttonStyle={{
+                      width: 32,
+                      height: 8,
+                      margin: 7.5,
+                      resizeMode: "contain",
+                    }}
+                    destructiveIndex={1}
+                    options={["Edit", "Delete", "Cancel"]}
+                    actions={[
+                      () => {
+                        console.log("edit - TODO");
+                      },
+                      async () => {
+                        console.log("delete", meditation.id);
+                        await fetcher("/api/meditation/delete", {
+                          id: meditation.id,
+                        });
+                        await mutate("/api/me", {
+                          ...me,
+                          meditations: me.meditations.filter(
+                            (m) => m.id !== meditation.id
+                          ),
+                        });
+                      },
+                      () => {},
+                    ]}
+                  />
                   <Text>Session {me?.meditations?.length - i}</Text>
                   <Text>{meditation.notes ? meditation.notes : ""}</Text>
                   <Text>Zen Score: {meditation.zenScore}</Text>

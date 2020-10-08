@@ -94,7 +94,7 @@ export default function TimerScreen({
           </TouchableOpacity>
         </View>
         {timerOn && (
-          <TouchableOpacity onPress={endMeditation} style={{ zIndex: 10 }}>
+          <TouchableOpacity onPress={endMeditation} style={{ zIndex: 20 }}>
             <Text
               style={{
                 ...styles.buttonText,

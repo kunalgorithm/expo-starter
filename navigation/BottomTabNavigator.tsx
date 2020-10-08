@@ -17,7 +17,6 @@ import FindFriendsScreen from "../screens/FindFriendsScreen";
 import CongratsScreen from "../screens/CongratsScreen";
 import JournalScreen from "../screens/JournalScreen";
 import UserScreen from "../screens/UserScreen";
-import { useNavigation } from "@react-navigation/native";
 
 const BottomTab = createBottomTabNavigator<any>();
 
@@ -95,13 +94,12 @@ function TabBarIcon(props: { name: string; color: string }) {
 const FeedStack = createStackNavigator<any>();
 
 function TabZeroNavigator() {
-  const navigation = useNavigation();
   return (
     <FeedStack.Navigator>
       <FeedStack.Screen
         name=" "
         component={FeedScreen}
-        options={{
+        options={({ navigation }) => ({
           headerTransparent: true,
           headerRight: () => (
             <TouchableOpacity
@@ -110,7 +108,7 @@ function TabZeroNavigator() {
               <Text style={{ color: Colors.mauve }}>Find Friends</Text>
             </TouchableOpacity>
           ),
-        }}
+        })}
       />
       <FeedStack.Screen
         name="UserProfile"
@@ -166,9 +164,9 @@ function TabOneNavigator() {
           headerTintColor: Colors.mauve,
           headerTitle: " ",
           headerBackTitle: "Go Back",
-          // headerRight: () => (
-          //   <Image source={require("../assets/icons/pray_icon.png")} />
-          // ),
+          headerRight: () => (
+            <Image source={require("../assets/icons/editdots.png")} />
+          ),
         }}
       />
     </TimerStack.Navigator>

@@ -17,6 +17,7 @@ import FindFriendsScreen from "../screens/FindFriendsScreen";
 import CongratsScreen from "../screens/CongratsScreen";
 import JournalScreen from "../screens/JournalScreen";
 import UserScreen from "../screens/UserScreen";
+import { useNavigation } from "@react-navigation/native";
 
 const BottomTab = createBottomTabNavigator<any>();
 
@@ -94,6 +95,7 @@ function TabBarIcon(props: { name: string; color: string }) {
 const FeedStack = createStackNavigator<any>();
 
 function TabZeroNavigator() {
+  const navigation = useNavigation();
   return (
     <FeedStack.Navigator>
       <FeedStack.Screen
@@ -102,7 +104,9 @@ function TabZeroNavigator() {
         options={{
           headerTransparent: true,
           headerRight: () => (
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("FindFriends")}
+            >
               <Text style={{ color: Colors.mauve }}>Find Friends</Text>
             </TouchableOpacity>
           ),
@@ -115,6 +119,16 @@ function TabZeroNavigator() {
           headerTransparent: true,
           headerTintColor: Colors.mauve,
           headerTitle: " ",
+          headerBackTitle: "Feed",
+        }}
+      />
+      <ProfileStack.Screen
+        name="FindFriends"
+        component={FindFriendsScreen}
+        options={{
+          headerTransparent: true,
+          headerTintColor: Colors.mauve,
+          headerTitle: "Find Friends",
           headerBackTitle: "Feed",
         }}
       />
@@ -152,6 +166,9 @@ function TabOneNavigator() {
           headerTintColor: Colors.mauve,
           headerTitle: " ",
           headerBackTitle: "Go Back",
+          // headerRight: () => (
+          //   <Image source={require("../assets/icons/pray_icon.png")} />
+          // ),
         }}
       />
     </TimerStack.Navigator>
@@ -180,16 +197,7 @@ function TabTwoNavigator() {
           headerBackTitle: "Profile",
         }}
       />
-      <ProfileStack.Screen
-        name="FindFriends"
-        component={FindFriendsScreen}
-        options={{
-          headerTransparent: true,
-          headerTintColor: Colors.mauve,
-          headerTitle: "Find Friends",
-          headerBackTitle: "Profile",
-        }}
-      />
+
       <ProfileStack.Screen
         name="UserProfile"
         component={UserScreen}

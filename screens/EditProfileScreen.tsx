@@ -72,6 +72,7 @@ export default function EditProfileScreen({
             onPress={async () => {
               const res = await fetcher(`/api/logout`);
               mutate("/api/me", {});
+              mutate("/api/feed", []);
             }}
           >
             Log out

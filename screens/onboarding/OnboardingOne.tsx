@@ -24,10 +24,10 @@ export default function OnboardingScreenOne({
       {/* <Text style={styles.subtitle}>Day 5 of 60 days completed </Text> */}
 
       <View style={styles.box}>
-        <Image
+        {/* <Image
           style={styles.icon}
           source={require("../assets/images/quote.png")}
-        />
+        /> */}
         <Text style={styles.quote}>
           Use The timer when you'd like to meditate. Visit your profile to view
           your streaks and recently frequency.

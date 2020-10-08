@@ -21,10 +21,9 @@ export default function HistoryScreen() {
           me?.meditations
             ?.reverse()
             .map((meditation: Meditation, i: number) => (
-              <Bubble>
-                <View style={styles.row} key={i}>
+              <Bubble key={meditation.id}>
+                <View style={styles.row}>
                   <Text style={styles.sessiontext}>
-                    {" "}
                     Session {me?.meditations?.length - i}
                   </Text>
                   <Text style={styles.durationtext}>
@@ -134,6 +133,7 @@ const styles = StyleSheet.create({
     fontFamily: "Calibre-Regular",
     paddingHorizontal: 20,
     paddingVertical: 20,
+    // textAlign: "center",
     // fontWeight: "",
   },
   date: {

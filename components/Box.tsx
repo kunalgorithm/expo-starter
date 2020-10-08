@@ -47,7 +47,7 @@ export const Box = ({
           borderWidth: isToday ? 3 : 0,
           backgroundColor:
             timeMeditated > 10
-              ? `rgba(182,153,154,${timeMeditated / 60})`
+              ? `rgba(182,153,154,${timeMeditated / 600 + 0.25})`
               : timeMeditated > 0
               ? Colors.pink
               : "#fff",

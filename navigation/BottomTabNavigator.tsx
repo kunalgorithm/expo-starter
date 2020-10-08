@@ -164,9 +164,9 @@ function TabOneNavigator() {
           headerTintColor: Colors.mauve,
           headerTitle: " ",
           headerBackTitle: "Go Back",
-          headerRight: () => (
-            <Image source={require("../assets/icons/editdots.png")} />
-          ),
+          // headerRight: () => (
+          //   <Image source={require("../assets/icons/editdots.png")} />
+          // ),
         }}
       />
     </TimerStack.Navigator>

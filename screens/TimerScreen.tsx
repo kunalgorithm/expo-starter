@@ -25,14 +25,6 @@ export default function TimerScreen({
   const [timerOn, setTimerOn] = React.useState(false);
   const { me } = useMe();
 
-  const day =
-    me && me.meditations?.length > 0
-      ? dayjs().diff(
-          dayjs(me.meditations[0] ? me.meditations[0].createdAt : new Date()),
-          "d"
-        )
-      : 1;
-
   const endMeditation = async () => {
     const soundObject = new Audio.Sound();
     await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
@@ -75,7 +67,9 @@ export default function TimerScreen({
         style={styles.backgroundImage}
         source={require("../assets/images/ocean_bg_small.jpg")}
       >
-        <Text style={styles.title}>Session {day}</Text>
+        <Text style={styles.title}>
+          Session {(me?.meditations?.length || 0) + 1}
+        </Text>
         <DropDown setSeconds={setSeconds} secondsMeditated={secondsMeditated} />
         <View style={styles.circle}>
           <Text style={styles.timer} onPress={(e) => setTimerOn(!timerOn)}>
@@ -94,14 +88,15 @@ export default function TimerScreen({
           </TouchableOpacity>
         </View>
         {timerOn && (
-          <TouchableOpacity onPress={endMeditation} style={{ zIndex: 50 }}>
+          <TouchableOpacity
+            onPress={endMeditation}
+            style={{ marginBottom: -90, marginTop: 50 }}
+          >
             <Text
               style={{
                 ...styles.buttonText,
                 color: "#ccc",
                 fontSize: 30,
-                marginBottom: -80,
-                marginTop: 50,
               }}
             >
               {"End"}

@@ -5,7 +5,7 @@ import {
   StyleProp,
   ViewStyle,
 } from "react-native";
-import { Text, View } from "../components/Themed";
+import { Text, View } from "react-native";
 const Button = ({
   onPress,
   children,
@@ -27,12 +27,12 @@ const Button = ({
         {
           backgroundColor: invertColors ? white : primary,
           padding: small ? 5 : 15,
-          width: small ? 110 : 146,
+          width: small ? 100 : 146,
           borderRadius: 100,
           marginVertical: small ? 10 : 50,
           alignItems: "center",
-          borderWidth: invertColors ? 2 : 0,
-          borderColor: "#fff",
+          borderWidth: invertColors ? 1.3 : 0,
+          borderColor: "#B6999B",
         },
         style
       )}
@@ -43,7 +43,7 @@ const Button = ({
           fontSize: small ? 12 : 20,
           color: invertColors ? primary : white,
 
-          letterSpacing: 4,
+          letterSpacing: 1,
           textTransform: "uppercase",
           fontFamily: "Calibre-Medium",
           marginTop: 5,

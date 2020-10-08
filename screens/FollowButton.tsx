@@ -1,6 +1,6 @@
 import * as React from "react";
 import { mutate } from "swr";
-import { View } from "../components/Themed";
+import { View } from "react-native";
 import { fetcher, useMe } from "../hooks/fetcher";
 import Button from "../components/Button";
 import { User } from "../types";

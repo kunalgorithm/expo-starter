@@ -16,17 +16,25 @@ export default function TabThreeScreen() {
           me?.meditations
             ?.reverse()
             .map((meditation: Meditation, i: number) => (
-              <View style={styles.row} key={i}>
-                <Bubble
-                  title={`${new Date(meditation.createdAt).toDateString()} - 
-            ${Math.ceil(meditation.duration / 60)} min`}
-                >
-                  <Text>Session {me?.meditations?.length - i}</Text>
-                  <Text>{meditation.notes ? meditation.notes : ""}</Text>
-                  <Text>Zen Score: {meditation.zenScore}</Text>
-                  <Text>{meditation.isPublic ? "Public " : "Private"}</Text>
-                </Bubble>
-              </View>
+              <Bubble>
+                <View style={styles.row} key={i}>
+                  <Text style={styles.sessiontext}>
+                    {" "}
+                    Session {me?.meditations?.length - i}
+                  </Text>
+                  <Text style={styles.durationtext}>
+                    {Math.ceil(meditation.duration / 60)} min
+                  </Text>
+                </View>
+
+                <Text style={styles.date}>
+                  {new Date(meditation.createdAt).toDateString()}
+                </Text>
+
+                <Text style={styles.inputtext}>
+                  {meditation.notes ? meditation.notes : ""}
+                </Text>
+              </Bubble>
             ))
         ) : (
           <View style={styles.row}>
@@ -48,8 +56,10 @@ const styles = StyleSheet.create({
   },
   row: {
     display: "flex",
+    flex: 3,
+    width: "90%",
     flexDirection: "row",
-    backgroundColor: "#FBFBFC",
+    backgroundColor: "#FFFFFF",
   },
   firsttitle: {
     fontSize: 32,
@@ -67,6 +77,38 @@ const styles = StyleSheet.create({
     color: "#B6999B",
     fontFamily: "Calibre-Regular",
     marginTop: 6,
+    // fontWeight: "",
+  },
+  sessiontext: {
+    fontSize: 22,
+    color: "#B6999B",
+    fontFamily: "Calibre-Regular",
+    marginTop: 10,
+    // fontWeight: "",
+  },
+  durationtext: {
+    fontSize: 18,
+    paddingLeft: 150,
+    color: "gray",
+    fontFamily: "Calibre-Regular",
+    marginTop: 10,
+    // fontWeight: "",
+  },
+  inputtext: {
+    fontSize: 17,
+    color: "gray",
+    fontFamily: "Calibre-Regular",
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    // fontWeight: "",
+  },
+  date: {
+    fontSize: 16,
+    textAlign: "left",
+    color: "#B6999B",
+    paddingRight: 162,
+    backgroundColor: "#ffffff",
+    fontFamily: "Calibre-Regular",
     // fontWeight: "",
   },
   box: {

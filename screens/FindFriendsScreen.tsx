@@ -5,7 +5,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from "react-native";
-import { Text, View } from "../components/Themed";
+import { Text, View } from "react-native";
 import { useMe, useUsers } from "../hooks/fetcher";
 import { Bubble } from "../components/Bubble";
 import { StackScreenProps } from "@react-navigation/stack";
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   row: {
     display: "flex",
     flexDirection: "row",
-    backgroundColor: "#FBFBFC",
+    backgroundColor: "#FFFFFF",
   },
   title: {
     fontSize: 20,

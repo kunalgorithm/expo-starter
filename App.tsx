@@ -8,6 +8,8 @@ import Navigation from "./navigation";
 
 import LoginScreen from "./screens/LoginScreen";
 import { useMe } from "./hooks/fetcher";
+import { createStackNavigator } from "@react-navigation/stack";
+import OnboardingOne from "./screens/onboarding/OnboardingOne";
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
@@ -29,4 +31,14 @@ export default function App() {
       </SafeAreaProvider>
     );
   }
+}
+
+const OnboardingStack = createStackNavigator<any>();
+
+function OnboardingNavigator() {
+  return (
+    <OnboardingStack.Navigator screenOptions={{ headerShown: false }}>
+      <OnboardingStack.Screen name="Onboarding-One" component={OnboardingOne} />
+    </OnboardingStack.Navigator>
+  );
 }

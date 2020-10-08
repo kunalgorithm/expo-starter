@@ -7,9 +7,11 @@ import { Bubble } from "../components/Bubble";
 import { Meditation } from "../types";
 // @ts-ignore
 import OptionsMenu from "react-native-options-menu";
+import { useNavigation } from "@react-navigation/native";
 
-export default function TabThreeScreen() {
+export default function HistoryScreen() {
   const { me } = useMe();
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -41,9 +43,9 @@ export default function TabThreeScreen() {
                     actions={[
                       () => {
                         console.log("edit - TODO");
+                        navigation.navigate("Journal", { meditation });
                       },
                       async () => {
-                        console.log("delete", meditation.id);
                         await fetcher("/api/meditation/delete", {
                           id: meditation.id,
                         });

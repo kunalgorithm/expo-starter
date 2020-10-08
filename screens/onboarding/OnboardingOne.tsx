@@ -1,19 +1,18 @@
 import * as React from "react";
 import { StyleSheet, Image } from "react-native";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 
-import { Text, View } from "../components/Themed";
-import NavalQuotes from "../constants/NavalQuotes";
-
+import { Text, View } from "../../components/Themed";
+import NavalQuotes from "../../constants/NavalQuotes";
 import { StackScreenProps } from "@react-navigation/stack";
-import { RootStackParamList } from "../types";
+import { RootStackParamList } from "../../types";
 
 function randomIntFromInterval(min: number, max: number) {
   // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-export default function CongratsScreen({
+export default function OnboardingScreenOne({
   navigation,
   route,
 }: StackScreenProps<RootStackParamList, "Congrats"> & {
@@ -21,7 +20,7 @@ export default function CongratsScreen({
 }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Congrats! ✨</Text>
+      <Text style={styles.title}>Welcome to Mindstreaks! ✨</Text>
       {/* <Text style={styles.subtitle}>Day 5 of 60 days completed </Text> */}
 
       <View style={styles.box}>
@@ -30,7 +29,9 @@ export default function CongratsScreen({
           source={require("../assets/images/quote.png")}
         />
         <Text style={styles.quote}>
-          {NavalQuotes[randomIntFromInterval(0, NavalQuotes.length)]}
+          Use The timer when you'd like to meditate. Visit your profile to view
+          your streaks and recently frequency.
+          {/* {NavalQuotes[randomIntFromInterval(0, NavalQuotes.length)]} */}
         </Text>
         <Text style={styles.author}>Naval</Text>
       </View>

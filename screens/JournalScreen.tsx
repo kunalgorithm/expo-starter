@@ -75,6 +75,7 @@ export default function CongratsScreen({
         <Text style={styles.titlefirst}>
           {Math.ceil(duration! / 60)} min meditation 🙌{" "}
         </Text>
+
         <Text style={styles.title}>How did you feel? </Text>
         <View style={styles.rowtwo}>
           <Text style={styles.mood}>restless</Text>

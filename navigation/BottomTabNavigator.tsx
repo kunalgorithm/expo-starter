@@ -99,14 +99,16 @@ function TabZeroNavigator() {
       <FeedStack.Screen
         name=" "
         component={FeedScreen}
-        options={{
+        options={({ navigation }) => ({
           headerTransparent: true,
           headerRight: () => (
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("FindFriends")}
+            >
               <Text style={{ color: Colors.mauve }}>Find Friends</Text>
             </TouchableOpacity>
           ),
-        }}
+        })}
       />
       <FeedStack.Screen
         name="UserProfile"
@@ -115,6 +117,16 @@ function TabZeroNavigator() {
           headerTransparent: true,
           headerTintColor: Colors.mauve,
           headerTitle: " ",
+          headerBackTitle: "Feed",
+        }}
+      />
+      <ProfileStack.Screen
+        name="FindFriends"
+        component={FindFriendsScreen}
+        options={{
+          headerTransparent: true,
+          headerTintColor: Colors.mauve,
+          headerTitle: "Find Friends",
           headerBackTitle: "Feed",
         }}
       />
@@ -152,6 +164,9 @@ function TabOneNavigator() {
           headerTintColor: Colors.mauve,
           headerTitle: " ",
           headerBackTitle: "Go Back",
+          headerRight: () => (
+            <Image source={require("../assets/icons/editdots.png")} />
+          ),
         }}
       />
     </TimerStack.Navigator>
@@ -180,16 +195,7 @@ function TabTwoNavigator() {
           headerBackTitle: "Profile",
         }}
       />
-      <ProfileStack.Screen
-        name="FindFriends"
-        component={FindFriendsScreen}
-        options={{
-          headerTransparent: true,
-          headerTintColor: Colors.mauve,
-          headerTitle: "Find Friends",
-          headerBackTitle: "Profile",
-        }}
-      />
+
       <ProfileStack.Screen
         name="UserProfile"
         component={UserScreen}

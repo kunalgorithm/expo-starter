@@ -79,24 +79,14 @@ export const Profile = ({ user }: { user: UserProfile | undefined }) => {
 
         <View style={styles.friendbutton}>
           {user.id === me?.id ? (
-            <>
-              <Button
-                onPress={() => navigation.navigate("FindFriends")}
-                small
-                invertColors
-                style={{ marginBottom: 2, marginTop: 0 }}
-              >
-                <Text style={styles.button_title}>Find Friends</Text>
-              </Button>
-              <Button
-                onPress={() => navigation.navigate("EditProfile", { me })}
-                small
-                invertColors
-                style={{ marginTop: 2 }}
-              >
-                <Text style={styles.button_title}>Edit Profile</Text>
-              </Button>
-            </>
+            <Button
+              onPress={() => navigation.navigate("EditProfile", { me })}
+              small
+              invertColors
+              style={{ marginTop: 2 }}
+            >
+              <Text style={styles.button_title}>Edit Profile</Text>
+            </Button>
           ) : (
             <FollowButton user={user} />
           )}

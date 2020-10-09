@@ -106,7 +106,17 @@ function TabZeroNavigator() {
             <TouchableOpacity
               onPress={() => navigation.navigate("FindFriends")}
             >
-              <Text style={{ color: Colors.mauve }}>Find Friends</Text>
+              <Text
+                style={{
+                  color: Colors.mauve,
+                  fontSize: 18,
+                  paddingTop: 7,
+                  paddingRight: 9,
+                  fontFamily: "Calibre-Regular",
+                }}
+              >
+                Find Friends
+              </Text>
             </TouchableOpacity>
           ),
         })}

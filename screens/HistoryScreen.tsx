@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { mutate } from "swr";
-import { Text, View } from "react-native";
+import { Text, View, Image } from "react-native";
 import { fetcher, useMe } from "../hooks/fetcher";
 import { Bubble } from "../components/Bubble";
 import { Meditation } from "../types";
@@ -36,6 +36,13 @@ export default function HistoryScreen() {
                     <Text style={styles.sessiontext}>
                       Session {me?.meditations?.length - i}
                     </Text>
+
+                    <Image
+                      style={styles.sitting}
+                      source={require("../assets/icons/pray_icon.png")}
+                      style={{ width: 15, height: 15 }}
+                    />
+
                     <Text style={styles.durationtext}>
                       {Math.ceil(meditation.duration / 60)} min
                     </Text>
@@ -105,6 +112,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "#FFFFFF",
   },
+  sitting: {
+    color: "#B6999B",
+    marginBottom: -10,
+  },
   firsttitle: {
     fontSize: 32,
     color: "gray",
@@ -132,8 +143,8 @@ const styles = StyleSheet.create({
   },
   durationtext: {
     fontSize: 18,
-    paddingLeft: 150,
-    color: "gray",
+    paddingLeft: 145,
+    color: "#B6999B",
     fontFamily: "Calibre-Regular",
     marginTop: 10,
     // fontWeight: "",
@@ -151,7 +162,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "left",
     color: "#B6999B",
-    paddingRight: 162,
+    paddingRight: 173,
     backgroundColor: "#ffffff",
     fontFamily: "Calibre-Regular",
     // fontWeight: "",

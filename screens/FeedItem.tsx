@@ -30,10 +30,23 @@ export const FeedItem = ({ meditation }: { meditation: FeedMeditation }) => {
             <Avatar user={meditation.user} size={70}></Avatar>
           </View>
           <View style={{ width: "40%", marginLeft: 0 }}>
-            <Text style={{ fontSize: 17, color: "gray", paddingBottom: 4 }}>
+            <Text
+              style={{
+                fontFamily: "Calibre-Regular",
+                fontSize: 17,
+                color: "gray",
+                paddingBottom: 4,
+              }}
+            >
               {meditation.user.name}
             </Text>
-            <Text style={{ color: "gray" }}>
+            <Text
+              style={{
+                color: "gray",
+                fontFamily: "Calibre-Regular",
+                fontSize: 16,
+              }}
+            >
               {/* @ts-ignore */}
               {dayjs(meditation.createdAt).from(dayjs())}
             </Text>
@@ -53,7 +66,15 @@ export const FeedItem = ({ meditation }: { meditation: FeedMeditation }) => {
               source={require("../assets/icons/pray_icon.png")}
               style={{ width: 15, height: 15 }}
             />
-            <Text style={{ color: Colors.mauve, fontSize: 14 }}>
+            <Text
+              style={{
+                color: Colors.mauve,
+                fontFamily: "Calibre-Regular",
+                marginTop: 2.5,
+                marginLeft: 3,
+                fontSize: 16,
+              }}
+            >
               {Math.ceil(meditation.duration / 60)} min
             </Text>
           </View>
@@ -66,7 +87,14 @@ export const FeedItem = ({ meditation }: { meditation: FeedMeditation }) => {
           width: "80%",
         }}
       >
-        <Text style={{ fontSize: 15, color: "#4A4A4A", marginLeft: -15 }}>
+        <Text
+          style={{
+            fontSize: 18,
+            fontFamily: "Calibre-Regular",
+            color: "#4A4A4A",
+            marginLeft: -15,
+          }}
+        >
           {meditation.notes}
         </Text>
       </View>

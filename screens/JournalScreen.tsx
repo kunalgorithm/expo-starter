@@ -192,7 +192,6 @@ const styles = StyleSheet.create({
   rowtwo: {
     display: "flex",
     flexDirection: "row",
-    marginHorizontal: 20,
     marginRight: 0,
     alignItems: "center",
     backgroundColor: "transparent",
@@ -240,7 +239,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 0,
     alignItems: "flex-start",
-    left: 40,
+    left: 35,
     marginTop: 30,
     fontFamily: "Calibre-Regular",
   },
@@ -251,7 +250,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     alignItems: "flex-start",
     marginVertical: 20,
-    left: 30,
+    left: 20,
     fontFamily: "Calibre-Regular",
   },
   titlethree: {
@@ -261,7 +260,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     alignItems: "flex-start",
     marginTop: 30,
-    left: -90,
+    left: -100,
     fontFamily: "Calibre-Regular",
   },
   titlefirst: {
@@ -311,7 +310,7 @@ const styles = StyleSheet.create({
     color: "#AEAEAE",
     fontWeight: "bold",
     letterSpacing: 1,
-    paddingHorizontal: 37,
+    marginHorizontal: 37,
     alignItems: "center",
     justifyContent: "center",
     textTransform: "uppercase",

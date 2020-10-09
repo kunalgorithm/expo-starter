@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
-    opacity: 0.7,
+    opacity: 0.8,
   },
 
   title: {

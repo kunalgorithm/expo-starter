@@ -1,5 +1,10 @@
 import * as React from "react";
-import { StyleSheet, ScrollView, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  ScrollView,
+  SafeAreaView,
+  TouchableOpacity,
+} from "react-native";
 import { mutate } from "swr";
 import { Text, View } from "react-native";
 import { fetcher, useMe } from "../hooks/fetcher";
@@ -19,55 +24,61 @@ export default function HistoryScreen() {
       {me?.meditations?.length && me?.meditations?.length > 0 ? (
         <ScrollView>
           {me?.meditations
-            ?.reverse()
+            // .sort((a, b) => (a.createdAt < b.createdAt ? -1 : 1))
+            .reverse()
             .map((meditation: Meditation, i: number) => (
-              <Bubble key={meditation.id}>
-                <View style={styles.row}>
-                  <Text style={styles.sessiontext}>
-                    Session {me?.meditations?.length - i}
-                  </Text>
-                  <Text style={styles.durationtext}>
-                    {Math.ceil(meditation.duration / 60)} min
-                  </Text>
-                  <OptionsMenu
-                    button={require("../assets/icons/editdots.png")}
-                    buttonStyle={{
-                      width: 32,
-                      height: 8,
-                      margin: 7.5,
-                      resizeMode: "contain",
-                    }}
-                    destructiveIndex={1}
-                    options={["Edit", "Delete", "Cancel"]}
-                    actions={[
-                      () => {
-                        console.log("edit - TODO");
-                        navigation.navigate("Journal", { meditation });
-                      },
-                      async () => {
-                        await fetcher("/api/meditation/delete", {
-                          id: meditation.id,
-                        });
-                        await mutate("/api/me", {
-                          ...me,
-                          meditations: me.meditations.filter(
-                            (m) => m.id !== meditation.id
-                          ),
-                        });
-                      },
-                      () => {},
-                    ]}
-                  />
-                </View>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("Journal", { meditation })}
+                key={meditation.id}
+              >
+                <Bubble>
+                  <View style={styles.row}>
+                    <Text style={styles.sessiontext}>
+                      Session {me?.meditations?.length - i}
+                    </Text>
+                    <Text style={styles.durationtext}>
+                      {Math.ceil(meditation.duration / 60)} min
+                    </Text>
+                    {/* <OptionsMenu
+                button={require("../assets/icons/editdots.png")}
+                buttonStyle={{
+                width: 32,
+                height: 8,
+                margin: 7.5,
+                resizeMode: "contain",
+                }}
+                destructiveIndex={1}
+                options={["Edit", "Delete", "Cancel"]}
+                actions={[
+                () => {
+                console.log("edit - TODO");
+                navigation.navigate("Journal", { meditation });
+                },
+                async () => {
+                await fetcher("/api/meditation/delete", {
+                id: meditation.id,
+                });
+                await mutate("/api/me", {
+                ...me,
+                meditations: me.meditations.filter(
+                (m) => m.id !== meditation.id
+                ),
+                });
+                },
+                () => {},
+                ]}
+                /> */}
+                  </View>
 
-                <Text style={styles.date}>
-                  {new Date(meditation.createdAt).toDateString()}
-                </Text>
+                  <Text style={styles.date}>
+                    {new Date(meditation.createdAt).toDateString()}
+                  </Text>
 
-                <Text style={styles.inputtext}>
-                  {meditation.notes ? meditation.notes : ""}
-                </Text>
-              </Bubble>
+                  <Text style={styles.inputtext}>
+                    {meditation.notes ? meditation.notes : ""}
+                  </Text>
+                </Bubble>
+              </TouchableOpacity>
             ))}
         </ScrollView>
       ) : (

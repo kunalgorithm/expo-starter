@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Image, TouchableOpacity, ScrollView } from "react-native";
 
 import { Text, View } from "../components/Themed";
 
@@ -99,20 +99,22 @@ export const Profile = ({ user }: { user: UserProfile | undefined }) => {
         </Text>
       )}
 
-      {Array(9)
-        .fill(0)
-        .map((row, i) => (
-          <View style={styles.row} key={i}>
-            <Box index={i * 7} meditations={meditations!} />
-            <Box index={i * 7 + 1} meditations={meditations!} />
-            <Box index={i * 7 + 2} meditations={meditations!} />
-            <Box index={i * 7 + 3} meditations={meditations!} />
-            <Box index={i * 7 + 4} meditations={meditations!} />
-            <Box index={i * 7 + 5} meditations={meditations!} />
-            <Box index={i * 7 + 6} meditations={meditations!} />
-            <Month index={i * 7 + 6} meditations={meditations!} />
-          </View>
-        ))}
+      <ScrollView>
+        {Array(11)
+          .fill(0)
+          .map((row, i) => (
+            <View style={styles.row} key={i}>
+              <Box index={i * 7} meditations={meditations!} />
+              <Box index={i * 7 + 1} meditations={meditations!} />
+              <Box index={i * 7 + 2} meditations={meditations!} />
+              <Box index={i * 7 + 3} meditations={meditations!} />
+              <Box index={i * 7 + 4} meditations={meditations!} />
+              <Box index={i * 7 + 5} meditations={meditations!} />
+              <Box index={i * 7 + 6} meditations={meditations!} />
+              <Month index={i * 7 + 6} meditations={meditations!} />
+            </View>
+          ))}
+      </ScrollView>
     </View>
   );
 };
@@ -149,7 +151,7 @@ const Month = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 70,
+    paddingTop: 45,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#FBFBFC",

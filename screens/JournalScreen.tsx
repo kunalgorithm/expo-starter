@@ -17,25 +17,39 @@ export default function CongratsScreen({
   navigation,
   route,
 }: StackScreenProps<RootStackParamList, "Journal"> & {
-  route: { params: { userId?: number } };
+  route: { params: { duration?: number; meditation?: Meditation } };
 }) {
-  const [notes, setNotes] = React.useState("");
-  const [zenScore, setZenScore] = React.useState(50);
-  const [isPublic, setIsPublic] = React.useState(true);
+  const [notes, setNotes] = React.useState(
+    route.params.meditation ? route.params.meditation.notes : ""
+  );
+  const [zenScore, setZenScore] = React.useState(
+    route.params.meditation ? route.params.meditation.zenScore : 50
+  );
+  const [isPublic, setIsPublic] = React.useState(
+    route.params.meditation ? route.params.meditation.isPublic : false
+  );
+  const duration = route.params.duration || route.params.meditation.duration;
   const [loading, setLoading] = React.useState(false);
   const { me } = useMe();
   const { feed } = useFeed();
-  const { duration } = route.params;
 
   const submitForm = async () => {
     if (loading) return;
     setLoading(true);
-    const res = await fetcher(`/api/meditation/create`, {
-      duration,
-      notes,
-      isPublic,
-      zenScore,
-    });
+    const res = route.params.meditation
+      ? await fetcher(`/api/meditation/edit`, {
+          id: route.params.meditation.id,
+          duration,
+          notes,
+          isPublic,
+          zenScore,
+        })
+      : await fetcher(`/api/meditation/create`, {
+          duration,
+          notes,
+          isPublic,
+          zenScore,
+        });
     await mutate("/api/me", {
       ...me,
       meditation: [
@@ -160,7 +174,9 @@ export default function CongratsScreen({
           switchWidthMultiplier={4.4} // multipled by the `circleSize` prop to calculate total width of the Switch
         ></Switch>
       </View>
-      <Button onPress={submitForm}>{loading ? "..." : "Submit"}</Button>
+      <Button onPress={submitForm}>
+        {loading ? "..." : route.params.meditation ? "Update" : "Submit"}
+      </Button>
     </View>
   );
 }

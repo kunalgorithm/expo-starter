@@ -221,6 +221,19 @@ function TabThreeNavigator() {
         component={HistoryScreen}
         options={{ headerTransparent: true }}
       />
+      <TimerStack.Screen
+        name="Journal"
+        component={JournalScreen}
+        options={{
+          headerTransparent: true,
+          headerTintColor: Colors.mauve,
+          headerTitle: " ",
+          headerBackTitle: "Logs",
+          // headerRight: () => (
+          //   <Image source={require("../assets/icons/editdots.png")} />
+          // ),
+        }}
+      />
     </TabThreeStack.Navigator>
   );
 }

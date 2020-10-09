@@ -37,15 +37,10 @@ export default function HistoryScreen() {
                       Session {me?.meditations?.length - i}
                     </Text>
 
-                    <Image
-                      style={styles.sitting}
-                      source={require("../assets/icons/pray_icon.png")}
-                      style={{ width: 15, height: 15 }}
-                    />
-
                     <Text style={styles.durationtext}>
                       {Math.ceil(meditation.duration / 60)} min
                     </Text>
+
                     {/* <OptionsMenu
                 button={require("../assets/icons/editdots.png")}
                 buttonStyle={{
@@ -111,10 +106,14 @@ const styles = StyleSheet.create({
     width: "90%",
     flexDirection: "row",
     backgroundColor: "#FFFFFF",
+    justifyContent: "center",
   },
   sitting: {
     color: "#B6999B",
-    marginBottom: -10,
+    marginBottom: 0,
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "row",
   },
   firsttitle: {
     fontSize: 32,
@@ -139,6 +138,7 @@ const styles = StyleSheet.create({
     color: "#B6999B",
     fontFamily: "Calibre-Regular",
     marginTop: 10,
+    paddingRight: 17,
     // fontWeight: "",
   },
   durationtext: {
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "left",
     color: "#B6999B",
-    paddingRight: 173,
+    paddingRight: 170,
     backgroundColor: "#ffffff",
     fontFamily: "Calibre-Regular",
     // fontWeight: "",

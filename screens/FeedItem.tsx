@@ -32,7 +32,7 @@ export const FeedItem = ({ meditation }: { meditation: FeedMeditation }) => {
           <View style={{ width: "40%", marginLeft: 0 }}>
             <Text
               style={{
-                fontFamily: "Calibre-Regular",
+                fontFamily: "Calibre-Medium",
                 fontSize: 17,
                 color: "gray",
                 paddingBottom: 4,

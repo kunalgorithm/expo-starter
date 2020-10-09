@@ -16,9 +16,9 @@ export default function HistoryScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.firsttitle}>past logs</Text>
-      <ScrollView>
-        {me?.meditations?.length! > 0 ? (
-          me?.meditations
+      {me?.meditations?.length && me?.meditations?.length > 0 ? (
+        <ScrollView>
+          {me?.meditations
             ?.reverse()
             .map((meditation: Meditation, i: number) => (
               <Bubble key={meditation.id}>
@@ -68,13 +68,13 @@ export default function HistoryScreen() {
                   {meditation.notes ? meditation.notes : ""}
                 </Text>
               </Bubble>
-            ))
-        ) : (
-          <View style={styles.row}>
-            Your meditation sessions will appear here.
-          </View>
-        )}
-      </ScrollView>
+            ))}
+        </ScrollView>
+      ) : (
+        <View style={styles.row}>
+          <Text>Your meditation sessions will appear here.</Text>
+        </View>
+      )}
     </SafeAreaView>
   );
 }

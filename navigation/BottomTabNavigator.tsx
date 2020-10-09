@@ -101,6 +101,7 @@ function TabZeroNavigator() {
         component={FeedScreen}
         options={({ navigation }) => ({
           headerTransparent: true,
+          headerRightContainerStyle: { marginRight: 20, marginTop: 20 },
           headerRight: () => (
             <TouchableOpacity
               onPress={() => navigation.navigate("FindFriends")}

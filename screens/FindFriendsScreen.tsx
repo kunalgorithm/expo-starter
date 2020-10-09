@@ -24,7 +24,9 @@ export default function FindFriendsScreen({
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         {users
-          ?.filter((u) => u.id !== me?.id)
+          ?.filter(
+            (u) => u.id !== me?.id && !u.name.toLowerCase().includes("test")
+          )
           .map((user) => (
             <Bubble key={user.id}>
               <View style={styles.row}>

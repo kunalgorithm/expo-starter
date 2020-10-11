@@ -77,7 +77,13 @@ export default function LoginScreen() {
         <View style={styles.container}>
           {error && <Text style={{ color: "red" }}>{error}</Text>}
           <Button onPress={onSubmit}>
-            {login ? (loading ? "..." : "Login") : loading ? "..." : "Sign Up"}
+            {login
+              ? loading
+                ? "loading..."
+                : "Login"
+              : loading
+              ? "loading..."
+              : "Sign Up"}
           </Button>
         </View>
 

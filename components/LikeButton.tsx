@@ -56,7 +56,7 @@ export const LikeButton = ({ meditation }: { meditation: FeedMeditation }) => {
                 fontFamily: "Calibre-Regular",
               }}
             >
-              {meditation.likes.length} kudos{"  "}
+              {meditation.likes.length} Kudos{"  "}
               {meditation.likes.map((like, i) => (
                 <Avatar
                   size={20}
@@ -70,8 +70,8 @@ export const LikeButton = ({ meditation }: { meditation: FeedMeditation }) => {
         )}
 
         <Image
-          source={require("../assets/icons/like.jpeg")}
-          style={{ width: 20, height: 20 }}
+          source={require("../assets/icons/strength_outline.png")}
+          style={{ width: 17, height: 17 }}
         />
         <Text
           style={{
@@ -81,6 +81,7 @@ export const LikeButton = ({ meditation }: { meditation: FeedMeditation }) => {
             fontWeight: isLiked ? "bold" : "normal",
           }}
         >
+          {" "}
           Kudos
         </Text>
       </View>

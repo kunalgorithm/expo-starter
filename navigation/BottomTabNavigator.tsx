@@ -112,7 +112,8 @@ function TabZeroNavigator() {
                   fontSize: 18,
                   paddingTop: 7,
                   paddingRight: 9,
-                  fontFamily: "Calibre-Regular",
+                  fontWeight: "bold",
+                  fontFamily: "Calibre-Medium",
                 }}
               >
                 Find Friends

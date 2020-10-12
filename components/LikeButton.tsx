@@ -70,7 +70,11 @@ export const LikeButton = ({ meditation }: { meditation: FeedMeditation }) => {
         )}
 
         <Image
-          source={require("../assets/icons/strength_outline.png")}
+          source={
+            isLiked
+              ? require("../assets/icons/strength_filledin.png")
+              : require("../assets/icons/strength_outline.png")
+          }
           style={{ width: 17, height: 17 }}
         />
         <Text

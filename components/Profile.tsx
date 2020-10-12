@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "flex-start",
     paddingBottom: 10,
-    paddingTop: 15,
+    paddingTop: 28,
     paddingLeft: 35,
     backgroundColor: Colors.grayBg,
     fontFamily: "Calibre-Regular",

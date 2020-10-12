@@ -47,7 +47,7 @@ const Button = ({
           textTransform: "uppercase",
           fontFamily: "Calibre-Medium",
           marginTop: 5,
-          marginLeft: 5,
+          marginLeft: 4,
           alignItems: "center",
         }}
       >

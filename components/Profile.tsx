@@ -92,12 +92,11 @@ export const Profile = ({ user }: { user: UserProfile | undefined }) => {
           )}
         </View>
       </View>
+      <Text style={styles.title}>
+        {user.name?.split(" ")[0]}, you're on a{" "}
+        <Text style={styles.streaktext}>{streak}</Text> day streak! ✨
+      </Text>
       <Stats meditations={user.meditations} longestStreak={longestStreak} />
-      {streak > 0 && (
-        <Text style={styles.title}>
-          {user.name?.split(" ")[0]}, you're on a {streak} day streak ✨
-        </Text>
-      )}
 
       <ScrollView>
         {Array(11)
@@ -167,10 +166,22 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.grayBg,
   },
   title: {
-    fontSize: 20,
-    paddingTop: 7,
-    paddingBottom: 10,
+    fontSize: 22,
+    paddingTop: 20,
+    marginBottom: -5,
     color: "gray",
+    fontWeight: "bold",
+    letterSpacing: 0,
+    margin: 5,
+    backgroundColor: Colors.grayBg,
+    fontFamily: "Calibre-Regular",
+  },
+
+  streaktext: {
+    fontSize: 22,
+    paddingTop: 20,
+    marginBottom: -5,
+    color: "#B6999B",
     fontWeight: "bold",
     letterSpacing: 0,
     margin: 5,

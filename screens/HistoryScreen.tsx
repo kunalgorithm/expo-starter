@@ -13,6 +13,7 @@ import { Meditation } from "../types";
 // @ts-ignore
 import OptionsMenu from "react-native-options-menu";
 import { useNavigation } from "@react-navigation/native";
+import dayjs from "dayjs";
 
 export default function HistoryScreen() {
   const { me } = useMe();
@@ -36,45 +37,15 @@ export default function HistoryScreen() {
                     <Text style={styles.sessiontext}>
                       Session {me?.meditations?.length - i}
                     </Text>
-
                     <Text style={styles.durationtext}>
                       {Math.ceil(meditation.duration / 60)} min
                     </Text>
-
-                    {/* <OptionsMenu
-                button={require("../assets/icons/editdots.png")}
-                buttonStyle={{
-                width: 32,
-                height: 8,
-                margin: 7.5,
-                resizeMode: "contain",
-                }}
-                destructiveIndex={1}
-                options={["Edit", "Delete", "Cancel"]}
-                actions={[
-                () => {
-                console.log("edit - TODO");
-                navigation.navigate("Journal", { meditation });
-                },
-                async () => {
-                await fetcher("/api/meditation/delete", {
-                id: meditation.id,
-                });
-                await mutate("/api/me", {
-                ...me,
-                meditations: me.meditations.filter(
-                (m) => m.id !== meditation.id
-                ),
-                });
-                },
-                () => {},
-                ]}
-                /> */}
                   </View>
-
-                  <Text style={styles.date}>
-                    {new Date(meditation.createdAt).toDateString()}
-                  </Text>
+                  <View style={styles.row}>
+                    <Text style={styles.date}>
+                      {dayjs(meditation.createdAt).format("MM/DD/YY")}
+                    </Text>
+                  </View>
 
                   <Text style={styles.inputtext}>
                     {meditation.notes ? meditation.notes : ""}
@@ -106,7 +77,7 @@ const styles = StyleSheet.create({
     width: "90%",
     flexDirection: "row",
     backgroundColor: "#FFFFFF",
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
   sitting: {
     color: "#B6999B",
@@ -138,12 +109,12 @@ const styles = StyleSheet.create({
     color: "#B6999B",
     fontFamily: "Calibre-Regular",
     marginTop: 10,
-    paddingRight: 17,
+
     // fontWeight: "",
   },
   durationtext: {
     fontSize: 18,
-    paddingLeft: 145,
+    // paddingLeft: 150,
     color: "#B6999B",
     fontFamily: "Calibre-Regular",
     marginTop: 10,
@@ -159,10 +130,11 @@ const styles = StyleSheet.create({
     // fontWeight: "",
   },
   date: {
-    fontSize: 16,
-    textAlign: "left",
+    fontSize: 18,
+    textAlign: "right",
+
+    paddingTop: 0,
     color: "#B6999B",
-    paddingRight: 170,
     backgroundColor: "#ffffff",
     fontFamily: "Calibre-Regular",
     // fontWeight: "",

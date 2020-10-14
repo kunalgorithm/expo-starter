@@ -67,13 +67,13 @@ export default function EditProfileScreen({
           {error && <Text style={{ color: "red" }}>{error}</Text>}
           <Button onPress={onSubmit}>{loading ? "..." : "Submit"}</Button>
           <Button
-            small
             invertColors
             onPress={async () => {
               const res = await fetcher(`/api/logout`);
               mutate("/api/me", {});
               mutate("/api/feed", []);
             }}
+            style={{ marginTop: -30 }}
           >
             Log out
           </Button>

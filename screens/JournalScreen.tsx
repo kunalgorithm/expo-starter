@@ -265,11 +265,11 @@ const styles = StyleSheet.create({
   },
   titlefirst: {
     fontSize: 30,
-    color: "gray",
+    color: "#B6999B",
     fontWeight: "bold",
     letterSpacing: 1.5,
     alignItems: "center",
-    marginLeft: 69,
+    marginLeft: 32,
     marginTop: 120,
     marginBottom: 5,
     fontFamily: "Calibre-Regular",

@@ -26,7 +26,7 @@ export default function CongratsScreen({
     route.params.meditation ? route.params.meditation.zenScore : 50
   );
   const [isPublic, setIsPublic] = React.useState(
-    route.params.meditation ? route.params.meditation.isPublic : false
+    route.params.meditation ? route.params.meditation.isPublic : true
   );
   const duration = route.params.duration || route.params.meditation.duration;
   const [loading, setLoading] = React.useState(false);

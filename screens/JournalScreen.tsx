@@ -108,7 +108,7 @@ export default function CongratsScreen({
             thumbTintColor={"#ffffff00"}
             thumbTouchSize={{ width: 50, height: 50 }}
             animationType={"spring"}
-            thumbImage={require("../assets/images/newslider_small.png")}
+            thumbImage={require("../assets/images/newslider.png")}
             minimumTrackTintColor={"#ccc"}
             maximumTrackTintColor={"#ccc"}
           />

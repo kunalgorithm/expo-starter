@@ -15,7 +15,7 @@ import { activateKeepAwake } from "expo-keep-awake";
 import { Audio } from "expo-av";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
-const DEFAULT_TIMER = 15 * 60; // 15 minutes
+const DEFAULT_TIMER = 1 * 60; // 1 minutes
 
 export default function TimerScreen({
   navigation,
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
-    opacity: 0.8,
+    opacity: 1.8,
   },
 
   title: {

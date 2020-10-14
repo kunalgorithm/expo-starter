@@ -30,12 +30,17 @@ export const Profile = ({ user }: { user: UserProfile | undefined }) => {
     <View style={styles.container}>
       <Text style={styles.titlename}>{user.name}</Text>
       <View style={styles.row}>
-        <View style={{ width: "20%", backgroundColor: Colors.grayBg }}>
+        <View style={{ width: "25%", backgroundColor: Colors.grayBg }}>
           <TouchableOpacity onPress={() => openImagePickerAsync()}>
             <Avatar user={user!} />
           </TouchableOpacity>
         </View>
-        <View style={{ width: "40%", backgroundColor: Colors.grayBg }}>
+        <View
+          style={{
+            width: "40%",
+            backgroundColor: Colors.grayBg,
+          }}
+        >
           <View style={styles.follower_container}>
             <Text style={styles.titlefollownum}>
               {user.followers?.length} {"\n"}
@@ -110,7 +115,7 @@ const Month = ({
   return (
     <Text
       style={{
-        paddingLeft: 3,
+        paddingLeft: 10,
         color: "gray",
         width: 40,
         marginTop: 10,
@@ -163,6 +168,7 @@ const styles = StyleSheet.create({
   row: {
     display: "flex",
     width: 340,
+    paddingLeft: 15,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -201,8 +207,8 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "flex-start",
     paddingBottom: 10,
-    paddingTop: 28,
-    paddingLeft: 35,
+    paddingTop: 35,
+    paddingLeft: 32,
     backgroundColor: Colors.grayBg,
     fontFamily: "Calibre-Regular",
   },
@@ -220,7 +226,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#B6999B",
     letterSpacing: 0,
-    paddingLeft: 20,
+    paddingLeft: 0,
     textTransform: "uppercase",
     backgroundColor: Colors.grayBg,
     fontFamily: "Calibre-Regular",
@@ -239,6 +245,7 @@ const styles = StyleSheet.create({
   },
   friendbutton: {
     paddingTop: 0,
+    paddingRight: 15,
     height: 75,
     backgroundColor: Colors.grayBg,
   },

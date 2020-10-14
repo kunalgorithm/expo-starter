@@ -93,7 +93,7 @@ export default function CongratsScreen({
         <Text style={styles.title}>How did you feel? </Text>
         <View style={styles.rowtwo}>
           <Text style={styles.mood}>restless</Text>
-          <Text style={styles.mood}>nuetral</Text>
+          <Text style={styles.mood}>neutral</Text>
           <Text style={styles.mood}>nirvana</Text>
         </View>
       </TouchableWithoutFeedback>

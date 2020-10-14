@@ -16,35 +16,6 @@ import { FollowButton } from "../screens/FollowButton";
 import dayjs from "dayjs";
 import { Meditation } from "../types";
 
-function useStreak({ user }: { user: UserProfile }) {
-  let longestStreak = 0;
-  let streak = 0;
-  let currentStreak = 0;
-  let currentStreakBroken = false;
-  const today = dayjs();
-  if (user.meditations.length === 0) return { streak, longestStreak };
-
-  const firstDay = dayjs(user.meditations[0].createdAt);
-  let day = today;
-
-  // Iterate from today to the first meditation day
-  for (let i = 0; i < today.diff(firstDay, "d"); i++) {
-    // increment streaks if a meditation is found
-    if (user.meditations.find((m) => dayjs(m.createdAt).isSame(day, "d"))) {
-      currentStreak += 1;
-      if (currentStreak > longestStreak) longestStreak = currentStreak;
-      if (!currentStreakBroken && currentStreak > streak)
-        streak = currentStreak;
-    } else {
-      currentStreak = 0;
-      currentStreakBroken = true;
-    }
-    day = day.subtract(1, "d");
-  }
-
-  return { streak, longestStreak };
-}
-
 export const Profile = ({ user }: { user: UserProfile | undefined }) => {
   if (!user || !user.meditations) return null;
   const navigation = useNavigation();
@@ -92,10 +63,13 @@ export const Profile = ({ user }: { user: UserProfile | undefined }) => {
           )}
         </View>
       </View>
-      <Text style={styles.title}>
-        {user.name?.split(" ")[0]}, you're on a{" "}
-        <Text style={styles.streaktext}>{streak}</Text> day streak! ✨
-      </Text>
+      {streak > 0 && (
+        <Text style={styles.title}>
+          {user.name?.split(" ")[0]}
+          {me?.id === user.id ? ", you're" : " is"} on a{" "}
+          <Text style={styles.streaktext}>{streak}</Text> day streak! ✨
+        </Text>
+      )}
       <Stats meditations={user.meditations} longestStreak={longestStreak} />
 
       <ScrollView>
@@ -146,6 +120,35 @@ const Month = ({
     </Text>
   );
 };
+
+function useStreak({ user }: { user: UserProfile }) {
+  let longestStreak = 0;
+  let streak = 0;
+  let currentStreak = 0;
+  let currentStreakBroken = false;
+  const today = dayjs();
+  if (user.meditations.length === 0) return { streak, longestStreak };
+
+  const firstDay = dayjs(user.meditations[0].createdAt);
+  let day = today;
+
+  // Iterate from today to the first meditation day
+  for (let i = 0; i < today.diff(firstDay, "d"); i++) {
+    // increment streaks if a meditation is found
+    if (user.meditations.find((m) => dayjs(m.createdAt).isSame(day, "d"))) {
+      currentStreak += 1;
+      if (currentStreak > longestStreak) longestStreak = currentStreak;
+      if (!currentStreakBroken && currentStreak > streak)
+        streak = currentStreak;
+    } else {
+      currentStreak = 0;
+      currentStreakBroken = true;
+    }
+    day = day.subtract(1, "d");
+  }
+
+  return { streak, longestStreak };
+}
 
 const styles = StyleSheet.create({
   container: {

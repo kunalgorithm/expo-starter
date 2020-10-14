@@ -15,9 +15,8 @@ export const Box = ({
 
   meditations: Meditation[];
 }) => {
-  const { me } = useMe();
   const boxDate = dayjs(
-    me?.meditations[0] ? me?.meditations[0].createdAt : new Date()
+    meditations[0] ? meditations[0].createdAt : dayjs()
   ).add(index, "day");
   const meditationsThisDay = meditations.filter(
     (item) =>
@@ -29,6 +28,7 @@ export const Box = ({
     .reduce((a, b) => a + b, 0);
   const isToday: boolean =
     boxDate.format("ddd, MMM D, YYYY") === dayjs().format("ddd, MMM D, YYYY");
+
   return (
     <View style={{ backgroundColor: "transparent" }}>
       {index < 7 && (
@@ -53,7 +53,7 @@ export const Box = ({
               : "#fff",
         }}
       >
-        {/* {index % 7 === 6 && <Text>{boxDate.format("MMM")}</Text>} */}
+        {/* <Text>{boxDate.format("D")}</Text> */}
       </View>
     </View>
   );

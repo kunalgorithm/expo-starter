@@ -2,7 +2,7 @@
   "expo": {
     "name": "mindstreaks",
     "slug": "mindstreaks",
-    "version": "1.0.9",
+    "version": "1.0.11",
     "sdkVersion": "39.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/ms_splash.png",

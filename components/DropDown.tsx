@@ -4,9 +4,11 @@ import Colors from "../constants/Colors";
 
 export function DropDown({
   setSeconds,
+  setInitialSeconds,
   secondsMeditated,
 }: {
   setSeconds: React.Dispatch<React.SetStateAction<number>>;
+  setInitialSeconds: React.Dispatch<React.SetStateAction<number>>;
   secondsMeditated: number;
 }) {
   return (
@@ -61,9 +63,10 @@ export function DropDown({
         borderBottomEndRadius: 15,
         borderBottomStartRadius: 15,
       }}
-      onChangeItem={(item: { value: number }) =>
-        setSeconds(item.value - secondsMeditated)
-      }
+      onChangeItem={(item: { value: number }) => {
+        setSeconds(item.value - secondsMeditated);
+        setInitialSeconds(item.value);
+      }}
     />
   );
 }

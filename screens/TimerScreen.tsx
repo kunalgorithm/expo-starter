@@ -4,6 +4,7 @@ import {
   Image,
   ImageBackground,
   TouchableOpacity,
+  Animated,
 } from "react-native";
 import { Text, View } from "../components/Themed";
 import { useInterval } from "../hooks/useInterval";
@@ -15,11 +16,57 @@ import { activateKeepAwake } from "expo-keep-awake";
 import { Audio } from "expo-av";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
+import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
+import Colors from "../constants/Colors";
 const DEFAULT_TIMER = 1 * 60; // 1 minutes
+
+const UrgeWithPleasureComponent = ({
+  timerOn,
+  seconds,
+  initialSeconds,
+  setTimerOn,
+}: {
+  timerOn: boolean;
+  seconds: number;
+  initialSeconds: number;
+  setTimerOn: any;
+}) => (
+  <CountdownCircleTimer
+    isPlaying={timerOn}
+    duration={initialSeconds}
+    initialRemainingTime={seconds}
+    key={initialSeconds}
+    colors={Colors.mauve}
+    size={300}
+  >
+    {(props) => (
+      <View style={styles.timer}>
+        <Animated.Text
+          style={styles.timer}
+          onPress={(e: any) => setTimerOn(!timerOn)}
+        >
+          {Math.floor(seconds / 60)}:
+          {seconds % 60 < 10 ? "0" + (seconds % 60) : seconds % 60}
+        </Animated.Text>
+        <TouchableOpacity onPress={() => setTimerOn(!timerOn)}>
+          <Image
+            style={{ height: 50, width: 50 }}
+            source={
+              timerOn
+                ? require("../assets/icons/meditation_pause_button.png")
+                : require("../assets/icons/meditation_start_button.png")
+            }
+          />
+        </TouchableOpacity>
+      </View>
+    )}
+  </CountdownCircleTimer>
+);
 
 export default function TimerScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, "Root">) {
+  const [initialSeconds, setInitialSeconds] = React.useState(DEFAULT_TIMER);
   const [seconds, setSeconds] = React.useState(DEFAULT_TIMER);
   const [secondsMeditated, setSecondsMeditated] = React.useState(0);
   const [timerOn, setTimerOn] = React.useState(false);
@@ -67,23 +114,20 @@ export default function TimerScreen({
         <Text style={styles.title}>
           Session {(me?.meditations?.length || 0) + 1}
         </Text>
-        <DropDown setSeconds={setSeconds} secondsMeditated={secondsMeditated} />
-        <View style={styles.circle}>
-          <Text style={styles.timer} onPress={(e) => setTimerOn(!timerOn)}>
-            {Math.floor(seconds / 60)}:
-            {seconds % 60 < 10 ? "0" + (seconds % 60) : seconds % 60}
-          </Text>
-          <TouchableOpacity onPress={() => setTimerOn(!timerOn)}>
-            <Image
-              style={{ height: 50, width: 50 }}
-              source={
-                timerOn
-                  ? require("../assets/icons/meditation_pause_button.png")
-                  : require("../assets/icons/meditation_start_button.png")
-              }
-            />
-          </TouchableOpacity>
-        </View>
+        <DropDown
+          setSeconds={setSeconds}
+          setInitialSeconds={setInitialSeconds}
+          secondsMeditated={secondsMeditated}
+        />
+        <UrgeWithPleasureComponent
+          timerOn={timerOn}
+          initialSeconds={initialSeconds}
+          seconds={seconds}
+          setTimerOn={setTimerOn}
+        />
+        {/* <View style={styles.circle}>
+          
+        </View> */}
         {timerOn && (
           <TouchableOpacity
             onPress={endMeditation}
@@ -147,12 +191,13 @@ const styles = StyleSheet.create({
     fontSize: 56,
     zIndex: 0,
     lineHeight: 90,
-    marginTop: 30,
-    marginLeft: 20,
+    marginTop: 15,
+    marginLeft: 10,
     color: "#ffffff",
     alignItems: "center",
     fontFamily: "Calibre-Regular",
     letterSpacing: 15,
+    backgroundColor: "transparent",
   },
 
   buttonText: {

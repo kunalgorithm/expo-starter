@@ -160,7 +160,7 @@ function TabOneNavigator() {
           headerTransparent: true,
           headerTintColor: Colors.mauve,
           headerTitle: " ",
-          headerBackTitle: "Discard",
+          headerBackTitle: "Back",
         }}
       />
       <TimerStack.Screen
@@ -170,7 +170,7 @@ function TabOneNavigator() {
           headerTransparent: true,
           headerTintColor: Colors.mauve,
           headerTitle: " ",
-          headerBackTitle: "Go Back",
+          headerBackTitle: "Back",
           // headerRight: () => (
           //   <Image source={require("../assets/icons/editdots.png")} />
           // ),

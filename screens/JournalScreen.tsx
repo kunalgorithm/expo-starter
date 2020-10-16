@@ -86,7 +86,7 @@ export default function CongratsScreen({
           Keyboard.dismiss();
         }}
       >
-        <Text style={styles.title}>How did you feel? </Text>
+        <Text style={styles.title}>How'd you feel? </Text>
         <View style={styles.rowtwo}>
           <Text style={styles.mood}>restless</Text>
           <Text style={styles.mood}>neutral</Text>

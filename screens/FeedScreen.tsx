@@ -33,13 +33,13 @@ export default function FeedScreen({
             <Text
               style={{
                 color: "#B6999B",
-                fontSize: 20,
+                fontSize: 17,
                 alignItems: "center",
                 justifyContent: "center",
                 fontFamily: "Calibre-Medium",
               }}
             >
-              Follow friends to see their meditations
+              Follow friends to see their meditations 👉
             </Text>
           </TouchableOpacity>
         )}

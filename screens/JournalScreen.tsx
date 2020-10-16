@@ -76,7 +76,7 @@ export default function CongratsScreen({
       ...feed!,
     ]);
 
-    navigation.replace("Root");
+    navigation.replace("Root", { screen: "Feed" });
   };
 
   return (

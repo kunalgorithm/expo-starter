@@ -8,7 +8,7 @@ export {
 // see https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/advanced-usage-of-generated-types
 
 export type RootStackParamList = {
-  Root: undefined;
+  Root: { screen?: string };
   FindFriends: undefined;
   Congrats: { duration: number };
   Journal: { meditation?: any; duration?: number };

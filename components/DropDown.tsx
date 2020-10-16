@@ -20,7 +20,7 @@ export function DropDown({
         { label: "30 min", value: 30 * 60 },
         { label: "60 min", value: 60 * 60 },
       ]}
-      defaultValue={15 * 60}
+      defaultValue={1 * 60}
       containerStyle={{
         height: 40,
         width: 146,

@@ -83,12 +83,6 @@ export default function BottomTabNavigator(user: any) {
   );
 }
 
-// You can explore the built-in icon families and icons on the web at:
-// https://icons.expo.fyi/
-function TabBarIcon(props: { name: string; color: string }) {
-  return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
-}
-
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
 const FeedStack = createStackNavigator<any>();
@@ -97,9 +91,10 @@ function TabZeroNavigator() {
   return (
     <FeedStack.Navigator>
       <FeedStack.Screen
-        name=" "
+        name="Feed"
         component={FeedScreen}
         options={({ navigation }) => ({
+          headerTitleStyle: { color: "transparent" },
           headerTransparent: true,
           headerRightContainerStyle: { marginRight: 20, marginTop: 20 },
           headerRight: () => (

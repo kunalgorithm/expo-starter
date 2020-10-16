@@ -15,7 +15,11 @@ export const fetcher = (url: string, data?: any): any =>
       "Content-Type": "application/json",
     },
     body: data ? JSON.stringify(data) : "",
-  }).then((r) => r.json());
+  })
+    .then((r) => r.json())
+    .catch((error) => {
+      console.error(error);
+    });
 
 export interface FeedMeditation extends Meditation {
   user: User;
@@ -30,7 +34,8 @@ export interface UserProfile extends User {
 export function useFeed() {
   const { data: feed }: { data?: FeedMeditation[] } = useSWR(
     "/api/feed",
-    fetcher
+    fetcher,
+    { refreshInterval: 1000 }
   );
   return { feed };
 }

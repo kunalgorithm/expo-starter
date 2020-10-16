@@ -21,7 +21,8 @@ export default function CongratsScreen({
 }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>congrats on a great sit ✨</Text>
+      <Text style={styles.title}>congrats on making time for yourself 🧘‍♀️</Text>
+
       {/* <Text style={styles.subtitle}>Day 5 of 60 days completed </Text> */}
 
       <View style={styles.box}>
@@ -70,9 +71,10 @@ const styles = StyleSheet.create({
     fontSize: 26,
     color: "#4A4A4A",
     fontWeight: "bold",
-    letterSpacing: 1.5,
+    letterSpacing: 1.0,
     alignItems: "center",
-    paddingTop: 20,
+    textAlign: "center",
+    paddingTop: 90,
     paddingBottom: 20,
     fontFamily: "Calibre-Regular",
   },

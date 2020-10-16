@@ -29,12 +29,9 @@ export default function TimerScreen({
     const soundObject = new Audio.Sound();
     await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
     try {
-      await soundObject.loadAsync(
-        require("../assets/sounds/gong_small_soft.mp3"),
-        {
-          shouldPlay: true,
-        }
-      );
+      await soundObject.loadAsync(require("../assets/sounds/singingbowl.mp3"), {
+        shouldPlay: true,
+      });
       await soundObject.playAsync();
     } catch (error) {
       console.log("error playing sound: ", error);
@@ -95,11 +92,11 @@ export default function TimerScreen({
             <Text
               style={{
                 ...styles.buttonText,
-                color: "#ccc",
-                fontSize: 30,
+                color: "#ffffff",
+                fontSize: 24,
               }}
             >
-              {"End"}
+              {"I'm done > "}
             </Text>
           </TouchableOpacity>
         )}
@@ -161,8 +158,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 20,
     color: "#fff",
-    letterSpacing: 4,
-    textTransform: "uppercase",
+    letterSpacing: 2,
     marginTop: 10,
     marginLeft: 5,
     alignItems: "center",

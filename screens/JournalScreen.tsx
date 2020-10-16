@@ -86,10 +86,6 @@ export default function CongratsScreen({
           Keyboard.dismiss();
         }}
       >
-        <Text style={styles.titlefirst}>
-          {Math.ceil(duration! / 60)} min meditation 🙌{" "}
-        </Text>
-
         <Text style={styles.title}>How did you feel? </Text>
         <View style={styles.rowtwo}>
           <Text style={styles.mood}>restless</Text>
@@ -119,18 +115,23 @@ export default function CongratsScreen({
           Keyboard.dismiss();
         }}
       >
-        <Text style={styles.titletwo}>How did it go? </Text>
+        <Text style={styles.titletwo}>How'd it go? </Text>
+        <Text style={styles.subtext}>
+          what came up? what went well/not well?
+        </Text>
 
         <View style={styles.inputbox}>
           <TextInput
             style={styles.input}
+            multiline={true}
             placeholderTextColor="#ccc"
             autoCapitalize="sentences"
-            placeholder="your reflections and thoughts.."
+            textBreakStrategy={"highQuality"}
+            placeholder="your reflections.."
+            scrollEnabled={true}
             onChangeText={(text) => setNotes(text)}
             value={notes}
             underlineColorAndroid="transparent"
-            multiline={true}
             // onSubmitEditing={submitForm}
           />
         </View>
@@ -174,9 +175,11 @@ export default function CongratsScreen({
           switchWidthMultiplier={4.4} // multipled by the `circleSize` prop to calculate total width of the Switch
         ></Switch>
       </View>
-      <Button onPress={submitForm}>
-        {loading ? "..." : route.params.meditation ? "Update" : "Submit"}
-      </Button>
+      <View style={styles.submitposition}>
+        <Button onPress={submitForm}>
+          {loading ? "..." : route.params.meditation ? "Update" : "Submit"}
+        </Button>
+      </View>
     </View>
   );
 }
@@ -211,6 +214,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     justifyContent: "flex-end",
   },
+  submitposition: {
+    marginBottom: "10%",
+    justifyContent: "flex-end",
+  },
   row: {
     display: "flex",
     flexDirection: "row",
@@ -239,8 +246,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 0,
     alignItems: "flex-start",
-    left: 35,
-    marginTop: 30,
+    left: 30,
+    marginTop: 120,
     fontFamily: "Calibre-Regular",
   },
   titletwo: {
@@ -249,9 +256,19 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 0,
     alignItems: "flex-start",
-    marginVertical: 20,
+    marginVertical: 10,
     left: 20,
     fontFamily: "Calibre-Regular",
+  },
+
+  subtext: {
+    fontSize: 18,
+    color: "gray",
+    letterSpacing: 0,
+    alignItems: "flex-start",
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+    fontFamily: "Calibre-Light",
   },
   titlethree: {
     fontSize: 25,

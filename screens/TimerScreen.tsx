@@ -36,7 +36,8 @@ const UrgeWithPleasureComponent = ({
     duration={initialSeconds}
     initialRemainingTime={seconds}
     key={initialSeconds}
-    colors={"#E5CEC6"}
+    trailColor={"#E5CEC6"}
+    colors={"#FFFFFF"}
     size={300}
   >
     {(props) => (
@@ -140,7 +141,7 @@ export default function TimerScreen({
                 fontSize: 24,
               }}
             >
-              {"I'm done > "}
+              {"I'm done 👉 "}
             </Text>
           </TouchableOpacity>
         )}
@@ -176,11 +177,11 @@ const styles = StyleSheet.create({
   },
   circle: {
     marginTop: 20,
-    backgroundColor: "#FBFBFC00",
+    backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 15,
-    borderColor: "#EBECEF",
+    borderColor: "#FFFFFF",
     borderRadius: 400,
     zIndex: 0,
     width: 330,

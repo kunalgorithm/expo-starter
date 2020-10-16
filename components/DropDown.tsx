@@ -27,7 +27,7 @@ export function DropDown({
         height: 40,
         width: 146,
         borderRadius: 200,
-        marginVertical: 15,
+        marginVertical: 30,
       }}
       arrowColor={Colors.mauve}
       style={{

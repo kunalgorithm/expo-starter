@@ -36,7 +36,7 @@ const UrgeWithPleasureComponent = ({
     duration={initialSeconds}
     initialRemainingTime={seconds}
     key={initialSeconds}
-    colors={Colors.mauve}
+    colors={"#E5CEC6"}
     size={300}
   >
     {(props) => (

@@ -6,7 +6,7 @@ import {
 } from "../server/node_modules/@prisma/client";
 import useSWR from "swr";
 
-const API_URL = "https://mindstreaks-api.onrender.com";
+const API_URL = "https://api.mindstreaks.com";
 export const fetcher = (url: string, data?: any): any =>
   fetch(API_URL + url, {
     method: data ? "POST" : "GET",
@@ -35,7 +35,7 @@ export function useFeed() {
   const { data: feed }: { data?: FeedMeditation[] } = useSWR(
     "/api/feed",
     fetcher,
-    { refreshInterval: 1000 }
+    { refreshInterval: 1500 }
   );
   return { feed };
 }
@@ -48,7 +48,7 @@ export function useMe() {
     data: me,
   }: {
     data?: UserProfile;
-  } = useSWR("/api/me", fetcher);
+  } = useSWR("/api/me", fetcher, { refreshInterval: 1500 });
   return { me };
 }
 export function useUser(userId: number) {

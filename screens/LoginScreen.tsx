@@ -6,7 +6,11 @@ import { Image, TextInput, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { fetcher, useMe } from "../hooks/fetcher";
 import { mutate } from "swr";
+import { Magic } from "@magic-sdk/react-native";
+import { useInterval } from "../hooks/useInterval";
 
+// const m = new Magic(process.env.MAGIC_KEY!);
+const m = new Magic("pk_test_4416C52A96118C14");
 export default function LoginScreen() {
   const [login, setLogin] = React.useState(false);
   const [name, setName] = React.useState("");
@@ -14,19 +18,35 @@ export default function LoginScreen() {
   const [password, setPassword] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
+  const [key, setKey] = React.useState(null);
+
+  useInterval(async () => {
+    if (key) {
+      try {
+        const poll = await fetcher(`/api/auth/fulfill/poll`, {
+          key,
+        });
+        if (poll && poll.success && poll.user)
+          await mutate("/api/me", { ...poll.user, meditations: [] });
+        return;
+      } catch (error) {}
+    }
+  }, 1500);
 
   const onSubmit = async () => {
     setLoading(true);
     setError(false);
-
-    const res = await fetcher(`/api/${login ? "login" : "signup"}`, {
-      email,
-      name,
-      password,
-    });
-    if (res.data && res.data.user) {
-      await mutate("/api/me", { ...res.data.user, meditations: [] });
-      return;
+    let res;
+    try {
+      res = await fetcher(`/api/auth/getMagicLink`, {
+        email,
+        // name,
+      });
+      if (res && res.success && res.key) {
+        setKey(res.key);
+      }
+    } catch (error) {
+      setError(error);
     }
 
     setLoading(false);
@@ -38,12 +58,13 @@ export default function LoginScreen() {
         style={styles.logo}
         source={require("../assets/images/login_logo.png")}
       />
-      <Text style={styles.title}>{login ? "Log in" : "Sign up"}</Text>
+      <m.Relayer />
+      <Text style={styles.title}>Get Started</Text>
       <KeyboardAwareScrollView
         style={{ flex: 1, width: "100%" }}
         keyboardShouldPersistTaps="always"
       >
-        {!login && (
+        {/* {!login && (
           <TextInput
             style={styles.input}
             placeholder="Name"
@@ -53,7 +74,7 @@ export default function LoginScreen() {
             underlineColorAndroid="transparent"
             autoCapitalize="none"
           />
-        )}
+        )} */}
         <TextInput
           style={styles.input}
           placeholder="E-mail"
@@ -63,7 +84,7 @@ export default function LoginScreen() {
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
-        <TextInput
+        {/* <TextInput
           style={styles.input}
           placeholderTextColor="#ccc"
           secureTextEntry
@@ -73,21 +94,26 @@ export default function LoginScreen() {
           underlineColorAndroid="transparent"
           autoCapitalize="none"
           // onSubmitEditing={onSubmit}
-        />
+        /> */}
         <View style={styles.container}>
           {error && <Text style={{ color: "red" }}>{error}</Text>}
-          <Button onPress={onSubmit}>
-            {login
+          {key ? (
+            <Text>Check your email for a login link!</Text>
+          ) : (
+            <Button onPress={onSubmit}>
+              {/* {login
               ? loading
                 ? "loading..."
                 : "Login"
               : loading
               ? "loading..."
-              : "Sign Up"}
-          </Button>
+              : "Sign Up"}  */}
+              {loading ? "... " : "Login"}
+            </Button>
+          )}
         </View>
 
-        <View style={styles.footerView}>
+        {/* <View style={styles.footerView}>
           {login ? (
             <Text style={styles.footerText}>
               Don't have an account?{" "}
@@ -103,7 +129,7 @@ export default function LoginScreen() {
               </Text>
             </Text>
           )}
-        </View>
+        </View> */}
       </KeyboardAwareScrollView>
     </View>
   );

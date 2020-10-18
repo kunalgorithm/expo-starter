@@ -38,6 +38,19 @@ export default function LoginScreen() {
     setLoading(true);
     setError(false);
     let res;
+
+    if (usePassword) {
+      const res = await fetcher(`/api/${login ? "login" : "signup"}`, {
+        email,
+        name,
+        password,
+      });
+      if (res.data && res.data.user) {
+        await mutate("/api/me", { ...res.data.user, meditations: [] });
+        return;
+      }
+    }
+
     try {
       res = await fetcher(`/api/auth/getMagicLink`, {
         email,

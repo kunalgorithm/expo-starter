@@ -113,15 +113,16 @@ export default function LoginScreen() {
                   ? "loading..."
                   : "Sign Up"}
               </Button>
-              <Button
-                small
-                invertColors
-                onPress={() => setUsePassword(!usePassword)}
-              >
-                {usePassword
-                  ? "Log in with Magic Link"
-                  : "Log in with password"}
-              </Button>
+
+              {login && (
+                <TouchableOpacity onPress={() => setUsePassword(!usePassword)}>
+                  <Text style={styles.footerLinktwo}>
+                    {usePassword
+                      ? "Login with magic link 🔗"
+                      : "Login with password 👉"}
+                  </Text>
+                </TouchableOpacity>
+              )}
             </>
           )}
         </View>
@@ -205,5 +206,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 22,
     marginBottom: 50,
+  },
+
+  footerLinktwo: {
+    color: "#B6999B",
+    fontFamily: "Calibre-Medium",
+    fontWeight: "bold",
+    fontSize: 22,
+    marginBottom: 20,
   },
 });

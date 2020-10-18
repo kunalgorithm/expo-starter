@@ -27,7 +27,7 @@ const Button = ({
         {
           backgroundColor: invertColors ? white : primary,
           padding: small ? 5 : 15,
-          width: small ? 100 : 146,
+          width: small ? 100 : 205,
           borderRadius: 100,
           marginVertical: small ? 10 : 50,
           alignItems: "center",
@@ -44,7 +44,7 @@ const Button = ({
           color: invertColors ? primary : white,
 
           letterSpacing: 1,
-          textTransform: "uppercase",
+          // textTransform: "uppercase",
           fontFamily: "Calibre-Medium",
           marginTop: 5,
           marginLeft: 4,

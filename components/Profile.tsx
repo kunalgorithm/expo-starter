@@ -147,7 +147,7 @@ function useStreak({ user }: { user: UserProfile }) {
         streak = currentStreak;
     } else {
       currentStreak = 0;
-      currentStreakBroken = true;
+      if (today !== day) currentStreakBroken = true;
     }
     day = day.subtract(1, "d");
   }

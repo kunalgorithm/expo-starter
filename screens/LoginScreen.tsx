@@ -16,6 +16,7 @@ export default function LoginScreen() {
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [usePassword, setUsePassword] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
   const [key, setKey] = React.useState(null);
@@ -84,31 +85,44 @@ export default function LoginScreen() {
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
-        {/* <TextInput
-          style={styles.input}
-          placeholderTextColor="#ccc"
-          secureTextEntry
-          placeholder="Password"
-          onChangeText={(text) => setPassword(text)}
-          value={password}
-          underlineColorAndroid="transparent"
-          autoCapitalize="none"
-          // onSubmitEditing={onSubmit}
-        /> */}
+        {usePassword && (
+          <TextInput
+            style={styles.input}
+            placeholderTextColor="#ccc"
+            secureTextEntry
+            placeholder="Password"
+            onChangeText={(text) => setPassword(text)}
+            value={password}
+            underlineColorAndroid="transparent"
+            autoCapitalize="none"
+            // onSubmitEditing={onSubmit}
+          />
+        )}
         <View style={styles.container}>
           {error && <Text style={{ color: "red" }}>{error}</Text>}
           {key ? (
             <Text>Check your email for a login link!</Text>
           ) : (
-            <Button onPress={onSubmit}>
-              {login
-                ? loading
+            <>
+              <Button onPress={onSubmit}>
+                {login
+                  ? loading
+                    ? "loading..."
+                    : "Email Login Link"
+                  : loading
                   ? "loading..."
-                  : "Login"
-                : loading
-                ? "loading..."
-                : "Sign Up"}
-            </Button>
+                  : "Sign Up"}
+              </Button>
+              <Button
+                small
+                invertColors
+                onPress={() => setUsePassword(!usePassword)}
+              >
+                {usePassword
+                  ? "Log in with Magic Link"
+                  : "Log in with password"}
+              </Button>
+            </>
           )}
         </View>
 

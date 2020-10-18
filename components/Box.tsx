@@ -3,7 +3,6 @@ import * as React from "react";
 import dayjs from "dayjs";
 import { Meditation } from "../types";
 import { StyleSheet, Text, View } from "react-native";
-import { useMe } from "../hooks/fetcher";
 import Colors from "../constants/Colors";
 
 export const Box = ({
@@ -29,6 +28,9 @@ export const Box = ({
   const isToday: boolean =
     boxDate.format("ddd, MMM D, YYYY") === dayjs().format("ddd, MMM D, YYYY");
 
+  const durations = meditations.map((m) => m.duration);
+  const longestMeditation = Math.max(...durations);
+
   return (
     <View style={{ backgroundColor: "transparent" }}>
       {index < 7 && (
@@ -47,7 +49,9 @@ export const Box = ({
           borderWidth: isToday ? 3 : 0,
           backgroundColor:
             timeMeditated > 10
-              ? `rgba(182,153,154,${timeMeditated / 600 + 0.25})`
+              ? `rgba(182,153,154,${
+                  timeMeditated / Math.max(longestMeditation, 600) + 0.25
+                })`
               : timeMeditated > 0
               ? Colors.pink
               : "#fff",

@@ -1,6 +1,6 @@
 import * as React from "react";
-import { AsyncStorage, StyleSheet } from "react-native";
-import { Text, View } from "../components/Themed";
+import { AsyncStorage, StyleSheet, Text, View } from "react-native";
+
 import Button from "../components/Button";
 import { Image, TextInput, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -40,7 +40,7 @@ export default function LoginScreen() {
     try {
       res = await fetcher(`/api/auth/getMagicLink`, {
         email,
-        // name,
+        name,
       });
       if (res && res.success && res.key) {
         setKey(res.key);
@@ -50,7 +50,7 @@ export default function LoginScreen() {
     }
 
     setLoading(false);
-    if (res.error) setError(res.error);
+    if (res && res.error) setError(res.error);
   };
   return (
     <View style={styles.container}>
@@ -59,12 +59,12 @@ export default function LoginScreen() {
         source={require("../assets/images/login_logo.png")}
       />
       <m.Relayer />
-      <Text style={styles.title}>Get Started</Text>
+      <Text style={styles.title}></Text>
       <KeyboardAwareScrollView
         style={{ flex: 1, width: "100%" }}
         keyboardShouldPersistTaps="always"
       >
-        {/* {!login && (
+        {!login && (
           <TextInput
             style={styles.input}
             placeholder="Name"
@@ -74,7 +74,7 @@ export default function LoginScreen() {
             underlineColorAndroid="transparent"
             autoCapitalize="none"
           />
-        )} */}
+        )}
         <TextInput
           style={styles.input}
           placeholder="E-mail"
@@ -101,19 +101,18 @@ export default function LoginScreen() {
             <Text>Check your email for a login link!</Text>
           ) : (
             <Button onPress={onSubmit}>
-              {/* {login
-              ? loading
+              {login
+                ? loading
+                  ? "loading..."
+                  : "Login"
+                : loading
                 ? "loading..."
-                : "Login"
-              : loading
-              ? "loading..."
-              : "Sign Up"}  */}
-              {loading ? "... " : "Login"}
+                : "Sign Up"}
             </Button>
           )}
         </View>
 
-        {/* <View style={styles.footerView}>
+        <View style={styles.footerView}>
           {login ? (
             <Text style={styles.footerText}>
               Don't have an account?{" "}
@@ -129,7 +128,7 @@ export default function LoginScreen() {
               </Text>
             </Text>
           )}
-        </View> */}
+        </View>
       </KeyboardAwareScrollView>
     </View>
   );

@@ -10,6 +10,9 @@ export function Stats({
   meditations: Meditation[];
   longestStreak: number;
 }) {
+  const totalDuration = meditations
+    .map((a) => a.duration)
+    .reduce((a, b) => a + b, 0);
   return (
     <View style={styles.row}>
       <View style={styles.col}>
@@ -19,10 +22,9 @@ export function Stats({
         />
         <Text style={styles.subtitle}>MINDFUL TIME</Text>
         <Text style={styles.number}>
-          {Math.ceil(
-            meditations.map((a) => a.duration).reduce((a, b) => a + b, 0) / 60
-          )}{" "}
-          m
+          {totalDuration > 60 * 60 &&
+            Math.floor(totalDuration / (60 * 60)) + `h `}
+          {Math.ceil(totalDuration / 60) % 60}m
         </Text>
       </View>
       <View style={styles.col}>

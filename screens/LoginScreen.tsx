@@ -32,7 +32,7 @@ export default function LoginScreen() {
         return;
       } catch (error) {}
     }
-  }, 1500);
+  }, 1000);
 
   const onSubmit = async () => {
     setLoading(true);

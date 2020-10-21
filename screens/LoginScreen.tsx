@@ -4,13 +4,10 @@ import { AsyncStorage, StyleSheet, Text, View } from "react-native";
 import Button from "../components/Button";
 import { Image, TextInput, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { fetcher, useMe } from "../hooks/fetcher";
+import { fetcher } from "../hooks/fetcher";
 import { mutate } from "swr";
-import { Magic } from "@magic-sdk/react-native";
 import { useInterval } from "../hooks/useInterval";
 
-// const m = new Magic(process.env.MAGIC_KEY!);
-const m = new Magic("pk_test_4416C52A96118C14");
 export default function LoginScreen() {
   const [login, setLogin] = React.useState(false);
   const [name, setName] = React.useState("");
@@ -83,7 +80,7 @@ export default function LoginScreen() {
             style={styles.input}
             placeholder="Name"
             placeholderTextColor="#ccc"
-            onChangeText={(text) => setName(text)}
+            onChangeText={(text: string) => setName(text)}
             value={name}
             underlineColorAndroid="transparent"
             autoCapitalize="none"
@@ -93,7 +90,7 @@ export default function LoginScreen() {
           style={styles.input}
           placeholder="E-mail"
           placeholderTextColor="#ccc"
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={(text: string) => setEmail(text)}
           value={email}
           underlineColorAndroid="transparent"
           autoCapitalize="none"
@@ -104,7 +101,7 @@ export default function LoginScreen() {
             placeholderTextColor="#ccc"
             secureTextEntry
             placeholder="Password"
-            onChangeText={(text) => setPassword(text)}
+            onChangeText={(text: string) => setPassword(text)}
             value={password}
             underlineColorAndroid="transparent"
             autoCapitalize="none"

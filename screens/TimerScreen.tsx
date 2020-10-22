@@ -106,6 +106,11 @@ export default function TimerScreen({
     if (timerOn) activateKeepAwake();
   }, [timerOn]);
 
+  // if (me && !me.email) {
+  //   navigation.replace("Login");
+  //   return null;
+  // }
+
   return (
     <View style={styles.container}>
       <ImageBackground

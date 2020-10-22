@@ -17,13 +17,20 @@ import FindFriendsScreen from "../screens/FindFriendsScreen";
 import CongratsScreen from "../screens/CongratsScreen";
 import JournalScreen from "../screens/JournalScreen";
 import UserScreen from "../screens/UserScreen";
+import { useMe } from "../hooks/fetcher";
+import { useNavigation } from "@react-navigation/native";
+import LoginScreen from "../screens/LoginScreen";
 
 const BottomTab = createBottomTabNavigator<any>();
 
 export default function BottomTabNavigator(user: any) {
   const colorScheme = useColorScheme();
+  const { me } = useMe();
+  const navigation = useNavigation();
 
   if (!user) return null;
+
+  if (me!! && !me?.email) return <LoginScreen />;
   return (
     <BottomTab.Navigator
       initialRouteName="Meditate"

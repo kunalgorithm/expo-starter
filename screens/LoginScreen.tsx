@@ -59,7 +59,6 @@ export default function LoginScreen() {
         style={styles.logo}
         source={require("../assets/images/login_logo.png")}
       />
-      <Relayer />
       <Text style={styles.title}></Text>
       <KeyboardAwareScrollView
         style={{ flex: 1, width: "100%" }}
@@ -101,7 +100,9 @@ export default function LoginScreen() {
         <View style={styles.container}>
           {error && <Text style={{ color: "red" }}>{error}</Text>}
           {key ? (
-            <Text>Check your email for a login link!</Text>
+            <Text style={styles.footerLinktwo}>
+              Check your email for a login link!✨{"\n"}
+            </Text>
           ) : (
             <>
               <Button onPress={onSubmit}>

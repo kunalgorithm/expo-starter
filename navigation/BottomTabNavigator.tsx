@@ -33,9 +33,25 @@ export default function BottomTabNavigator(user: any) {
   if (me!! && !me?.email) return <LoginScreen />;
   return (
     <BottomTab.Navigator
-      initialRouteName="Meditate"
+      initialRouteName="Feed"
       // tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
-      tabBarOptions={{ activeTintColor: Colors["light"].tint }}
+      tabBarOptions={{
+        activeTintColor: "#B6999B",
+        inactiveTintColor: "#cccccc",
+        inactiveBackgroundColor: "transparent",
+        activeBackgroundColor: "transparent",
+        style: {
+          backgroundColor: "#ffffff",
+          height: 80,
+          // borderRadius: 400 / 5,
+          color: "transparent",
+        },
+        labelStyle: {
+          fontSize: 12,
+          paddingTop: 5,
+          fontFamily: "Calibre-Medium",
+        },
+      }}
     >
       <BottomTab.Screen
         name="Feed"

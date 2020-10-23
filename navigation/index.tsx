@@ -11,12 +11,15 @@ import NotFoundScreen from "../screens/NotFoundScreen";
 import { RootStackParamList } from "../types";
 import BottomTabNavigator from "./BottomTabNavigator";
 import LinkingConfiguration from "./LinkingConfiguration";
-import FindFriendsScreen from "../screens/FindFriendsScreen";
-import CongratsScreen from "../screens/CongratsScreen";
-import JournalScreen from "../screens/JournalScreen";
-import Button from "../components/Button";
-import EditProfileScreen from "../screens/EditProfileScreen";
-import UserScreen from "../screens/UserScreen";
+import {
+  Onboarding1,
+  Onboarding2,
+  Onboarding3,
+  Onboarding4,
+  Onboarding5,
+  Onboarding6,
+} from "../screens/onboarding/Onboarding";
+import LoginScreen from "../screens/LoginScreen";
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -50,6 +53,13 @@ function RootNavigator() {
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
       />
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Onboarding_1" component={Onboarding1} />
+      <Stack.Screen name="Onboarding_2" component={Onboarding2} />
+      <Stack.Screen name="Onboarding_3" component={Onboarding3} />
+      <Stack.Screen name="Onboarding_4" component={Onboarding4} />
+      <Stack.Screen name="Onboarding_5" component={Onboarding5} />
+      <Stack.Screen name="Onboarding_6" component={Onboarding6} />
     </Stack.Navigator>
   );
 }

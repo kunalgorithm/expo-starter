@@ -18,6 +18,13 @@ export type RootStackParamList = {
   MyProfile: { userId?: number };
   UserProfile: { userId: number };
   EditProfile: { me: User };
+  Onboarding_1: undefined;
+  Onboarding_2: undefined;
+  Onboarding_3: undefined;
+  Onboarding_4: undefined;
+  Onboarding_5: { name: string };
+  Onboarding_6: undefined;
+  Login: undefined;
 };
 
 export type BottomTabParamList = {

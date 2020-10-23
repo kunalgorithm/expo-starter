@@ -33,10 +33,11 @@ export default function FeedScreen({
             <Text
               style={{
                 color: "#B6999B",
-                fontSize: 17,
+                fontSize: 20,
                 alignItems: "center",
+                paddingHorizontal: 25,
                 justifyContent: "center",
-                fontFamily: "Calibre-Medium",
+                fontFamily: "Calibre-Regular",
               }}
             >
               Follow friends to see their meditations 👉

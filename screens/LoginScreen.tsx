@@ -6,11 +6,9 @@ import { Image, TextInput, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { fetcher, useMe } from "../hooks/fetcher";
 import { mutate } from "swr";
-import { Magic } from "@magic-sdk/react-native";
 import { useInterval } from "../hooks/useInterval";
+import { useNavigation } from "@react-navigation/native";
 
-// const m = new Magic(process.env.MAGIC_KEY!);
-const m = new Magic("pk_test_4416C52A96118C14");
 export default function LoginScreen() {
   const [login, setLogin] = React.useState(false);
   const [name, setName] = React.useState("");
@@ -21,22 +19,44 @@ export default function LoginScreen() {
   const [error, setError] = React.useState(false);
   const [key, setKey] = React.useState(null);
 
+  const navigation = useNavigation();
+
   useInterval(async () => {
     if (key) {
       try {
         const poll = await fetcher(`/api/auth/fulfill/poll`, {
           key,
         });
-        if (poll && poll.success && poll.user)
+        if (poll && poll.success && poll.user) {
           await mutate("/api/me", { ...poll.user, meditations: [] });
-        return;
+          navigation.navigate("Feed");
+          return;
+        }
       } catch (error) {}
     }
   }, 1500);
 
   const onSubmit = async () => {
+    if (!login) {
+      navigation.navigate("Onboarding_1");
+      return;
+    }
+
     setLoading(true);
     setError(false);
+    if (usePassword) {
+      const res = await fetcher(`/api/${login ? "login" : "signup"}`, {
+        email,
+        name,
+        password,
+      });
+      if (res.data && res.data.user) {
+        await mutate("/api/me", { ...res.data.user, meditations: [] });
+        navigation.navigate("Feed");
+        return;
+      }
+    }
+
     let res;
     try {
       res = await fetcher(`/api/auth/getMagicLink`, {
@@ -59,12 +79,13 @@ export default function LoginScreen() {
         style={styles.logo}
         source={require("../assets/images/login_logo.png")}
       />
-      <Text style={styles.title}></Text>
+      <Text style={styles.title}>Strava for your mind ✨</Text>
+
       <KeyboardAwareScrollView
         style={{ flex: 1, width: "100%" }}
         keyboardShouldPersistTaps="always"
       >
-        {!login && (
+        {/* {!login && (
           <TextInput
             style={styles.input}
             placeholder="Name"
@@ -74,17 +95,19 @@ export default function LoginScreen() {
             underlineColorAndroid="transparent"
             autoCapitalize="none"
           />
+        )} */}
+        {login && (
+          <TextInput
+            style={styles.input}
+            placeholder="E-mail"
+            placeholderTextColor="#ccc"
+            onChangeText={(text) => setEmail(text)}
+            value={email}
+            underlineColorAndroid="transparent"
+            autoCapitalize="none"
+          />
         )}
-        <TextInput
-          style={styles.input}
-          placeholder="E-mail"
-          placeholderTextColor="#ccc"
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-          underlineColorAndroid="transparent"
-          autoCapitalize="none"
-        />
-        {usePassword && (
+        {login && usePassword && (
           <TextInput
             style={styles.input}
             placeholderTextColor="#ccc"
@@ -100,19 +123,17 @@ export default function LoginScreen() {
         <View style={styles.container}>
           {error && <Text style={{ color: "red" }}>{error}</Text>}
           {key ? (
-            <Text style={styles.footerLinktwo}>
-              Check your email for a login link!✨{"\n"}
+            <Text style={{ margin: 30 }}>
+              Check your email for a login link!
             </Text>
           ) : (
             <>
               <Button onPress={onSubmit}>
                 {login
-                  ? loading
-                    ? "loading..."
+                  ? usePassword
+                    ? "Log in"
                     : "Email Login Link"
-                  : loading
-                  ? "loading..."
-                  : "Sign Up"}
+                  : "Get Started"}
               </Button>
 
               {login && (
@@ -128,23 +149,25 @@ export default function LoginScreen() {
           )}
         </View>
 
-        <View style={styles.footerView}>
-          {login ? (
-            <Text style={styles.footerText}>
-              Don't have an account?{" "}
-              <Text onPress={() => setLogin(false)} style={styles.footerLink}>
-                Sign up
+        {!key && (
+          <View style={styles.footerView}>
+            {login ? (
+              <Text style={styles.footerText}>
+                Don't have an account?{" "}
+                <Text onPress={() => setLogin(false)} style={styles.footerLink}>
+                  Sign up
+                </Text>
               </Text>
-            </Text>
-          ) : (
-            <Text style={styles.footerText}>
-              Have an account?{" "}
-              <Text onPress={() => setLogin(true)} style={styles.footerLink}>
-                Log in
+            ) : (
+              <Text style={styles.footerText}>
+                Have an account?{" "}
+                <Text onPress={() => setLogin(true)} style={styles.footerLink}>
+                  Log in
+                </Text>
               </Text>
-            </Text>
-          )}
-        </View>
+            )}
+          </View>
+        )}
       </KeyboardAwareScrollView>
     </View>
   );
@@ -162,8 +185,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: 120,
-    marginTop: -90,
+    marginTop: 20,
     width: 200,
+    paddingBottom: 200,
     alignSelf: "center",
     resizeMode: "contain",
     margin: 30,
@@ -184,12 +208,12 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
   },
   title: {
-    fontSize: 30,
-    marginTop: -190,
+    fontSize: 22,
+    marginTop: -230,
     fontWeight: "bold",
     color: "#4A4A4A",
     opacity: 0.8,
-    fontFamily: "Calibre-Medium",
+    fontFamily: "Calibre-Regular",
   },
   footerView: {
     flex: 1,
@@ -198,6 +222,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#FBFBFC",
   },
   footerText: {
+    fontSize: 22,
+    fontFamily: "Calibre-Medium",
+    color: "#2e2e2d",
+  },
+  headerText: {
     fontSize: 22,
     fontFamily: "Calibre-Medium",
     color: "#2e2e2d",
@@ -214,6 +243,6 @@ const styles = StyleSheet.create({
     fontFamily: "Calibre-Medium",
     fontWeight: "bold",
     fontSize: 22,
-    marginBottom: 0,
+    marginBottom: 10,
   },
 });

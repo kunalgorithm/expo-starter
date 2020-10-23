@@ -55,8 +55,10 @@ export default function HistoryScreen() {
             ))}
         </ScrollView>
       ) : (
-        <View style={styles.row}>
-          <Text>Your meditation sessions will appear here.</Text>
+        <View style={styles.emptystatebackground}>
+          <Text style={styles.emptystatetext}>
+            Your meditation sessions and reflections will appear here 🧘‍♀️
+          </Text>
         </View>
       )}
     </SafeAreaView>
@@ -77,6 +79,14 @@ const styles = StyleSheet.create({
     width: "90%",
     flexDirection: "row",
     backgroundColor: "#FFFFFF",
+    justifyContent: "space-between",
+  },
+  emptystatebackground: {
+    display: "flex",
+    flex: 3,
+    width: "90%",
+    flexDirection: "row",
+    backgroundColor: "#FBFBFC",
     justifyContent: "space-between",
   },
   sitting: {
@@ -109,6 +119,15 @@ const styles = StyleSheet.create({
     color: "#B6999B",
     fontFamily: "Calibre-Regular",
     marginTop: 10,
+
+    // fontWeight: "",
+  },
+  emptystatetext: {
+    fontSize: 20,
+    color: "#B6999B",
+    fontFamily: "Calibre-Regular",
+    marginTop: 10,
+    paddingHorizontal: 10,
 
     // fontWeight: "",
   },

@@ -80,7 +80,7 @@ export default function LoginScreen() {
         source={require("../assets/images/login_logo.png")}
       />
 
-      <Text style={styles.title}>Strava for your mind</Text>
+      <Text style={styles.title}>Strava for your mind ✨</Text>
       <KeyboardAwareScrollView
         style={{ flex: 1, width: "100%" }}
         keyboardShouldPersistTaps="always"

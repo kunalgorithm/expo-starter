@@ -6,8 +6,9 @@ import { Text, View } from "../../components/Themed";
 import NavalQuotes from "../../constants/NavalQuotes";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types";
-import { fetcher } from "../../hooks/fetcher";
+import { fetcher, useUser, UserProfile, useUsers } from "../../hooks/fetcher";
 import { mutate } from "swr";
+import { FollowBubble } from "../FindFriendsScreen";
 
 /* 
 Onboarding screens 
@@ -106,10 +107,12 @@ export function Onboarding5({
     console.log(res);
     if (res.data && res.data.user) {
       await mutate("/api/me", { ...res.data.user, meditations: [] });
-      navigation.navigate("Root", { screen: "Feed" });
+      navigation.navigate("Onboarding_6");
+
       return;
     }
   };
+
   return (
     <View style={styles.container}>
       <Text style={styles.titlename}>
@@ -125,6 +128,38 @@ export function Onboarding5({
         autoCapitalize="none"
       />
       <Button onPress={onSubmit}>Sign Up</Button>
+    </View>
+  );
+}
+export function Onboarding6({
+  navigation,
+  route,
+}: StackScreenProps<RootStackParamList, "Onboarding_6"> & {
+  route: { params: { name: string } };
+}) {
+  const [email, setEmail] = React.useState("");
+  const { users } = useUsers();
+
+  const onSubmit = async () => {
+    navigation.navigate("Root", { screen: "Feed" });
+    return;
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titlename}>
+        Follow the co-creators 🙆🏽‍♂️👩🏻‍💻{"\n"}to see how the social feed works (it's
+        ok you can unfollow later)
+        {"\n"} {"\n"}
+        Hit "follow" 👇
+      </Text>
+      {users
+        ?.filter((u) => u.id === 9 || u.id === 12)
+        .map((u) => (
+          <FollowBubble user={u} key={u.id} />
+        ))}
+
+      <Button onPress={onSubmit}>Next</Button>
     </View>
   );
 }
@@ -172,6 +207,7 @@ const styles = StyleSheet.create({
   titlename: {
     fontSize: 25,
     marginTop: 160,
+    paddingHorizontal: 25,
     color: "#4A4A4A",
     justifyContent: "center",
     textAlign: "center",

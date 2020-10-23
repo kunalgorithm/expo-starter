@@ -17,6 +17,7 @@ import {
   Onboarding3,
   Onboarding4,
   Onboarding5,
+  Onboarding6,
 } from "../screens/onboarding/Onboarding";
 import LoginScreen from "../screens/LoginScreen";
 
@@ -58,6 +59,7 @@ function RootNavigator() {
       <Stack.Screen name="Onboarding_3" component={Onboarding3} />
       <Stack.Screen name="Onboarding_4" component={Onboarding4} />
       <Stack.Screen name="Onboarding_5" component={Onboarding5} />
+      <Stack.Screen name="Onboarding_6" component={Onboarding6} />
     </Stack.Navigator>
   );
 }

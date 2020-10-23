@@ -23,6 +23,7 @@ export type RootStackParamList = {
   Onboarding_3: undefined;
   Onboarding_4: undefined;
   Onboarding_5: { name: string };
+  Onboarding_6: undefined;
   Login: undefined;
 };
 

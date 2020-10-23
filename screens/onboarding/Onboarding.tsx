@@ -104,7 +104,7 @@ export function Onboarding5({
       email,
       name: route.params.name,
     });
-    console.log(res);
+
     if (res.data && res.data.user) {
       await mutate("/api/me", { ...res.data.user, meditations: [] });
       navigation.navigate("Onboarding_6");

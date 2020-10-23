@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
   },
 });
 export function FollowBubble({ user }: { user: User }): JSX.Element {
-  console.log(user);
   const navigation = useNavigation();
   return (
     <Bubble key={user.id}>

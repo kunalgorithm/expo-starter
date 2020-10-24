@@ -57,14 +57,17 @@ export const LikeButton = ({ meditation }: { meditation: FeedMeditation }) => {
               }}
             >
               {meditation.likes.length} Kudos{"  "}
-              {meditation.likes.map((like, i) => (
-                <Avatar
-                  size={20}
-                  user={like.user}
-                  key={i}
-                  style={{ marginLeft: 0 }}
-                ></Avatar>
-              ))}
+              {meditation.likes.map(
+                (like, i) =>
+                  i < 3 && (
+                    <Avatar
+                      size={20}
+                      user={like.user}
+                      key={i}
+                      style={{ marginLeft: 0 }}
+                    ></Avatar>
+                  )
+              )}
             </Text>
           </View>
         )}

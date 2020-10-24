@@ -29,7 +29,7 @@ export default function FindFriendsScreen({
             (u) => u.id !== me?.id && !u.name.toLowerCase().includes("test")
           )
           .map((user) => (
-            <FollowBubble user={user} />
+            <FollowBubble user={user} key={user.id} />
           ))}
       </ScrollView>
     </SafeAreaView>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
 export function FollowBubble({ user }: { user: User }): JSX.Element {
   const navigation = useNavigation();
   return (
-    <Bubble key={user.id}>
+    <Bubble>
       <View style={styles.row}>
         <View style={{ width: "40%" }}>
           <TouchableOpacity

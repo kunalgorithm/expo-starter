@@ -148,8 +148,8 @@ export function Onboarding6({
   return (
     <View style={styles.container}>
       <Text style={styles.titlename}>
-        Follow the co-creators 🙆🏽‍♂️👩🏻‍💻{"\n"}to see how the social feed works (it's
-        ok you can unfollow later)
+        Follow the co-creators 🙆🏽‍♂️👩🏻‍💻{"\n"}to see how the social feed works (you
+        can unfollow later)
         {"\n"} {"\n"}
         Hit "follow" 👇
       </Text>

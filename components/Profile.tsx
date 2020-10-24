@@ -31,7 +31,9 @@ export const Profile = ({ user }: { user: UserProfile | undefined }) => {
       <Text style={styles.titlename}>{user.name}</Text>
       <View style={styles.row}>
         <View style={{ width: "25%", backgroundColor: Colors.grayBg }}>
-          <TouchableOpacity onPress={() => openImagePickerAsync()}>
+          <TouchableOpacity
+            onPress={() => user.id === me?.id && openImagePickerAsync()}
+          >
             <Avatar user={user!} />
           </TouchableOpacity>
         </View>

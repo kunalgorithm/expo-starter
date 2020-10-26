@@ -57,8 +57,12 @@ export default function HistoryScreen() {
       ) : (
         <View style={styles.emptystatebackground}>
           <Text style={styles.emptystatetext}>
-            Your meditation sessions and reflections will appear here 🧘‍♀️
+            Your meditations will appear here!
           </Text>
+          <Image
+            style={styles.animation}
+            source={require("../assets/icons/meditationempty.png")}
+          />
         </View>
       )}
     </SafeAreaView>
@@ -85,9 +89,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flex: 3,
     width: "90%",
-    flexDirection: "row",
     backgroundColor: "#FBFBFC",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
   },
   sitting: {
     color: "#B6999B",
@@ -95,6 +98,12 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     flexDirection: "row",
+  },
+  animation: {
+    marginTop: 230,
+    height: 300,
+    width: 340,
+    justifyContent: "center",
   },
   firsttitle: {
     fontSize: 32,

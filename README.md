@@ -27,3 +27,8 @@ yarn start
 ```
 
 and then open up the project on the Expo app on your phone.
+
+## Authors
+
+- [Patricia Mou](https://twitter.com/_patriciamou)
+- [Kunal Shah](https://twitter.com/kunalgorithm)

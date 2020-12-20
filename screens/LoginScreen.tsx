@@ -12,64 +12,28 @@ import { useNavigation } from "@react-navigation/native";
 export default function LoginScreen() {
   const [login, setLogin] = React.useState(false);
   const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
+  const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [usePassword, setUsePassword] = React.useState(false);
+
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
-  const [key, setKey] = React.useState(null);
 
   const navigation = useNavigation();
 
-  useInterval(async () => {
-    if (key) {
-      try {
-        const poll = await fetcher(`/api/auth/fulfill/poll`, {
-          key,
-        });
-        if (poll && poll.success && poll.user) {
-          await mutate("/api/me", { ...poll.user, meditations: [] });
-          navigation.navigate("Feed");
-          return;
-        }
-      } catch (error) {}
-    }
-  }, 1500);
-
   const onSubmit = async () => {
-    if (!login) {
-      navigation.navigate("Onboarding_1");
-      return;
-    }
-
     setLoading(true);
     setError(false);
-    if (usePassword) {
-      const res = await fetcher(`/api/${login ? "login" : "signup"}`, {
-        email,
-        name,
-        password,
-      });
-      if (res.data && res.data.user) {
-        await mutate("/api/me", { ...res.data.user, meditations: [] });
-        navigation.navigate("Feed");
-        return;
-      }
-    }
 
-    let res;
-    try {
-      res = await fetcher(`/api/auth/getMagicLink`, {
-        email,
-        name,
-      });
-      if (res && res.success && res.key) {
-        setKey(res.key);
-      }
-    } catch (error) {
-      setError(error);
+    const res = await fetcher(`/api/${login ? "login" : "signup"}`, {
+      username,
+      name,
+      password,
+    });
+    if (res.data && res.data.user) {
+      await mutate("/api/me", { ...res.data.user, meditations: [] });
+      navigation.navigate("Feed");
+      return;
     }
-
     setLoading(false);
     if (res && res.error) setError(res.error);
   };
@@ -79,7 +43,6 @@ export default function LoginScreen() {
         style={styles.logo}
         source={require("../assets/images/login_logo.png")}
       />
-      <Text style={styles.title}>Strava for your mind ✨</Text>
 
       <KeyboardAwareScrollView
         style={{ flex: 1, width: "100%" }}
@@ -99,15 +62,15 @@ export default function LoginScreen() {
         {login && (
           <TextInput
             style={styles.input}
-            placeholder="E-mail"
+            placeholder="Username"
             placeholderTextColor="#ccc"
-            onChangeText={(text) => setEmail(text)}
-            value={email}
+            onChangeText={(text) => setUsername(text)}
+            value={username}
             underlineColorAndroid="transparent"
             autoCapitalize="none"
           />
         )}
-        {login && usePassword && (
+        {login && (
           <TextInput
             style={styles.input}
             placeholderTextColor="#ccc"
@@ -122,52 +85,29 @@ export default function LoginScreen() {
         )}
         <View style={styles.container}>
           {error && <Text style={{ color: "red" }}>{error}</Text>}
-          {key ? (
-            <Text style={{ margin: 30 }}>
-              Check your email for a login link!
-            </Text>
-          ) : (
-            <>
-              <Button onPress={onSubmit}>
-                {login
-                  ? usePassword
-                    ? "Log in"
-                    : "Email Login Link"
-                  : "Get Started"}
-              </Button>
 
-              {login && (
-                <TouchableOpacity onPress={() => setUsePassword(!usePassword)}>
-                  <Text style={styles.footerLinktwo}>
-                    {usePassword
-                      ? "Login with magic link 👉"
-                      : "Login with password 👉"}
-                  </Text>
-                </TouchableOpacity>
-              )}
-            </>
-          )}
+          <Button onPress={onSubmit}>
+            {loading ? "..." : login ? "Log in" : "Get Started"}
+          </Button>
         </View>
 
-        {!key && (
-          <View style={styles.footerView}>
-            {login ? (
-              <Text style={styles.footerText}>
-                Don't have an account?{" "}
-                <Text onPress={() => setLogin(false)} style={styles.footerLink}>
-                  Sign up
-                </Text>
+        <View style={styles.footerView}>
+          {login ? (
+            <Text style={styles.footerText}>
+              Don't have an account?{" "}
+              <Text onPress={() => setLogin(false)} style={styles.footerLink}>
+                Sign up
               </Text>
-            ) : (
-              <Text style={styles.footerText}>
-                Have an account?{" "}
-                <Text onPress={() => setLogin(true)} style={styles.footerLink}>
-                  Log in
-                </Text>
+            </Text>
+          ) : (
+            <Text style={styles.footerText}>
+              Have an account?{" "}
+              <Text onPress={() => setLogin(true)} style={styles.footerLink}>
+                Log in
               </Text>
-            )}
-          </View>
-        )}
+            </Text>
+          )}
+        </View>
       </KeyboardAwareScrollView>
     </View>
   );

@@ -1,12 +1,6 @@
-import {
-  Meditation,
-  User,
-  Like,
-  Follow,
-} from "../server/node_modules/@prisma/client";
 import useSWR from "swr";
 
-const API_URL = "https://api.mindstreaks.com";
+const API_URL = "https://fullstack-twitter.onrender.com"; // TODO
 export const fetcher = (url: string, data?: any): any =>
   fetch(API_URL + url, {
     method: data ? "POST" : "GET",
@@ -21,33 +15,21 @@ export const fetcher = (url: string, data?: any): any =>
       console.error(error);
     });
 
-export interface FeedMeditation extends Meditation {
-  user: User;
-  likes: (Like & { user: User })[];
-}
-export interface UserProfile extends User {
-  meditations: Meditation[];
-  followers: Follow[];
-  following: Follow[];
-}
-
 export function useFeed() {
-  const { data: feed }: { data?: FeedMeditation[] } = useSWR(
-    "/api/feed",
-    fetcher,
-    { refreshInterval: 1500 }
-  );
+  const { data: feed }: { data?: any[] } = useSWR("/api/feed", fetcher, {
+    refreshInterval: 1500,
+  });
   return { feed };
 }
 export function useUsers() {
-  const { data: users }: { data?: User[] } = useSWR("/api/users", fetcher);
+  const { data: users }: { data?: any[] } = useSWR("/api/users", fetcher);
   return { users };
 }
 export function useMe() {
   const {
     data: me,
   }: {
-    data?: UserProfile;
+    data?: any;
   } = useSWR("/api/me", fetcher, { refreshInterval: 1500 });
   return { me };
 }
@@ -55,7 +37,7 @@ export function useUser(userId: number) {
   const {
     data: user,
   }: {
-    data?: UserProfile;
+    data?: any;
   } = useSWR("/api/user", fetcher);
   return { user };
 }

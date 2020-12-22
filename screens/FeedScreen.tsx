@@ -16,34 +16,15 @@ export default function FeedScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, "Feed">) {
   const { feed } = useFeed();
-
+  console.log("feed", feed);
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>the zen feed </Text>
+      <Text style={styles.title}>the feed </Text>
 
       <ScrollView>
-        {feed && feed.length > 0 ? (
-          feed
-            .filter((m) => m.isPublic)
-            .map((meditation, i) => (
-              <FeedItem meditation={meditation} key={i} />
-            ))
-        ) : (
-          <TouchableOpacity onPress={() => navigation.navigate("FindFriends")}>
-            <Text
-              style={{
-                color: "#B6999B",
-                fontSize: 20,
-                alignItems: "center",
-                paddingHorizontal: 25,
-                justifyContent: "center",
-                fontFamily: "Calibre-Regular",
-              }}
-            >
-              Follow friends to see their meditations 👉
-            </Text>
-          </TouchableOpacity>
-        )}
+        {feed &&
+          feed.length > 0 &&
+          feed.map((item, i) => <FeedItem item={item} key={i} />)}
       </ScrollView>
     </SafeAreaView>
   );

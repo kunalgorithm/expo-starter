@@ -5,29 +5,32 @@ import { Avatar } from "../components/Avatar";
 import dayjs from "dayjs";
 import Colors from "../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { LikeButton } from "../components/LikeButton";
-import { FeedMeditation, useMe } from "../hooks/fetcher";
+import { useMe } from "../hooks/fetcher";
 
 import { useNavigation } from "@react-navigation/native";
 var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
-export const FeedItem = ({ meditation }: { meditation: FeedMeditation }) => {
-  if (!meditation) return null;
+export const FeedItem = ({
+  item,
+}: {
+  item: { text: string; id: number; author: { username: string; id: number } };
+}) => {
+  if (!item) return null;
   const { me } = useMe();
   const navigation = useNavigation();
   return (
-    <Bubble key={meditation.id}>
+    <Bubble key={item.id}>
       <TouchableOpacity
         onPress={() =>
-          meditation.user.id === me?.id
+          item.author.id === me?.id
             ? navigation.navigate("Profile")
-            : navigation.navigate("UserProfile", { userId: meditation.user.id })
+            : navigation.navigate("UserProfile", { userId: item.author.id })
         }
       >
         <View style={{ display: "flex", flexDirection: "row", paddingTop: 10 }}>
           <View style={{ width: "27%" }}>
-            <Avatar user={meditation.user} size={70}></Avatar>
+            <Avatar user={item.author} size={70}></Avatar>
           </View>
           <View style={{ width: "40%", marginLeft: 0 }}>
             <Text
@@ -38,21 +41,8 @@ export const FeedItem = ({ meditation }: { meditation: FeedMeditation }) => {
                 paddingBottom: 4,
               }}
             >
-              {meditation.user.name}
+              {item.author.username}
             </Text>
-            <Text
-              style={{
-                color: "gray",
-                fontFamily: "Calibre-Regular",
-                fontSize: 16,
-              }}
-            >
-              {/* @ts-ignore */}
-              {dayjs(meditation.createdAt).from(dayjs())}
-            </Text>
-            {/* <Text style={{ color: "#B6999B", paddingTop: 5 }}>
-              ⚡ 4 day streak
-            </Text> */}
           </View>
           <View
             style={{
@@ -66,17 +56,6 @@ export const FeedItem = ({ meditation }: { meditation: FeedMeditation }) => {
               source={require("../assets/icons/pray_icon.png")}
               style={{ width: 15, height: 15 }}
             />
-            <Text
-              style={{
-                color: Colors.mauve,
-                fontFamily: "Calibre-Regular",
-                marginTop: 2.5,
-                marginLeft: 3,
-                fontSize: 16,
-              }}
-            >
-              {Math.ceil(meditation.duration / 60)} min
-            </Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -95,14 +74,8 @@ export const FeedItem = ({ meditation }: { meditation: FeedMeditation }) => {
             marginLeft: -15,
           }}
         >
-          {meditation.notes}
+          {item.text}
         </Text>
-      </View>
-
-      <View
-        style={{ display: "flex", flexDirection: "row", paddingBottom: 10 }}
-      >
-        <LikeButton meditation={meditation}></LikeButton>
       </View>
     </Bubble>
   );

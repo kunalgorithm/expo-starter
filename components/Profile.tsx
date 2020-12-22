@@ -3,8 +3,8 @@ import { StyleSheet, Image, TouchableOpacity, ScrollView } from "react-native";
 
 import { Text, View } from "../components/Themed";
 
-import { useMe, UserProfile } from "../hooks/fetcher";
-import { Stats } from "../components/Stats";
+import { useMe } from "../hooks/fetcher";
+
 import { Box } from "../components/Box";
 import Button from "../components/Button";
 
@@ -16,19 +16,19 @@ import { FollowButton } from "../screens/FollowButton";
 import dayjs from "dayjs";
 import { Meditation } from "../types";
 
-export const Profile = ({ user }: { user: UserProfile | undefined }) => {
-  if (!user || !user.meditations) return null;
+export const Profile = ({
+  user,
+}: {
+  user: { username: string; id: number };
+}) => {
+  if (!user) return null;
   const navigation = useNavigation();
 
   const { me } = useMe();
-  const { streak, longestStreak } = useStreak({ user });
 
-  const meditations = user?.meditations.sort((a, b) =>
-    a.createdAt < b.createdAt ? -1 : 1
-  );
   return (
     <View style={styles.container}>
-      <Text style={styles.titlename}>{user.name}</Text>
+      <Text style={styles.titlename}>{user.username}</Text>
       <View style={styles.row}>
         <View style={{ width: "25%", backgroundColor: Colors.grayBg }}>
           <TouchableOpacity
@@ -36,23 +36,6 @@ export const Profile = ({ user }: { user: UserProfile | undefined }) => {
           >
             <Avatar user={user!} />
           </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            width: "40%",
-            backgroundColor: Colors.grayBg,
-          }}
-        >
-          <View style={styles.follower_container}>
-            <Text style={styles.titlefollownum}>
-              {user.followers?.length} {"\n"}
-              <Text style={styles.titlefollow}>followers</Text>
-            </Text>
-            <Text style={styles.titlefollownum}>
-              {user.following?.length} {"\n"}
-              <Text style={styles.titlefollow}>following</Text>
-            </Text>
-          </View>
         </View>
 
         <View style={styles.friendbutton}>
@@ -70,92 +53,9 @@ export const Profile = ({ user }: { user: UserProfile | undefined }) => {
           )}
         </View>
       </View>
-      {streak > 0 && (
-        <Text style={styles.title}>
-          {user.name?.split(" ")[0]}
-          {me?.id === user.id ? ", you're" : " is"} on a{" "}
-          <Text style={styles.streaktext}>{streak}</Text> day streak! ✨
-        </Text>
-      )}
-      <Stats meditations={user.meditations} longestStreak={longestStreak} />
-
-      <ScrollView>
-        {Array(11)
-          .fill(0)
-          .map((row, i) => (
-            <View style={styles.row} key={i}>
-              <Box index={i * 7} meditations={meditations!} />
-              <Box index={i * 7 + 1} meditations={meditations!} />
-              <Box index={i * 7 + 2} meditations={meditations!} />
-              <Box index={i * 7 + 3} meditations={meditations!} />
-              <Box index={i * 7 + 4} meditations={meditations!} />
-              <Box index={i * 7 + 5} meditations={meditations!} />
-              <Box index={i * 7 + 6} meditations={meditations!} />
-              <Month index={i * 7 + 6} meditations={meditations!} />
-            </View>
-          ))}
-      </ScrollView>
     </View>
   );
 };
-
-const Month = ({
-  index,
-  meditations,
-}: {
-  index: number;
-  meditations: Meditation[];
-}) => {
-  const date = dayjs(
-    meditations.length > 0 ? meditations[0].createdAt : new Date()
-  ).add(index, "day");
-
-  const month = date.format("MMM");
-  if (index > 6 && parseInt(date.format("D")) > 7)
-    return <Text style={{ width: 40 }}></Text>;
-
-  return (
-    <Text
-      style={{
-        paddingLeft: 10,
-        color: "gray",
-        width: 40,
-        marginTop: 10,
-      }}
-    >
-      {month}
-    </Text>
-  );
-};
-
-function useStreak({ user }: { user: UserProfile }) {
-  let longestStreak = 0;
-  let streak = 0;
-  let currentStreak = 0;
-  let currentStreakBroken = false;
-  const today = dayjs();
-  if (user.meditations.length === 0) return { streak, longestStreak };
-
-  const firstDay = dayjs(user.meditations[0].createdAt);
-  let day = today;
-
-  // Iterate from today to the first meditation day
-  for (let i = 0; i < today.diff(firstDay, "d"); i++) {
-    // increment streaks if a meditation is found
-    if (user.meditations.find((m) => dayjs(m.createdAt).isSame(day, "d"))) {
-      currentStreak += 1;
-      if (currentStreak > longestStreak) longestStreak = currentStreak;
-      if (!currentStreakBroken && currentStreak > streak)
-        streak = currentStreak;
-    } else {
-      currentStreak = 0;
-      if (today !== day) currentStreakBroken = true;
-    }
-    day = day.subtract(1, "d");
-  }
-
-  return { streak, longestStreak };
-}
 
 const styles = StyleSheet.create({
   container: {

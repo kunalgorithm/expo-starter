@@ -30,7 +30,7 @@ export default function BottomTabNavigator(user: any) {
 
   if (!user) return null;
 
-  if (me!! && !me?.email) return <LoginScreen />;
+  if (me!! && !me?.username) return <LoginScreen />;
   return (
     <BottomTab.Navigator
       initialRouteName="Feed"

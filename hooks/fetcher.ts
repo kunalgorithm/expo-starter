@@ -8,7 +8,7 @@ export const fetcher = (url: string, data?: any): any =>
     headers: {
       "Content-Type": "application/json",
     },
-    body: data ? JSON.stringify(data) : "",
+    body: data ? JSON.stringify(data) : undefined,
   })
     .then((r) => r.json())
     .catch((error) => {
@@ -16,9 +16,7 @@ export const fetcher = (url: string, data?: any): any =>
     });
 
 export function useFeed() {
-  const { data: feed }: { data?: any[] } = useSWR("/api/feed", fetcher, {
-    refreshInterval: 1500,
-  });
+  const { data: feed }: { data?: any[] } = useSWR("/api/feed", fetcher);
   return { feed };
 }
 export function useUsers() {

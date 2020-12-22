@@ -29,9 +29,10 @@ export default function LoginScreen() {
       name,
       password,
     });
-    if (res.data && res.data.user) {
-      await mutate("/api/me", { ...res.data.user, meditations: [] });
-      navigation.navigate("Feed");
+    console.log("login res", res);
+    if (res && res.id) {
+      await mutate("/api/me", res.data);
+      // navigation.navigate("Root");
       return;
     }
     setLoading(false);
@@ -39,10 +40,10 @@ export default function LoginScreen() {
   };
   return (
     <View style={styles.container}>
-      <Image
+      {/* <Image
         style={styles.logo}
         source={require("../assets/images/login_logo.png")}
-      />
+      /> */}
 
       <KeyboardAwareScrollView
         style={{ flex: 1, width: "100%" }}
@@ -119,6 +120,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#FBFBFC",
+    paddingTop: 150,
   },
   logo: {
     flex: 1,
